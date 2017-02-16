@@ -16,7 +16,7 @@
                 <source clone="true" type="body"/>
                 <target action="replace" property="InitialMessage" type="property"/>
             </enrich>
-            <sequence key="dbLookupSeq"/>
+            <sequence key="cacheLookupSeq"/>
         </then>
         <else>
             <sequence key="checkLimitSeq"/>
