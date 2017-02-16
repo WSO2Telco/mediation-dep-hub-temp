@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="userInfoCallSeq" onError="userInfoCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property
+    expression="get-property('registry', 'gov:/paymentConfig/paymentConfig.xml')"
+    name="paymentConfig" scope="default" type="OM"/>
+  <property expression="$ctx:paymentConfig//infoapi/apiEndpoint"
+    name="uri.var.infoapiendpoint" scope="default" type="STRING"/>
+  <script language="js"><![CDATA[var requestIdentifier=Math.floor(Math.random() * (999999 - 100000) + 100000);          mc.setProperty("requestIdentifier", requestIdentifier);]]></script>
+  <property expression="get-property('requestIdentifier')"
+    name="uri.var.requestIdentifier" scope="default" type="STRING"/>
+  <property expression="fn:concat('Bearer ', get-property('access.token'))"
+    name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+  <property name="Content-Type" scope="transport" type="STRING" value=""/>
+  <call>
+    <endpoint key="Wso2TelcoUserInfoEndpoint"/>
+  </call>
+  <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+  <switch source="get-property('axis2', 'HTTP_SC')">
+    <case regex="200">
+      <property expression="json-eval($.customer.accountType)"
+        name="userpackagetype" scope="default" type="STRING"/>
+      <sequence key="pkgTypeSetSeq"/>
+    </case>
+    <case regex="401|403">
+      <sequence key="userInfoCallErrorSeq"/>
+    </case>
+    <default>
+      <sequence key="userInfoCallErrorSeq"/>
+    </default>
+
+  </switch>
+</sequence>

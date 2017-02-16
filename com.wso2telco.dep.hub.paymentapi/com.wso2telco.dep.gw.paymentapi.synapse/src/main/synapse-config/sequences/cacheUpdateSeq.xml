@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="cacheUpdateSeq" onError="dropSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <class name="mediator.PackageTypeCacheMediator"/>
+</sequence>

@@ -9,7 +9,7 @@
             <sequence key="paymentStatusSeq"/>
         </case>
         <case regex="AmountChargeHandler">
-            <sequence key="paymentChargeSeq"/>
+            <sequence key="paymentChargeSeq"/>+
         </case>
         <case regex="AmountRefundHandler">
             <sequence key="paymentRefundSeq"/>
