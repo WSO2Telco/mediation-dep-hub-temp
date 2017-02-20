@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="defaultUSSDEndpoint" xmlns="http://ws.apache.org/ns/synapse">
-    <default/>
+    <default>
+        <timeout>
+            <responseAction>fault</responseAction>
+        </timeout>
+    </default>
 </endpoint>

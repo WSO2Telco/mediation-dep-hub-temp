@@ -14,24 +14,40 @@
   <name>ussdapihub_capp</name>
   <description>ussdapihub_capp</description>
   <properties>
+    <com.wso2telco.dep.hub.sequence_._ussdSubscriptionSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ussdSubscriptionSeq>
+    <com.wso2telco.dep.hub.sequence_._ussdSubscriptionSplitterFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ussdSubscriptionSplitterFaultSeq>
+    <com.wso2telco.dep.hub.sequence_._SendUssdSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._SendUssdSeq>
     <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.wso2telco.dep.hub.sequence_._USSDMainOutSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMainOutSeq>
-    <com.wso2telco.dep.hub.sequence_._USSDMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMainSeq>
-    <com.wso2telco.dep.hub.endpoint_._SendUssdSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._SendUssdSeqEndpoint>
-    <com.wso2telco.dep.hub.sequence_._ModifyUSSDResponseSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ModifyUSSDResponseSeq>
-    <com.wso2telco.dep.hub.sequence_._USSDInboundSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDInboundSeq>
-    <com.wso2telco.dep.hub.sequence_._USSDMOSubscribeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMOSubscribeSeq>
     <com.wso2telco.dep.hub.sequence_._USSDMOStopSubscriptionSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMOStopSubscriptionSeq>
+    <com.wso2telco.dep.hub.sequence_._USSDInboundSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDInboundSeq>
+    <com.wso2telco.dep.hub.endpoint_._SendUssdSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._SendUssdSeqEndpoint>
+    <com.wso2telco.dep.hub.sequence_._USSDMOSubscribeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMOSubscribeSeq>
     <com.wso2telco.dep.hub.sequence_._USSDInboundResponseSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDInboundResponseSeq>
-    <com.wso2telco.dep.hub.api_._ussdAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._ussdAPI>
-    <com.wso2telco.dep.hub.endpoint_._DefaultUSSDEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DefaultUSSDEndpoint>
-    <com.wso2telco.dep.hub.sequence_._SendUssdSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._SendUssdSeq>
+    <com.wso2telco.dep.hub.sequence_._ussdSubscriptionGatherSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ussdSubscriptionGatherSeq>
+    <com.wso2telco.dep.hub.sequence_._ModifyUSSDResponseSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ModifyUSSDResponseSeq>
     <com.wso2telco.dep.hub.endpoint_._USSDInboundSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._USSDInboundSeqEndpoint>
+    <com.wso2telco.dep.hub.api_._ussdAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._ussdAPI>
+    <com.wso2telco.dep.hub.sequence_._USSDMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._USSDMainSeq>
+    <com.wso2telco.dep.hub.sequence_._ussdSubscriptionSplitterSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ussdSubscriptionSplitterSeq>
+    <com.wso2telco.dep.hub.endpoint_._DefaultUSSDEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DefaultUSSDEndpoint>
   </properties>
   <dependencies>
     <dependency>
+      <groupId>com.wso2telco.dep.hub.api</groupId>
+      <artifactId>ussdAPI</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
       <artifactId>DefaultUSSDEndpoint</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
+      <artifactId>SendUssdSeqEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -43,19 +59,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>USSDMOSubscribeSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>USSDMOStopSubscriptionSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>USSDMainSeq</artifactId>
+      <artifactId>ModifyUSSDResponseSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -67,19 +71,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>ModifyUSSDResponseSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>USSDMainOutSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.api</groupId>
-      <artifactId>ussdAPI</artifactId>
+      <artifactId>USSDInboundResponseSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -91,14 +83,44 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>USSDInboundResponseSeq</artifactId>
+      <artifactId>USSDMOStopSubscriptionSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>SendUssdSeqEndpoint</artifactId>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>USSDMOSubscribeSeq</artifactId>
       <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>USSDMainOutSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>USSDMainSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>ussdSubscriptionGatherSeq</artifactId>
+      <version>2.1.0-SNAPSHOT</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>ussdSubscriptionSplitterFaultSeq</artifactId>
+      <version>2.1.0-SNAPSHOT</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>ussdSubscriptionSplitterSeq</artifactId>
+      <version>2.1.0-SNAPSHOT</version>
       <type>xml</type>
     </dependency>
   </dependencies>

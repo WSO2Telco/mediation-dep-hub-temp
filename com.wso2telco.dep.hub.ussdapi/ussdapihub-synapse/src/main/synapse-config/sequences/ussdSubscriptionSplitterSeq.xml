@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ussdSubscriptionSplitterSeq" onError="ussdSubscriptionSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ SplitterSeq ===="/>
+    </log>
+    <log level="full"/>
+    <iterate attachPath="//subscription" expression="//shortCodes" id="ussd_splitter" preservePayload="true">
+        <target>
+            <sequence>
+                <log level="custom">
+                    <property name="STATUS" value="==== @ Splitted Parts ===="/>
+                </log>
+                <enrich>
+                    <source clone="true" xpath="//shortCodes/node()"/>
+                    <target action="child" xpath="//subscription"/>
+                </enrich>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::shortCodes.toAddress;
+                delete payload..*::shortCodes.authorizationHeader;
+                mc.setPayloadXML(payload);]]></script>
+                <enrich>
+                    <source clone="true" xpath="//shortCodes"/>
+                    <target property="original_payload" type="property"/>
+                </enrich>
+                <enrich>
+                    <source clone="true" xpath="//callbackReference"/>
+                    <target property="original_callbackReference" type="property"/>
+                </enrich>
+                <enrich>
+                    <source clone="true" xpath="//clientCorrelator"/>
+                    <target property="original_clientCorrelator" type="property"/>
+                </enrich>
+                <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
+                    <then>
+                        <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
+                        <sequence key="ussdSubscriptionGatherSeq"/>
+                    </then>
+                    <else/>
+                </filter>
+                <header expression="//subscription/toAddress/text()" name="To" scope="default"/>
+                <header expression="//subscription/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <property expression="//subscription/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::toAddress;
+                delete payload..*::authorizationHeader;
+                delete payload..*::operatorCode;
+                delete payload..*::shortCodes;
+                mc.setPayloadXML(payload);]]></script>
+                <log level="full"/>
+                <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                <call>
+                    <endpoint key="defaultUSSDEndpoint"/>
+                </call>
+                <sequence key="ussdSubscriptionGatherSeq"/>
+            </sequence>
+        </target>
+    </iterate>
+</sequence>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ussdSubscriptionGatherSeq" onError="fault" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ GatherSeq ===="/>
+        <property expression="$ctx:original_payload" name="original_payload"/>
+    </log>
+    <filter regex="Not Provisioned|failed" source="$ctx:status">
+        <then/>
+        <else>
+            <filter xpath="$body//subscription">
+                <then>
+                    <property name="status" scope="default" type="STRING" value="Created"/>
+                </then>
+                <else>
+                    <property name="status" scope="default" type="STRING" value="Not Created"/>
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <enrich>
+        <source clone="true" property="original_payload" type="property"/>
+        <target type="body"/>
+    </enrich>
+    <enrich>
+        <source clone="true" type="inline">
+            <status xmlns="">TEST</status>
+        </source>
+        <target action="child" xpath="//shortCodes"/>
+    </enrich>
+    <enrich>
+        <source clone="true" property="status" type="property"/>
+        <target xpath="//shortCodes/status/text()"/>
+    </enrich>
+    <log level="custom">
+        <property expression="$body" name="new_payload"/>
+    </log>
+    <property name="collection" scope="default">
+        <subscription xmlns=""/>
+    </property>
+    <aggregate id="ussd_splitter">
+        <completeCondition>
+            <messageCount max="-1" min="-1"/>
+        </completeCondition>
+        <onComplete enclosingElementProperty="collection" expression="//shortCodes">
+            <enrich>
+                <source clone="true" type="inline">
+                    <resourceURL xmlns="">TEST</resourceURL>
+                </source>
+                <target action="child" xpath="//subscription"/>
+            </enrich>
+            <enrich>
+                <source clone="true" property="original_callbackReference" type="property"/>
+                <target action="child" xpath="//subscription"/>
+            </enrich>
+            <enrich>
+                <source clone="true" property="original_clientCorrelator" type="property"/>
+                <target action="child" xpath="//subscription"/>
+            </enrich>
+            <enrich>
+                <source clone="true" property="responseResourceURL" type="property"/>
+                <target xpath="//resourceURL/text()"/>
+            </enrich>
+            <respond/>
+        </onComplete>
+    </aggregate>
+</sequence>
