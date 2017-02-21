@@ -30,6 +30,7 @@
                     <source clone="true" xpath="//clientCorrelator"/>
                     <target property="original_clientCorrelator" type="property"/>
                 </enrich>
+                <property expression="//subscription/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
                 <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
                     <then>
                         <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
@@ -39,7 +40,6 @@
                 </filter>
                 <header expression="//subscription/toAddress/text()" name="To" scope="default"/>
                 <header expression="//subscription/authorizationHeader/text()" name="Authorization" scope="transport"/>
-                <property expression="//subscription/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
                 <script language="js"><![CDATA[var payload = mc.getPayloadXML();
                 delete payload..*::toAddress;
                 delete payload..*::authorizationHeader;

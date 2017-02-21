@@ -15,12 +15,11 @@
                 </connection>
                 <statement>
                     <sql><![CDATA[delete from mo_ussd_subscription where ussd_request_did=?;]]></sql>
-                    <parameter expression="get-property('subscriptionId')"
-                               type="VARCHAR" />
+                    <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
                 </statement>
             </dbreport>
         </case>
-        <default />
+        <default/>
     </switch>
     <respond/>
 </sequence>
