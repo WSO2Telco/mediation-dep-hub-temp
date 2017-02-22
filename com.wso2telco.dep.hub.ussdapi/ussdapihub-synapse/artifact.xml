@@ -44,4 +44,13 @@
     <artifact name="ussdSubscriptionSplitterFaultSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/ussdSubscriptionSplitterFaultSeq.xml</file>
     </artifact>
+    <artifact name="ussdMOStopSubscriptionSplitterSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ussdMOStopSubscriptionSplitterSeq.xml</file>
+    </artifact>
+    <artifact name="ussdMOStopSubscriptionSplitterFaultSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ussdMOStopSubscriptionSplitterFaultSeq.xml</file>
+    </artifact>
+    <artifact name="ussdMOStopSubscriptionGatherSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/ussdMOStopSubscriptionGatherSeq.xml</file>
+    </artifact>
 </artifacts>
