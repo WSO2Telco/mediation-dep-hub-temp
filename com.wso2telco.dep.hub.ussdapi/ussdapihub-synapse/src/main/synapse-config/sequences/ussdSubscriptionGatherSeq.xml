@@ -73,6 +73,28 @@
                 <source clone="true" property="responseResourceURL" type="property"/>
                 <target xpath="//resourceURL/text()"/>
             </enrich>
+            <log level="full"/>
+            <payloadFactory media-type="xml">
+                <format>
+                    <subscription>
+		    $1
+		    
+		    <?xml-multiple shortCodes?>
+		    $2
+		    
+		    <clientCorrelator>$3</clientCorrelator>
+                        <resourceURL>$4</resourceURL>
+                    </subscription>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="//callbackReference"/>
+                    <arg evaluator="xml" expression="//shortCodes"/>
+                    <arg evaluator="xml" expression="//clientCorrelator"/>
+                    <arg evaluator="xml" expression="//resourceURL"/>
+                </args>
+            </payloadFactory>
+            <log level="full"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
             <respond/>
         </onComplete>
     </aggregate>
