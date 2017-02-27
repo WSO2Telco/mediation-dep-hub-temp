@@ -9,7 +9,8 @@ var str = mc.getProperty('outboundUSSDMessage');
 var text = str.replace("\n", "\\n").replace("\r", "\\r");
 payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
 mc.setPayloadJSON(payload);]]></script>
-    <send>
+    <call>
         <endpoint key="sendUssdSeqEndpoint"/>
-    </send>
+    </call>
+    <respond/>
 </sequence>

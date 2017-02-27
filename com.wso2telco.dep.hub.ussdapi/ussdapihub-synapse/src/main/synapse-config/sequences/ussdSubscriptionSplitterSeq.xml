@@ -7,9 +7,6 @@
     <iterate attachPath="//subscription" expression="//shortCodes" id="ussd_splitter" preservePayload="true">
         <target>
             <sequence>
-                <log level="custom">
-                    <property name="STATUS" value="==== @ Splitted Parts ===="/>
-                </log>
                 <enrich>
                     <source clone="true" xpath="//shortCodes/node()"/>
                     <target action="child" xpath="//subscription"/>
@@ -46,7 +43,6 @@
                 delete payload..*::operatorCode;
                 delete payload..*::shortCodes;
                 mc.setPayloadXML(payload);]]></script>
-                <log level="full"/>
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 <call>
                     <endpoint key="defaultUSSDEndpoint"/>
