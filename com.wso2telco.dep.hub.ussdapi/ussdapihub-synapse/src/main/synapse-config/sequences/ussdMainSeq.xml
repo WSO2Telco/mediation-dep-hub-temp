@@ -11,14 +11,12 @@
         <case regex="USSDInboundHandler">
             <sequence key="ussdInboundSeq"/>
         </case>
-        <case regex="SouthBoundMOUSSDSubscribeHandler">
-            <sequence key="ussdMOSubscribeSeq"/>
+        <case regex="NorthBoundUSSDSubscriptionHandler">
+            <sequence key="ussdSubscriptionSeq"/>
         </case>
         <case regex="SouthBoundStopMOUSSDSubscriptionHandler">
             <sequence key="ussdMOStopSubscriptionSeq"/>
         </case>
-        <default>
-            <!-- TODO:handle error -->
-        </default>
+        <default/>
     </switch>
 </sequence>

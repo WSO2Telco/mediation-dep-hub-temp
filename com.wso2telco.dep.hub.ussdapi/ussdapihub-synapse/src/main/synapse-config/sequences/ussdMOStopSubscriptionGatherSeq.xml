@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ussdMOStopSubscriptionGatherSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ GatherSeq ===="/>
+    </log>
+    <filter regex="204" source="$axis2:HTTP_SC">
+        <then>
+            <property name="status" scope="default" type="STRING" value="deleted"/>
+        </then>
+        <else>
+            <property name="status" scope="default" type="STRING" value="failed"/>
+        </else>
+    </filter>
+    <switch source="$axis2:HTTP_SC">
+        <case regex="(200|201|204)">
+            <dbreport>
+                <connection>
+                    <pool>
+                        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[delete from mo_ussd_subscription where ussd_request_did=?;]]></sql>
+                    <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
+                </statement>
+            </dbreport>
+        </case>
+        <default/>
+    </switch>
+    <payloadFactory media-type="json">
+        <format>
+		    { 
+		    "operators" : {
+			    "operatorCode" : "$1",
+			    "status": "$2"
+			    }    
+		    }    
+    	</format>
+        <args>
+            <arg evaluator="xml" expression="get-property('operatorCode')"/>
+            <arg evaluator="xml" expression="get-property('status')"/>
+        </args>
+    </payloadFactory>
+    <property name="collection" scope="default">
+        <deleteSubscription xmlns=""/>
+    </property>
+    <aggregate id="ussd_stop_splitter">
+        <completeCondition>
+            <messageCount max="-1" min="-1"/>
+        </completeCondition>
+        <onComplete enclosingElementProperty="collection" expression="//operators">
+            <log level="full"/>
+            <payloadFactory media-type="xml">
+                <format>
+                    <deleteSubscription><?xml-multiple operators?>
+		    $1
+		    
+		    </deleteSubscription>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="//operators"/>
+                </args>
+            </payloadFactory>
+            <log level="full"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <respond/>
+        </onComplete>
+    </aggregate>
+</sequence>

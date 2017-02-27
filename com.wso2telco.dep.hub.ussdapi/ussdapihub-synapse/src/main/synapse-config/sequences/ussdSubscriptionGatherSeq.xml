@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ussdSubscriptionGatherSeq" onError="commonFault" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ GatherSeq ===="/>
+    </log>
+    <filter regex="Not Provisioned|failed" source="$ctx:status">
+        <then/>
+        <else>
+            <filter xpath="$body//subscription">
+                <then>
+                    <property name="status" scope="default" type="STRING" value="Created"/>
+                </then>
+                <else>
+                    <property name="status" scope="default" type="STRING" value="Not Created"/>
+                </else>
+            </filter>
+            <dbreport>
+                <connection>
+                    <pool>
+                        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[insert into mo_ussd_subscription(ussd_request_did, domainurl, operator) values(?, ?, ?);]]></sql>
+                    <parameter expression="get-property('subscriptionID')" type="VARCHAR"/>
+                    <parameter expression="get-property('responseResourceURL')" type="VARCHAR"/>
+                    <parameter expression="get-property('operatorCode')" type="VARCHAR"/>
+                </statement>
+            </dbreport>
+        </else>
+    </filter>
+    <enrich>
+        <source clone="true" property="original_payload" type="property"/>
+        <target type="body"/>
+    </enrich>
+    <enrich>
+        <source clone="true" type="inline">
+            <status xmlns="">TEST</status>
+        </source>
+        <target action="child" xpath="//shortCodes"/>
+    </enrich>
+    <enrich>
+        <source clone="true" property="status" type="property"/>
+        <target xpath="//shortCodes/status/text()"/>
+    </enrich>
+    <property name="collection" scope="default">
+        <subscription xmlns=""/>
+    </property>
+    <aggregate id="ussd_splitter">
+        <completeCondition>
+            <messageCount max="-1" min="-1"/>
+        </completeCondition>
+        <onComplete enclosingElementProperty="collection" expression="//shortCodes">
+            <payloadFactory media-type="xml">
+                <format>
+                    <subscription>
+		    $1
+		    
+		    <?xml-multiple shortCodes?>
+		    $2
+		    
+		    <clientCorrelator>$3</clientCorrelator>
+                        <resourceURL>$4</resourceURL>
+                    </subscription>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:original_callbackReference"/>
+                    <arg evaluator="xml" expression="//shortCodes"/>
+                    <arg evaluator="xml" expression="$ctx:original_clientCorrelator"/>
+                    <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
+                </args>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <respond/>
+        </onComplete>
+    </aggregate>
+</sequence>
