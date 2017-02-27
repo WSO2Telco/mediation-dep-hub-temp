@@ -80,13 +80,46 @@
     <artifact name="setCelcomRegistryTokens" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/setCelcomRegistryTokens.xml</file>
     </artifact>
-    <artifact name="userInfoAsyncSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/userInfoAsyncSeq.xml</file>
+    <artifact name="celcomUserInfoAsyncSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/celcomUserInfoAsyncSeq.xml</file>
     </artifact>
-    <artifact name="userInfoFaultSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/userInfoFaultSeq.xml</file>
+    <artifact name="celcomUserInfoFaultSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/celcomUserInfoFaultSeq.xml</file>
     </artifact>
-    <artifact name="userInfoSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/sequences/userInfoSeq.xml</file>
+    <artifact name="celcomUserInfoSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/celcomUserInfoSeq.xml</file>
+    </artifact>
+    <artifact name="cacheLookupSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/cacheLookupSeq.xml</file>
+    </artifact>
+    <artifact name="cacheUpdateSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/cacheUpdateSeq.xml</file>
+    </artifact>
+    <artifact name="defaultPkgTypeSetSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/defaultPkgTypeSetSeq.xml</file>
+    </artifact>
+    <artifact name="opratorConfigReaderSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/opratorConfigReaderSeq.xml</file>
+    </artifact>
+    <artifact name="pkgTypeSetSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/pkgTypeSetSeq.xml</file>
+    </artifact>
+    <artifact name="userInfoCallErrorSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/userInfoCallErrorSeq.xml</file>
+    </artifact>
+    <artifact name="tokenEndpointCallErrorSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/tokenEndpointCallErrorSeq.xml</file>
+    </artifact>
+    <artifact name="Wso2TelcoUserInfoEndpoint" groupId="com.wso2telco.dep.hub.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/Wso2TelcoUserInfoEndpoint.xml</file>
+    </artifact>
+	<artifact name="tokenEndpointCallSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/tokenEndpointCallSeq.xml</file>
+    </artifact>
+    <artifact name="tokenPoolEndpoint" groupId="com.wso2telco.dep.hub.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/tokenPoolEndpoint.xml</file>
+    </artifact>
+    <artifact name="userInfoCallSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/userInfoCallSeq.xml</file>
     </artifact>
 </artifacts>

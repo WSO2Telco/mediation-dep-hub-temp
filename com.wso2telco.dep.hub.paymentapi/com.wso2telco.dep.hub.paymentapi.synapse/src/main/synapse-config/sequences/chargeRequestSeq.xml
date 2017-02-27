@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="chargeRequestSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-  <property expression="get-property('query.param.oprendpoint')"
+  <property expression="get-property('ENDPOINT')"
     name="uri.var.operatorEndpoint" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
   <script language="js">
     <![CDATA[var endpointUpdated; var endpoint=mc.getProperty("uri.var.operatorEndpoint"); endpointUpdated=endpoint.trim().replace(" ","+");
