@@ -3,7 +3,7 @@
     <property expression="get-property('query.param.operator')"
               name="operatorname" scope="default" type="STRING"/>
     <property
-            expression="get-property('registry', 'gov:/operatorConfig/operatorConfig.xml')"
+            expression="get-property('registry', 'conf:/repository/wso2telco/configurations/operatorConfig.xml')"
             name="opratorConfig" scope="default" type="OM"/>
     <property
             expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/operatorid"
@@ -26,7 +26,7 @@
         </then>
         <else>
             <property
-                    expression="get-property('registry', 'gov:/paymentConfig/paymentConfig.xml')"
+                    expression="get-property('registry', 'conf:/repository/wso2telco/configurations/paymentConfig.xml')"
                     name="paymentConfig" scope="default" type="OM"/>
             <property expression="$ctx:paymentConfig//tokenPoolEnabled"
                       name="isTokenPoolEnabled" scope="default" type="STRING"/>

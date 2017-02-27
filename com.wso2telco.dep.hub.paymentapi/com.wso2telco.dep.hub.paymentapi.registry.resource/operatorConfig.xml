@@ -1,0 +1,19 @@
+<operators>
+	<operator name="">
+		<operatorid></operatorid>
+		<userinfotype></userinfotype> <!--currently not being used -->
+		<defaultpackagetype>postpaid</defaultpackagetype>
+		<authtype>basic</authtype>
+		<ttl>3600</ttl>
+	</operator>
+
+	<!--duplicate and fill as needed for each operator-->
+
+	<!-- <operator name="">
+		<operatorid></operatorid>
+		<userinfotype></userinfotype>
+		<defaultpackagetype></defaultpackagetype>
+		<authtype></authtype>
+		<ttl></ttl>
+	</operator> -->
+</operators>

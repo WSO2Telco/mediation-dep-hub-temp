@@ -1,0 +1,11 @@
+<paymentConfig>
+	<tokenPoolEnabled>true</tokenPoolEnabled>
+	<accessToken></accessToken>
+		<infoapi>
+		<serviceProvider>admin</serviceProvider>
+		<applicationName></applicationName>
+		<apiEndpoint>http://localhost:8280/customerinfo/v1</apiEndpoint>
+	</infoapi>
+	<tokenEndpoint>http://localhost:8181/tokenservice</tokenEndpoint>
+
+</paymentConfig>

@@ -6,6 +6,6 @@
     scope="default" type="STRING"/>
   <property expression="get-property('query.param.operator')"
     name="operator" scope="default" type="STRING"/>
-  <class name="mediator.LimitCheckMediator"/>
+  <class name="com.wso2telco.dep.spend.limit.mediation.mediator.LimitCheckMediator"/>
   <sequence key="chargeRequestSeq"/>
 </sequence>
