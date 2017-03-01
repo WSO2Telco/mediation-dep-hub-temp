@@ -15,11 +15,23 @@
   <name>locationapihub_capp</name>
   <description>locationapihub_capp</description>
   <properties>
-
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.wso2telco.dep.hub.locationapi.synapse_._locationOperatorEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse_._locationOperatorEndpoint>
+    <com.wso2telco.dep.hub.locationapi.synapse.endpoints_._locationOperatorEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse.endpoints_._locationOperatorEndpoint>
+    <com.wso2telco.dep.hub.locationapi.synapse_._locationAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse_._locationAPI>
+    <com.wso2telco.dep.hub.synapse.endpoints_._locationOperatorEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.synapse.endpoints_._locationOperatorEndpoint>
+    <com.wso2telco.dep.hub.locationapi.synapse.api_._test>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse.api_._test>
+    <com.wso2telco.dep.hub.endpoints_._locationOperatorEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoints_._locationOperatorEndpoint>
+    <com.wso2telco.dep.hub.sequences_._apiPropertySeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequences_._apiPropertySeq>
+    <com.wso2telco.dep.hub.locationapi.synapse.api_._locationAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse.api_._locationAPI>
     
+    <com.wso2telco.dep.hub.locationapi.synapse_._locationSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse_._locationSeq>
+    <com.wso2telco.dep.hub.locationapi.synapse_._apiPropertySeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse_._apiPropertySeq>
+    <com.wso2telco.dep.hub.locationapi.synapse.sequences_._locationSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse.sequences_._locationSeq>
     <com.wso2telco.dep.hub.api_._locationAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._locationAPI>
-    <com.wso2telco.dep.hub.sequence_._locationSequence>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._locationSequence>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
+    <com.wso2telco.dep.hub.sequences_._locationSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequences_._locationSeq>
+    <com.wso2telco.dep.hub.sequence_._locationSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._locationSeq>
+    <com.wso2telco.dep.hub.locationapi.synapse.sequences_._apiPropertySeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.locationapi.synapse.sequences_._apiPropertySeq>
     <com.wso2telco.dep.hub.endpoint_._locationOperatorEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._locationOperatorEndpoint>
   </properties>
   <dependencies>
@@ -31,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>locationSequence</artifactId>
+      <artifactId>locationSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
