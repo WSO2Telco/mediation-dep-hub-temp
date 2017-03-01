@@ -28,7 +28,7 @@
     <com.wso2telco.dep.hub.sequence_._celcomUserInfoSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._celcomUserInfoSeq>
     <com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>
     <com.wso2telco.dep.hub.sequence_._dbLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbLookupSeq>
-    <com.wso2telco.dep.hub.resource_._paymentConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._paymentConfig>
+    <com.wso2telco.dep.hub.resource_._defaultUserInfoConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._defaultUserInfoConfig>
     <com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>
@@ -67,7 +67,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.resource</groupId>
-      <artifactId>paymentConfig</artifactId>
+      <artifactId>defaultUserInfoConfig</artifactId>
       <version>1.0.0</version>
       <type>zip</type>
     </dependency>
