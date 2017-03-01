@@ -14,7 +14,7 @@
   <name>paymentapihub_capp</name>
   <description>paymentapihub_capp</description>
   <properties>
-    <com.wso2telco.dep.hub.endpoint_._Wso2TelcoUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._Wso2TelcoUserInfoEndpoint>
+    <com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>
     <com.wso2telco.dep.hub.sequence_._pkgTypeSetSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._pkgTypeSetSeq>
     <com.wso2telco.dep.hub.sequence_._chargeRequestSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._chargeRequestSeq>
     <com.wso2telco.dep.hub.endpoint_._DefaultPaymentEndPoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DefaultPaymentEndPoint>
@@ -307,7 +307,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>Wso2TelcoUserInfoEndpoint</artifactId>
+      <artifactId>defaultUserInfoEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

@@ -12,7 +12,7 @@
     name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
   <property name="Content-Type" scope="transport" type="STRING" value=""/>
   <call>
-    <endpoint key="Wso2TelcoUserInfoEndpoint"/>
+    <endpoint key="defaultUserInfoEndpoint"/>
   </call>
   <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
   <switch source="get-property('axis2', 'HTTP_SC')">

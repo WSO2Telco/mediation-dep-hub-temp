@@ -110,8 +110,8 @@
     <artifact name="tokenEndpointCallErrorSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/tokenEndpointCallErrorSeq.xml</file>
     </artifact>
-    <artifact name="Wso2TelcoUserInfoEndpoint" groupId="com.wso2telco.dep.hub.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/endpoints/Wso2TelcoUserInfoEndpoint.xml</file>
+    <artifact name="defaultUserInfoEndpoint" groupId="com.wso2telco.dep.hub.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/defaultUserInfoEndpoint.xml</file>
     </artifact>
 	<artifact name="tokenEndpointCallSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/tokenEndpointCallSeq.xml</file>
