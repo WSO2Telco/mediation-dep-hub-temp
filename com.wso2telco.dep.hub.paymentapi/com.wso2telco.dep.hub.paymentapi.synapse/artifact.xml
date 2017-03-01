@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><artifacts>
     <artifact name="paymentAPI" groupId="com.wso2telco.dep.hub.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
-        <file>src/main/synapse-config/api/paymentApi.xml</file>
+        <file>src/main/synapse-config/api/paymentAPI.xml</file>
     </artifact>
     <artifact name="CelcomDBUserInfoEndpoint" groupId="com.wso2telco.dep.hub.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/endpoints/CelcomDBUserInfoEndpoint.xml</file>
