@@ -12,11 +12,12 @@
 
     <config operatorName="OPERATOR1">
         <credentials>
-            <username></username>
-            <password></password>
-            <authToken></authToken>
+            <username>mife</username>
+            <password>Jr2938fdyu</password>
+            <authToken>UkdlOGk3MnBQZWhGMElFRzc1ZjVPUW5sNzFxSzlLSWE6d1AxWWpIblFBenN1RkEweQ</authToken>
         </credentials>
-        <tokenEndpoint></tokenEndpoint>
-        <userInfoEndpoint></userInfoEndpoint>
+        <tokenEndpoint>https://celcom-test.apigee.net/v1/oauth/token</tokenEndpoint>
+        <!--tokenEndpoint>https://demo5329248.mockable.io/celcom</tokenEndpoint-->
+        <userInfoEndpoint>https://celcom-test.apigee.net/oneapi/queryprofile/v1/tel:0192098790/subscribertype</userInfoEndpoint>
     </config>
 </apigeeConfigs>

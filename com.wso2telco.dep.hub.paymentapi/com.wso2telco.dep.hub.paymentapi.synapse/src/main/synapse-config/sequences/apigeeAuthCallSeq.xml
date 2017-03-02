@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="apigeeAuthCallSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-  <dblookup>
-    <connection>
-      <pool>
-        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
-      </pool>
-    </connection>
-    <statement>
-      <sql><![CDATA[select username,password from tokeninfo]]></sql>
-      <result column="username" name="username"/>
-      <result column="password" name="password"/>
-    </statement>
-  </dblookup>
+<sequence name="apigeeAuthCallSeq" onError="apigeeUserInfoCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
+
+  <header expression="get-property('apigeeAuthToken')"
+          name="Authorization" scope="transport"/>
+
   <payloadFactory media-type="xml">
     <format>
       <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
@@ -21,14 +14,34 @@
             <grant_type>password</grant_type>
             <username>$1</username>
             <password>$2</password>
-            <scope/>
+              <scope/>
           </root>
         </soapenv:Body>
       </soapenv:Envelope>
     </format>
     <args>
-      <arg evaluator="xml" expression="get-property('username')"/>
-      <arg evaluator="xml" expression="get-property('password')"/>
+      <arg evaluator="xml" expression="get-property('apigeeUsername')"/>
+      <arg evaluator="xml" expression="get-property('apigeePassword')"/>
     </args>
   </payloadFactory>
+
+  <property name="messageType" scope="axis2" type="STRING" value="application/x-www-form-urlencoded"/>
+
+  <call>
+    <endpoint>
+      <http method="post" uri-template="{uri.var.apigeeTokenEndpoint}"/>
+    </endpoint>
+  </call>
+
+  <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="apigeeAuthCallSeq"
+              expression="get-property('axis2', 'HTTP_SC')"/>
+
+  </log>
+
+
+    <!--change registry path to save in a collection named after the operator. Change all usages accordingly!-->
+    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeAccessToken" scope="registry" expression="json-eval($.access_token)" type="STRING" />
+    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeRefreshToken" scope="registry" expression="json-eval($.refresh_token)" type="STRING"/>
+
 </sequence>
