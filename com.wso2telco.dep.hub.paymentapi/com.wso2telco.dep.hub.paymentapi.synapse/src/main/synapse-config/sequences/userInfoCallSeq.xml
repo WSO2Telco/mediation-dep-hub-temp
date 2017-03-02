@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="userInfoCallSeq" onError="userInfoCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
   <property
-    expression="get-property('registry', 'conf:/repository/wso2telco/configurations/paymentConfig.xml')"
-    name="paymentConfig" scope="default" type="OM"/>
-  <property expression="$ctx:paymentConfig//infoapi/apiEndpoint"
+    expression="get-property('registry', 'conf:/repository/wso2telco/configurations/userInfoConfig.xml')"
+    name="userInfoConfig" scope="default" type="OM"/>
+  <property expression="$ctx:userInfoConfig//infoapi/apiEndpoint"
     name="uri.var.infoapiendpoint" scope="default" type="STRING"/>
   <script language="js"><![CDATA[var requestIdentifier=Math.floor(Math.random() * (999999 - 100000) + 100000);          mc.setProperty("requestIdentifier", requestIdentifier);]]></script>
   <property expression="get-property('requestIdentifier')"
