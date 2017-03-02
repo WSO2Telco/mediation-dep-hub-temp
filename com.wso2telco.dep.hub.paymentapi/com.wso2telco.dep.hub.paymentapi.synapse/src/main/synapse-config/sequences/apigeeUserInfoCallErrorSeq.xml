@@ -2,6 +2,11 @@
 <sequence name="apigeeUserInfoCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
 
     <!--Implement error handling here-->
+    <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
+        <property name="apigeeUserInfoCallErrorSeq.HTTP_SC"
+                  expression="get-property('axis2', 'HTTP_SC')"/>
+
+    </log>
     <log category="INFO" level="custom">
         <property name="apigeeUserInfoCallErrorSeq" value="Error occurred while calling apigee endpoint. Using default package type."/>
     </log>
