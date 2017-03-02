@@ -1,0 +1,22 @@
+<apigeeConfigs>
+
+    <config operatorName="">
+        <credentials>
+            <username></username>
+            <password></password>
+            <authToken></authToken>
+        </credentials>
+        <tokenEndpoint></tokenEndpoint>
+        <userInfoEndpoint></userInfoEndpoint>
+    </config>
+
+    <config operatorName="OPERATOR1">
+        <credentials>
+            <username></username>
+            <password></password>
+            <authToken></authToken>
+        </credentials>
+        <tokenEndpoint></tokenEndpoint>
+        <userInfoEndpoint></userInfoEndpoint>
+    </config>
+</apigeeConfigs>
