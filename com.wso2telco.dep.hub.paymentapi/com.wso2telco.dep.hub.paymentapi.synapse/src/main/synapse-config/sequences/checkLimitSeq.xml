@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="checkLimitSeq" onError="checkLimitErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-  <property expression="get-property('query.param.consumerKey')"
+  <property expression="get-property('CONSUMER_KEY')"
     name="consumerKey" scope="default" type="STRING"/>
   <property expression="get-property('endUserId')" name="endUserId"
     scope="default" type="STRING"/>
