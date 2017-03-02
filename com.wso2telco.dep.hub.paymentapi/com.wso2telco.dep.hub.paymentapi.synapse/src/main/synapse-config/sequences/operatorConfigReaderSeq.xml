@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="opratorConfigReaderSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="operatorConfigReaderSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <property expression="get-property('query.param.operator')"
               name="operatorname" scope="default" type="STRING"/>
     <property
             expression="get-property('registry', 'conf:/repository/wso2telco/configurations/operatorConfig.xml')"
-            name="opratorConfig" scope="default" type="OM"/>
+            name="operatorConfig" scope="default" type="OM"/>
     <property
-            expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/operatorid"
+            expression="$ctx:operatorConfig//operator[@name=get-property('operatorname')]/operatorid"
             name="operatorid" scope="default" type="STRING"/>
     <property
-            expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/userinfotype"
+            expression="$ctx:operatorConfig//operator[@name=get-property('operatorname')]/userinfotype"
             name="userinfotype" scope="default" type="STRING"/>
     <property
-            expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/defaultpackagetype"
+            expression="$ctx:operatorConfig//operator[@name=get-property('operatorname')]/defaultpackagetype"
             name="defaultpackagetype" scope="default" type="STRING"/>
     <property
-            expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/authtype"
+            expression="$ctx:operatorConfig//operator[@name=get-property('operatorname')]/authtype"
             name="authtype" scope="default" type="STRING"/>
     <property
-            expression="$ctx:opratorConfig//operator[@name=get-property('operatorname')]/ttl"
+            expression="$ctx:operatorConfig//operator[@name=get-property('operatorname')]/ttl"
             name="ttl" scope="default" type="STRING"/>
     <filter regex="CELCOM" source="get-property('operatorname')">
         <then>
@@ -26,16 +26,16 @@
         </then>
         <else>
             <property
-                    expression="get-property('registry', 'conf:/repository/wso2telco/configurations/paymentConfig.xml')"
-                    name="paymentConfig" scope="default" type="OM"/>
-            <property expression="$ctx:paymentConfig//tokenPoolEnabled"
+                    expression="get-property('registry', 'conf:/repository/wso2telco/configurations/userInfoConfig.xml')"
+                    name="userInfoConfig" scope="default" type="OM"/>
+            <property expression="$ctx:userInfoConfig//tokenPoolEnabled"
                       name="isTokenPoolEnabled" scope="default" type="STRING"/>
             <filter regex="true" source="get-property('isTokenPoolEnabled')">
                 <then>
                     <sequence key="tokenEndpointCallSeq"/>
                 </then>
                 <else>
-                    <property expression="$ctx:paymentConfig//accessToken"
+                    <property expression="$ctx:userInfoConfig//accessToken"
                               name="access.token" scope="default" type="STRING"/>
                     <sequence key="userInfoCallSeq"/>
                 </else>

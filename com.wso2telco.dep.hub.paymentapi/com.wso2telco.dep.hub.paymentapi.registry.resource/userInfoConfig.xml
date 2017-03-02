@@ -1,4 +1,4 @@
-<paymentConfig>
+<userInfoConfig>
 	<tokenPoolEnabled>true</tokenPoolEnabled>
 	<accessToken></accessToken>
 		<infoapi>
@@ -8,4 +8,4 @@
 	</infoapi>
 	<tokenEndpoint>http://localhost:8181/tokenservice</tokenEndpoint>
 
-</paymentConfig>
+</userInfoConfig>

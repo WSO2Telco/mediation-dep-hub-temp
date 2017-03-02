@@ -2,10 +2,10 @@
 <sequence name="tokenEndpointCallSeq"
   onError="tokenEndpointCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
   <property
-    expression="get-property('registry','conf:/repository/wso2telco/configurations/paymentConfig.xml')"
-    name="paymentConfig" scope="default" type="OM" xmlns:ns="http://org.apache.synapse/xsd"/>
+    expression="get-property('registry','conf:/repository/wso2telco/configurations/userInfoConfig.xml')"
+    name="userInfoConfig" scope="default" type="OM" xmlns:ns="http://org.apache.synapse/xsd"/>
   <property
-    expression="fn:concat($ctx:paymentConfig//tokenEndpoint,'/', $ctx:paymentConfig//infoapi//serviceProvider)"
+    expression="fn:concat($ctx:userInfoConfig//tokenEndpoint,'/', $ctx:userInfoConfig//infoapi//serviceProvider)"
     name="uri.var.httpendpointurl" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
   <log category="DEBUG" level="custom">
     <property expression="get-property('uri.var.httpendpointurl')"

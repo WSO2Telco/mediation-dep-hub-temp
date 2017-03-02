@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="cacheLookupSeq" onError="opratorConfigReaderSeq"
+<sequence name="cacheLookupSeq" onError="operatorConfigReaderSeq"
   trace="disable" xmlns="http://ws.apache.org/ns/synapse">
   <property expression="$trp:Authorization" name="auth-header"
     scope="default" type="STRING"/>
@@ -22,7 +22,7 @@
       <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
         <property name="cacheLookupSeq" value="Not found in cache"/>
       </log>
-      <sequence key="opratorConfigReaderSeq"/>
+      <sequence key="operatorConfigReaderSeq"/>
     </else>
   </filter>
 </sequence>
