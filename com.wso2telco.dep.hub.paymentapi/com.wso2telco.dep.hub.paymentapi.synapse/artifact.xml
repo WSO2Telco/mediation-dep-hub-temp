@@ -128,4 +128,7 @@
     <artifact name="apigeeUserInfoCallSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/apigeeUserInfoCallSeq.xml</file>
     </artifact>
+    <artifact name="apigeeRefreshCallSeq" groupId="com.wso2telco.dep.hub.sequence" version="2.1.0-SNAPSHOT" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/apigeeRefreshCallSeq.xml</file>
+    </artifact>
 </artifacts>
