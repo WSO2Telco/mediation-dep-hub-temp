@@ -50,6 +50,7 @@
     <com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>
     <com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>
     <com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>
+    <com.wso2telco.dep.hub.sequence_._apigeeAuthCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._apigeeAuthCallSeq>
     <com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>
     <com.wso2telco.dep.hub.sequence_._dropSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dropSeq>
     <com.wso2telco.dep.hub.sequence_._dbFaultError>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbFaultError>
@@ -58,7 +59,6 @@
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>
     <com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>
-    <com.wso2telco.dep.hub.sequence_._celcomAuthCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._celcomAuthCallSeq>
     <com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>
     <com.wso2telco.dep.hub.sequence_._cacheLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._cacheLookupSeq>
   </properties>
@@ -131,7 +131,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>celcomAuthCallSeq</artifactId>
+      <artifactId>apigeeAuthCallSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
