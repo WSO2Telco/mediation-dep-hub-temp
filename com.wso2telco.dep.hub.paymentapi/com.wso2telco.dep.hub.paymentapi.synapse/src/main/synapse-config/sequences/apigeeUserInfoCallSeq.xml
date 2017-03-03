@@ -1,78 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="apigeeUserInfoCallSeq" onError="apigeeUserInfoCallErrorSeq" trace="disable"
-          xmlns="http://ws.apache.org/ns/synapse">
-
-
-    <property
-            expression="get-property('registry','conf:/repository/wso2telco/configurations/PaymentAPI/apigeeAccessToken')"
-            name="apigeeAccessToken" scope="default" type="STRING"/>
-    <property
-            expression="get-property('registry','conf:/repository/wso2telco/configurations/PaymentAPI/apigeeRefreshToken')"
-            name="apigeeRefreshToken" scope="default" type="STRING"/>
-
-    <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
-        <property name="apigeeUserInfoCallSeq"
-                expression="boolean(get-property('apigeeAccessToken'))"/>
-    </log>
-
-    <filter regex="true" source="boolean(get-property('apigeeAccessToken'))">
-        <then>
-            <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
-                <property name="apigeeUserInfoCallSeq"
-                          value="HELLO WORLD!"/>
-            </log>
-            <header expression="fn:concat('Bearer ',get-property('apigeeAccessToken'))"
-                    name="Authorization" scope="transport"/>
-            <property name="Content-Type" scope="transport" type="STRING" value=""/>
-
-            <call>
-                <endpoint>
-                    <http method="get" uri-template="{uri.var.apigeeUserInfoEndpoint}"/>
-                </endpoint>
-            </call>
-
-            <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
-                <property name="apigeeUserInfoCallSeq.HTTP_SC"
-                          expression="get-property('axis2', 'HTTP_SC')"/>
-
-            </log>
-
-            <switch source="get-property('axis2', 'HTTP_SC')">
-                <case regex="200">
-                    <property
-                            expression="json-eval($.getSubscriberTypeResponse.userType)"
-                            name="userpackagetype" scope="default" type="STRING"/>
-
-
-                    <sequence key="pkgTypeSetSeq"/>
-                </case>
-                <case regex="401|403">
-                    <sequence key="apigeeRefreshCallSeq"/>
-                    <sequence key="apigeeUserInfoCallSeq"/>
-                </case>
-
-                <default>
-                    <sequence key="apigeeUserInfoCallErrorSeq"/>
-                </default>
-            </switch>
-        </then>
-
-        <else>
-            <sequence key="apigeeAuthCallSeq"/>
-
-            <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
-                <property name="################# AACS.LOG2"
-                          expression="json-eval($.access_token)"/>
-                <property name="################# AACS.LOG2"
-                          expression="json-eval($.refresh_token)"/>
-            </log>
-
-            <sequence key="apigeeUserInfoCallSeq"/>
-
-        </else>
-    </filter>
-
-    <!-- pseudo code for logic to be implemented
+<sequence name="apigeeUserInfoCallSeq"
+  onError="apigeeUserInfoCallErrorSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+  <property
+    expression="get-property('registry','conf:/repository/wso2telco/configurations/PaymentAPI/apigeeAccessToken')"
+    name="apigeeAccessToken" scope="default" type="STRING"/>
+  <property
+    expression="get-property('registry','conf:/repository/wso2telco/configurations/PaymentAPI/apigeeRefreshToken')"
+    name="apigeeRefreshToken" scope="default" type="STRING"/>
+  <log level="custom">
+    <property expression="boolean(get-property('apigeeAccessToken'))" name="apigeeUserInfoCallSeq"/>
+  </log>
+  <filter regex="true" source="boolean(get-property('apigeeAccessToken'))">
+    <then>
+      <log level="custom">
+        <property name="apigeeUserInfoCallSeq" value="HELLO WORLD!"/>
+      </log>
+      <header
+        expression="fn:concat('Bearer ',get-property('apigeeAccessToken'))"
+        name="Authorization" scope="transport"/>
+      <property name="Content-Type" scope="transport" type="STRING" value=""/>
+      <call/>
+      <log level="custom">
+        <property expression="get-property('axis2', 'HTTP_SC')" name="apigeeUserInfoCallSeq.HTTP_SC"/>
+      </log>
+      <switch source="get-property('axis2', 'HTTP_SC')">
+        <case regex="200">
+          <property
+            expression="json-eval($.getSubscriberTypeResponse.userType)"
+            name="userpackagetype" scope="default" type="STRING"/>
+          <sequence key="pkgTypeSetSeq"/>
+        </case>
+        <case regex="401|403">
+          <sequence key="apigeeRefreshCallSeq"/>
+          <sequence key="apigeeUserInfoCallSeq"/>
+        </case>
+        <default>
+          <sequence key="apigeeUserInfoCallErrorSeq"/>
+        </default>
+      </switch>
+    </then>
+    <else>
+      <sequence key="apigeeAuthCallSeq"/>
+      <log level="custom">
+        <property expression="json-eval($.access_token)" name="################# AACS.LOG2"/>
+        <property expression="json-eval($.refresh_token)" name="################# AACS.LOG2"/>
+      </log>
+      <sequence key="apigeeUserInfoCallSeq"/>
+    </else>
+  </filter>
+  <!-- pseudo code for logic to be implemented
 
     write separate sequence to get refresh and access tokens. (apigeeAuthCallSeq)
     write separate sequences for any repeating tasks
@@ -106,5 +82,4 @@
         callSelf();
     }
     -->
-
 </sequence>

@@ -22,7 +22,9 @@
   <header name="Accept-Charset" scope="transport" value="UTF-8"/>
   <!-- remove below comment for production -->
   <header name="sandbox" scope="transport" expression="get-property('uri.var.onBehalfOf')"/>
- 
+  <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="CR.LOG.1" expression="get-property('uri.var.operatorEndpoint')"/>
+  </log>
   <send>
     <endpoint>
       <http method="post" trace="disable" uri-template="{uri.var.operatorEndpoint}"/>

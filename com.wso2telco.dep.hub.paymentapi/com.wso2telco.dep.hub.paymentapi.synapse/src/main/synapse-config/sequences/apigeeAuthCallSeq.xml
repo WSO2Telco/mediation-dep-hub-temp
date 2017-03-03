@@ -41,7 +41,7 @@
 
 
     <!--change registry path to save in a collection named after the operator. Change all usages accordingly!-->
-    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeAccessToken" scope="registry" expression="json-eval($.access_token)" type="STRING" />
-    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeRefreshToken" scope="registry" expression="json-eval($.refresh_token)" type="STRING"/>
+    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeAccessToken//operator" scope="registry" expression="json-eval($.access_token)" type="STRING" />
+    <property name="conf:/repository/wso2telco/configurations/PaymentAPI/apigeeRefreshToken//operator" scope="registry" expression="json-eval($.refresh_token)" type="STRING"/>
 
 </sequence>
