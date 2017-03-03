@@ -14,7 +14,7 @@
         <case regex="QuerySMSStatusHandler">
             <sequence key="smsQueryDeliveryStatusSeq"/>
         </case>
-        <case regex="OutboundSMSSubscriptionsSouthboundHandler">
+        <case regex="OutboundSMSSubscriptionsNorthboundHandler">
             <sequence key="subscribeToSMSDeliveryNotificationsSeq"/>
         </case>
         <case regex="SendSMSHandler">
