@@ -89,4 +89,13 @@
     <artifact name="subscribeToSMSDeliveryNotificationsGatherSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/subscribeToSMSDeliveryNotificationsGatherSeq.xml</file>
     </artifact>
+    <artifact name="smsStopSubsDeliveryNotificationSplitterSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/smsStopSubsDeliveryNotificationSplitterSeq.xml</file>
+    </artifact>
+    <artifact name="smsStopSubsDeliveryNotificationSplitterFaultSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/smsStopSubsDeliveryNotificationSplitterFaultSeq.xml</file>
+    </artifact>
+    <artifact name="smsStopSubsDeliveryNotificationGatherSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/smsStopSubsDeliveryNotificationGatherSeq.xml</file>
+    </artifact>
 </artifacts>
