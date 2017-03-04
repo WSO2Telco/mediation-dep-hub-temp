@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="smsInboundSubscriptionSplitterFaultSeq" onError="commonFault" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ SMS Deli Notify SplitterFaultSeq ===="/>
+    </log>
+    <property name="status" scope="default" type="STRING" value="Failed"/>
+    <sequence key="smsInboundSubscriptionSplitterGatherSeq"/>
+</sequence>

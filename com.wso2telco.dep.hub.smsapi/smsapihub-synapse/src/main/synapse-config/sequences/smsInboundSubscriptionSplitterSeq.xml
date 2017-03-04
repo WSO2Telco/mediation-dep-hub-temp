@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="smsInboundSubscriptionSplitterSeq" onError="smsInboundSubscriptionSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ SMS Inbound Subs SplitterSeq ===="/>
+    </log>
+    <iterate attachPath="//subscription" expression="//destinationAddresses" id="sms_notif_splitter" preservePayload="true">
+        <target>
+            <sequence>
+                <enrich>
+                    <source clone="true" xpath="//destinationAddresses/criteria"/>
+                    <target action="child" xpath="//subscription"/>
+                </enrich>
+                <enrich>
+                    <source clone="true" xpath="//destinationAddresses/destinationAddress"/>
+                    <target action="child" xpath="//subscription"/>
+                </enrich>
+                <property expression="//destinationAddresses/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//destinationAddresses/toAddress/text()" name="toAddress" scope="default" type="STRING"/>
+                <header expression="//destinationAddresses/toAddress/text()" name="To" scope="default"/>
+                <header expression="//destinationAddresses/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::destinationAddresses.toAddress;
+                delete payload..*::destinationAddresses.authorizationHeader;
+                mc.setPayloadXML(payload);]]></script>
+                <enrich>
+                    <source clone="true" xpath="//destinationAddresses"/>
+                    <target property="original_payload" type="property"/>
+                </enrich>
+                <enrich>
+                    <source clone="true" xpath="//callbackReference"/>
+                    <target property="original_callbackReference" type="property"/>
+                </enrich>
+                <filter regex="Not Provisioned" source="$ctx:toAddress">
+                    <then>
+                        <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
+                        <sequence key="smsInboundSubscriptionGatherSeq"/>
+                    </then>
+                    <else/>
+                </filter>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::destinationAddresses;
+                mc.setPayloadXML(payload);]]></script>
+                <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                <call>
+                    <endpoint key="defaultSMSEndpoint"/>
+                </call>
+                <sequence key="smsInboundSubscriptionGatherSeq"/>
+            </sequence>
+        </target>
+    </iterate>
+</sequence>

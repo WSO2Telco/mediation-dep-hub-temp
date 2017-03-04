@@ -23,7 +23,7 @@
         <case regex="SMSOutboundNotificationsHandler">
             <sequence key="sendSMSDeliveryNotificationsSeq"/>
         </case>
-        <case regex="SMSInboundSubscriptionsSouthboundHandler">
+        <case regex="SMSInboundSubscriptionsNorthboundHandler">
             <sequence key="smsInboundSubscriptionSeq"/>
         </case>
         <case regex="SMSInboundNotificationsHandler">
