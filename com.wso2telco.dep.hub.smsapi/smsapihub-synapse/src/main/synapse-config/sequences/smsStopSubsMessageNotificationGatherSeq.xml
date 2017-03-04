@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="smsStopSubsDeliveryNotificationGatherSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="smsStopSubsMessageNotificationGatherSeq" onError="commonFault" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log level="custom">
-        <property name="STATUS" value="==== @ SMS GatherSeq ===="/>
+        <property name="STATUS" value="==== @ SMS Msg GatherSeq ===="/>
     </log>
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201|204)">
@@ -12,7 +12,7 @@
                     </pool>
                 </connection>
                 <statement>
-                    <sql><![CDATA[delete from outbound_operatorsubs where dn_subscription_did=?;]]></sql>
+                    <sql><![CDATA[delete from operatorsubs where mo_subscription_did=?;]]></sql>
                     <parameter expression="$ctx:subscriptionId" type="VARCHAR"/>
                 </statement>
             </dbreport>
@@ -22,13 +22,13 @@
     <property name="collection" scope="default">
         <deleteSubscription xmlns=""/>
     </property>
-    <aggregate id="sms_stop_splitter">
+    <aggregate id="sms_msg_stop_splitter">
         <completeCondition>
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete enclosingElementProperty="collection" expression="//operators">
             <log level="custom">
-                <property name="STATUS" value="==== @ SMS GatherSeq OnComplete ===="/>
+                <property name="STATUS" value="==== @ SMS Msg GatherSeq OnComplete ===="/>
             </log>
             <property name="HTTP_SC" scope="axis2" type="STRING" value="204"/>
             <respond/>

@@ -43,11 +43,14 @@
     <com.wso2telco.dep.hub.sequence_._StoreSMSNotificationSubscriptionSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._StoreSMSNotificationSubscriptionSeq>
     <com.wso2telco.dep.hub.endpoint_._SMSInboundNotificationEp>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._SMSInboundNotificationEp>
     <com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionSeq>
+    <com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationSplitterFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationSplitterFaultSeq>
     <com.wso2telco.dep.hub.sequence_._ModifySMSNotificationSubscriptionResponsePayloadSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._ModifySMSNotificationSubscriptionResponsePayloadSeq>
+    <com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationGatherSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationGatherSeq>
     <com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionGatherSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionGatherSeq>
     <com.wso2telco.dep.hub.sequence_._SMSQueryDeliveryStatusSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._SMSQueryDeliveryStatusSeq>
     <com.wso2telco.dep.hub.sequence_._SubscribeToSMSDeliveryNotificationsSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._SubscribeToSMSDeliveryNotificationsSeq>
     <com.wso2telco.dep.hub.endpoint_._SMSQueryDeliveryStatusEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._SMSQueryDeliveryStatusEndpoint>
+    <com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationSplitterSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsStopSubsMessageNotificationSplitterSeq>
     <com.wso2telco.dep.hub.sequence_._smsStopSubsDeliveryNotificationSplitterFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsStopSubsDeliveryNotificationSplitterFaultSeq>
     <com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionSplitterFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._smsInboundSubscriptionSplitterFaultSeq>
     <com.wso2telco.dep.hub.sequence_._SendSmsOutSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._SendSmsOutSeq>
@@ -266,6 +269,24 @@
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>smsInboundSubscriptionSplitterSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>smsStopSubsMessageNotificationGatherSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>smsStopSubsMessageNotificationSplitterFaultSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>smsStopSubsMessageNotificationSplitterSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>

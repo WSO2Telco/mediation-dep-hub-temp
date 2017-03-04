@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sequence name="smsStopSubsDeliveryNotificationSplitterSeq" onError="smsStopSubsDeliveryNotificationSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+<sequence name="smsStopSubsMessageNotificationSplitterSeq" onError="smsStopSubsMessageNotificationSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <log level="custom">
-        <property name="STATUS" value="==== @ SMS_Stop_SplitterSeq ===="/>
+        <property name="STATUS" value="==== @ SMS_Msg_Stop_SplitterSeq ===="/>
     </log>
-    <iterate attachPath="//deleteSubscriptions" expression="//operators" id="sms_stop_splitter" preservePayload="true">
+    <iterate attachPath="//deleteSubscriptions" expression="//operators" id="sms_msg_stop_splitter" preservePayload="true">
         <target>
             <sequence>
                 <log level="custom">
@@ -18,14 +18,14 @@
                 <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
                     <then>
                         <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
-                        <sequence key="smsStopSubsDeliveryNotificationGatherSeq"/>
+                        <sequence key="smsStopSubsMessageNotificationGatherSeq"/>
                     </then>
                     <else/>
                 </filter>
                 <call>
                     <endpoint key="defaultSMSEndpoint"/>
                 </call>
-                <sequence key="smsStopSubsDeliveryNotificationGatherSeq"/>
+                <sequence key="smsStopSubsMessageNotificationGatherSeq"/>
             </sequence>
         </target>
     </iterate>
