@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="subscribeToSMSDeliveryNotificationsSplitterSeq" onError="subscribeToSMSDeliveryNotificationsSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="STATUS" value="==== @ SMS SplitterSeq ===="/>
+    </log>
+    <log level="full"/>
+    <iterate attachPath="//deliveryReceiptSubscription" expression="//senderAddresses" id="sms_dilv_splitter" preservePayload="true">
+        <target>
+            <sequence>
+                <enrich>
+                    <source clone="true" xpath="//senderAddresses/filterCriteria"/>
+                    <target action="child" xpath="//deliveryReceiptSubscription"/>
+                </enrich>
+                <property expression="//senderAddresses/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//senderAddresses/toAddress/text()" name="toAddress" scope="default" type="STRING"/>
+                <header expression="//senderAddresses/toAddress/text()" name="To" scope="default"/>
+                <header expression="//senderAddresses/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::senderAddresses.toAddress;
+                delete payload..*::senderAddresses.authorizationHeader;
+                mc.setPayloadXML(payload);]]></script>
+                <enrich>
+                    <source clone="true" xpath="//senderAddresses"/>
+                    <target property="original_payload" type="property"/>
+                </enrich>
+                <enrich>
+                    <source clone="true" xpath="//callbackReference"/>
+                    <target property="original_callbackReference" type="property"/>
+                </enrich>
+                <filter regex="Not Provisioned" source="$ctx:toAddress">
+                    <then>
+                        <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
+                        <sequence key="subscribeToSMSDeliveryNotificationsGatherSeq"/>
+                    </then>
+                    <else/>
+                </filter>
+                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                delete payload..*::senderAddresses;
+                mc.setPayloadXML(payload);]]></script>
+                <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                <call>
+                    <endpoint key="defaultSMSEndpoint"/>
+                </call>
+                <sequence key="subscribeToSMSDeliveryNotificationsGatherSeq"/>
+            </sequence>
+        </target>
+    </iterate>
+</sequence>
