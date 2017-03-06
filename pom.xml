@@ -28,5 +28,6 @@
   	<module>com.wso2telco.dep.hub.smsapi</module>
   	<module>com.wso2telco.dep.hub.ussdapi</module>
   	<module>com.wso2telco.dep.hub.paymentapi</module>
+	<module>distribution</module>
   </modules>
 </project>
