@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="smsRetrieveSMSNorthboundNotificationSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log/>
+    <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
+    <iterate attachPath="//inboundSMSMessages" expression="//registrations" id="sms_splitter" preservePayload="true" xmlns:ns="http://org.apache.synapse/xsd">
+        <target>
+            <sequence>
+                <property name="HTTP_METHOD" scope="axis2" type="STRING" value="GET"/>
+                <property expression="//registrations/operatorCode" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//registrations/criteria" name="criteria" scope="default" type="STRING"/>
+                <property expression="//clientCorrelator" name="clientCorrelator" scope="default" type="STRING"/>
+                <header expression="//registrations/toAddress/text()" name="To" scope="default"/>
+                <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <log level="full"/>
+                <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                <call/>
+            </sequence>
+        </target>
+    </iterate>
+    <property name="collection" scope="default">
+        <northboundRetrieveResponse xmlns=""/>
+    </property>
+    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
+    var operatorCode = mc.getProperty('operatorCode');
+    var criteria = mc.getProperty('criteria');
+    var clientCorrelator = mc.getProperty('clientCorrelator');
+    
+    payload.inboundSMSMessageList.operatorCode = operatorCode;
+    payload.inboundSMSMessageList.criteria = criteria;
+    payload.inboundSMSMessageList.clientCorrelator=clientCorrelator;
+    
+    mc.setPayloadJSON(payload);]]></script>
+    <log level="full"/>
+    <aggregate id="sms_splitter">
+        <completeCondition>
+            <messageCount max="-1" min="-1"/>
+        </completeCondition>
+        <onComplete enclosingElementProperty="collection" expression="//inboundSMSMessageList" xmlns:ns="http://org.apache.synapse/xsd">
+            <log level="full"/>
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+        </onComplete>
+    </aggregate>
+    <property name="SMSMessageListArr" scope="operation" type="STRING" value=""/>
+    <property name="totalNumofMsgs" scope="operation" type="STRING" value="0"/>
+    <property name="totalNumofPendingMsgs" scope="operation" type="STRING" value="0"/>
+    <iterate attachPath="//northboundRetrieveResponse" continueParent="true" expression="//inboundSMSMessageList" id="itrSMSMessageList" preservePayload="true" sequential="true" xmlns:ns="http://org.apache.synapse/xsd">
+        <target>
+            <sequence>
+                <property name="SMSMessageArr" scope="operation" type="STRING" value=""/>
+                <iterate attachPath="//inboundSMSMessageList" continueParent="true" expression="//inboundSMSMessage" id="itrinboundSMSMessages" preservePayload="true" sequential="true">
+                    <target>
+                        <sequence>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/dateTime" name="dateTime" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/destinationAddress" name="destinationAddress" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/messageId" name="messageId" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/message" name="message" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/resourceURL" name="resourceURL" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage/senderAddress" name="senderAddress" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/operatorCode" name="operatorCode" scope="default" type="STRING"/>
+                            <property expression="//inboundSMSMessageList/criteria" name="criteria" scope="default" type="STRING"/>
+                            <script language="js"><![CDATA[var res=mc.getProperty("resourceURL");
+                                 res = res.replace('registrations/','registrations/' + mc.getProperty("operatorCode") + '/'+ mc.getProperty("senderAddress")+ '/'+mc.getProperty("messageId")).toString();
+                                 mc.setProperty('resourceURL',res);]]></script>
+                            <property expression="//inboundSMSMessageList/inboundSMSMessage" name="itrSMSMessage" scope="default" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;inboundSMSMessage>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;dateTime>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('dateTime'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/dateTime>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;destinationAddress>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('destinationAddress'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/destinationAddress>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;messageId>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('messageId'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/messageId>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;message>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('message'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/message>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;resourceURL>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('resourceURL'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/resourceURL>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;senderAddress>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('senderAddress'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/senderAddress>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;operatorCode>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('operatorCode'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/operatorCode>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;criteria>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),get-property('criteria'),'')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/criteria>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                            <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;/inboundSMSMessage>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
+                        </sequence>
+                    </target>
+                </iterate>
+                <property expression="fn:concat(get-property('operation','SMSMessageListArr'),get-property('operation','SMSMessageArr'),'')" name="SMSMessageListArr" scope="operation" type="STRING"/>
+                <property expression="//inboundSMSMessageList/totalNumberOfPendingMessages" name="itrtotnumofmsgsPending" scope="default" type="STRING"/>
+                <property expression="//inboundSMSMessageList/numberOfMessagesInThisBatch" name="itrNumofMsgInBatch" scope="default" type="STRING"/>
+                <property expression="get-property('operation','totalNumofMsgs')" name="synapsetotalNumofMsgs" scope="default" type="STRING"/>
+                <property expression="get-property('operation','totalNumofPendingMsgs')" name="synapsetotalNumofPendingMsgs" scope="default" type="STRING"/>
+                <script language="js"><![CDATA[var msgsInBatch = parseInt(mc.getProperty("itrNumofMsgInBatch")) + parseInt(mc.getProperty("synapsetotalNumofMsgs")) ;                                             
+                 var numMsgPending = parseInt(mc.getProperty("itrtotnumofmsgsPending")) +   parseInt(mc.getProperty("synapsetotalNumofPendingMsgs"));    
+                 print("msgsInBatch"+msgsInBatch);  
+                 mc.setProperty('synapsetotalNumofMsgs',msgsInBatch);       
+                 mc.setProperty('synapsetotalNumofPendingMsgs',numMsgPending);]]></script>
+                <log>
+                    <property expression="get-property('operation','synapsetotalNumofMsgs')" name="synapsetotalNumofMsgs"/>
+                </log>
+                <property expression="get-property('synapsetotalNumofMsgs')" name="totalNumofMsgs" scope="operation" type="STRING"/>
+                <property expression="get-property('synapsetotalNumofPendingMsgs')" name="totalNumofPendingMsgs" scope="operation" type="STRING"/>
+            </sequence>
+        </target>
+    </iterate>
+    <log>
+        <property expression="get-property('operation','totalNumofMsgs')" name="totalNumofMsgs" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="get-property('operation','totalNumofPendingMsgs')" name="totalNumofPendingMsgs" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="get-property('operation','SMSMessageListArr')" name="SMSMessageListArr" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </log>
+    <log>
+        <property name="THE END" value="THE END"/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <inboundSMSMessageList>                  $1                                                            
+                     <numberOfMessagesInThisBatch>$2</numberOfMessagesInThisBatch>
+                <totalNumberOfPendingMessages>$3</totalNumberOfPendingMessages>
+                <clientCorrelator>$4</clientCorrelator>
+                <resourceURL>$5</resourceURL>
+            </inboundSMSMessageList>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('operation','SMSMessageListArr')" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('operation','totalNumofMsgs')" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('operation','totalNumofPendingMsgs')" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('clientCorrelator')" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('resourceURL')" xmlns:ns="http://org.apache.synapse/xsd"/>
+        </args>
+    </payloadFactory>
+    <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+    <respond/>
+</sequence>
