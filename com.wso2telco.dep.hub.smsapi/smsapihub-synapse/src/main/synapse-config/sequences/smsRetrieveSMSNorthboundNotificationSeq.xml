@@ -117,6 +117,7 @@
     <log>
         <property name="THE END" value="THE END"/>
     </log>
+    <property name="resourceURL" scope="default" type="STRING" value="/inbound/registrations/messages"/>
     <payloadFactory media-type="xml">
         <format>
             <inboundSMSMessageList>                  $1                                                            
