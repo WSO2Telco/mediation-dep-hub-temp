@@ -116,4 +116,7 @@
     <artifact name="smsStopSubsMessageNotificationGatherSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/smsStopSubsMessageNotificationGatherSeq.xml</file>
     </artifact>
+    <artifact name="smsRetrieveSMSNorthboundNotificationSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/smsRetrieveSMSNorthboundNotificationSeq.xml</file>
+    </artifact>
 </artifacts>
