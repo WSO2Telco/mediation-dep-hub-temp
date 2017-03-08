@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="defaultPkgTypeSetSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="get-property('defaultPackageType')" name="userpackagetype" scope="default" type="STRING"/>
+    <clone>
+        <target sequence="filterCheckLimitSeq"/>
+        <!--target sequence="cacheUpdateSeq"/-->
+    </clone>
+</sequence>

@@ -4,6 +4,12 @@
     	var hubGateway = mc.getProperty('hubGateway').trim();
     	var requestResourceUrl = mc.getProperty('requestResourceUrl').trim();
     	var requestID = mc.getProperty('requestID').trim();
+    	var clientCorrelator = mc.getProperty('clientCorrelator');
+    	var clientCorrelatorArr = new Array();
+    	clientCorrelatorArr = clientCorrelator.split(":");
+    	payload.amountTransaction.clientCorrelator = clientCorrelatorArr[0];
  	payload.amountTransaction.resourceURL = hubGateway + requestResourceUrl + requestID;
  	mc.setPayloadJSON(payload);]]></script>
 </sequence>
+
+

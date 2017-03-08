@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="userInfoConfig" groupId="com.wso2telco.dep.hub.resource" version="1.0.0" type="registry/resource" serverRole="GovernanceRegistry">
+        <item>
+            <file>userInfoConfig.xml</file>
+            <path>/_system/config/repository/wso2telco/configurations/PaymentAPI</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="operatorConfig" groupId="com.wso2telco.dep.hub.resource" version="1.0.0" type="registry/resource" serverRole="GovernanceRegistry">
+        <item>
+            <file>operatorConfig.xml</file>
+            <path>/_system/config/repository/wso2telco/configurations/PaymentAPI</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+    <artifact name="apigeeConfig" groupId="com.wso2telco.dep.hub.resource" version="1.0.0" type="registry/resource" serverRole="GovernanceRegistry">
+        <item>
+            <file>apigeeConfig.xml</file>
+            <path>/_system/config/repository/wso2telco/configurations/PaymentAPI</path>
+            <mediaType>application/xml</mediaType>
+        </item>
+    </artifact>
+</artifacts>
