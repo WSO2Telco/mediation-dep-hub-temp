@@ -23,11 +23,7 @@
     <com.wso2telco.dep.hub.sequence_._userInfoCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoCallSeq>
     <com.wso2telco.dep.hub.sequence_._paymentRefundSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentRefundSeq>
     <com.wso2telco.dep.hub.resource_._operatorConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._operatorConfig>
-    <com.wso2telco.dep.hub.sequence_._celcomUserInfoSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._celcomUserInfoSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>
-    <com.wso2telco.dep.hub.sequence_._dbLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbLookupSeq>
     <com.wso2telco.dep.hub.sequence_._apigeeUserInfoCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._apigeeUserInfoCallErrorSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>
     <com.wso2telco.dep.hub.endpoint_._defaultPaymentEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._defaultPaymentEndpoint>
     <com.wso2telco.dep.hub.sequence_._defaultPkgTypeSetSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._defaultPkgTypeSetSeq>
     <com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>
@@ -35,33 +31,25 @@
     <com.wso2telco.dep.hub.resource_._userInfoConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._userInfoConfig>
     <com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>
     <com.wso2telco.dep.hub.sequence_._operatorConfigReaderSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._operatorConfigReaderSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomTokenEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomTokenEndpoint>
-    <com.wso2telco.dep.hub.sequence_._paymentStatusSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentStatusSeq>
     <com.wso2telco.dep.hub.sequence_._cacheUpdateSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._cacheUpdateSeq>
     <com.wso2telco.dep.hub.api_._paymentAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._paymentAPI>
-    <com.wso2telco.dep.hub.sequence_._getCelcomAuthTokenSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._getCelcomAuthTokenSeq>
     <com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>
     <com.wso2telco.dep.hub.resource_._apigeeConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._apigeeConfig>
     <com.wso2telco.dep.hub.endpoint_._tokenPoolEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._tokenPoolEndpoint>
-    <com.wso2telco.dep.hub.sequence_._celcomUserInfoFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._celcomUserInfoFaultSeq>
     <com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>
     <com.wso2telco.dep.hub.sequence_._paymentMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentMainSeq>
     <com.wso2telco.dep.hub.sequence_._apigeeUserInfoCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._apigeeUserInfoCallSeq>
     <com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>
-    <com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>
-    <com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>
     <com.wso2telco.dep.hub.sequence_._apigeeAuthCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._apigeeAuthCallSeq>
     <com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>
-    <com.wso2telco.dep.hub.sequence_._dropSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dropSeq>
-    <com.wso2telco.dep.hub.sequence_._dbFaultError>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbFaultError>
-    <com.wso2telco.dep.hub.sequence_._paymentChargeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentChargeSeq>
+ <com.wso2telco.dep.hub.sequence_._paymentChargeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentChargeSeq>
     <com.wso2telco.dep.hub.sequence_._apigeeRefreshCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._apigeeRefreshCallSeq>
-    <com.wso2telco.dep.hub.sequence_._celcomUserInfoAsyncSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._celcomUserInfoAsyncSeq>
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>
     <com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>
     <com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>
-    <com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>
     <com.wso2telco.dep.hub.sequence_._cacheLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._cacheLookupSeq>
+    <com.wso2telco.dep.hub.sequence_._dropSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dropSeq>
+
   </properties>
   <dependencies>
     <dependency>
@@ -88,13 +76,7 @@
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>CelcomDBUserInfoEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
+        <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
       <artifactId>CelcomTokenEndpoint</artifactId>
       <version>1.0.0</version>
@@ -108,24 +90,13 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>DBUserInfoEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
       <artifactId>defaultPaymentEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>paymentStatusSeqEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
+     
       <artifactId>UserInfoEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
@@ -138,13 +109,13 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>cacheLookupSeq</artifactId>
+      <artifactId>cacheUpdateSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>cacheUpdateSeq</artifactId>
+      <artifactId>cacheLookupSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
