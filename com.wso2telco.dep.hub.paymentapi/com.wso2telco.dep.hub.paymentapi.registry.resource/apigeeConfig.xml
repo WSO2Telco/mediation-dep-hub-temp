@@ -20,4 +20,4 @@
         <!--tokenEndpoint>https://demo5329248.mockable.io/celcom</tokenEndpoint-->
         <userInfoEndpoint>https://celcom-test.apigee.net/oneapi/queryprofile/v1/tel:0192098790/subscribertype</userInfoEndpoint>
     </config>
-</apigeeConfigs>
+</apigeeConfigsk
