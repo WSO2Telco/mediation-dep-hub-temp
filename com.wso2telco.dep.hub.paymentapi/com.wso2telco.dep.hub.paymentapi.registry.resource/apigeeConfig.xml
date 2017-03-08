@@ -12,9 +12,9 @@
 
     <config operatorName="OPERATOR1">
         <credentials>
-            <username>mife</username>
-            <password>Jr2938fdyu</password>
-            <authToken>UkdlOGk3MnBQZWhGMElFRzc1ZjVPUW5sNzFxSzlLSWE6d1AxWWpIblFBenN1RkEweQ</authToken>
+            <username></username>
+            <password></password>
+            <authToken></authToken>
         </credentials>
         <tokenEndpoint>https://celcom-test.apigee.net/v1/oauth/token</tokenEndpoint>
         <!--tokenEndpoint>https://demo5329248.mockable.io/celcom</tokenEndpoint-->
