@@ -4,6 +4,18 @@
     <class description="" name="com.wso2telco.dep.mediator.HandlerMediator">
         <property name="executorClass" value="com.wso2telco.dep.mediator.impl.LocationExecutor"/>
     </class>
+    <filter xpath="boolean($ctx:UserMSISDN)">
+    <then>
+    <!-- concat tel:+ to the msisdn -->
+    <property expression="fn:concat('tel:+', $ctx:UserMSISDN)"
+    name="MSISDN" scope="default" type="STRING"/>
+    <!-- validate the msisdn for black list and white list -->
+    <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
+        <with-param name="paramName" value="address"/>
+        <with-param name="paramValue" value="{$ctx:MSISDN}"/>
+      </call-template>
+    </then>
+    </filter>
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
     <send>
         <endpoint key="locationOperatorEndpoint"/>
