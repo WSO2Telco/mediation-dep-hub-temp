@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="ussdMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <sequence key="apiPropertySeq"/>
-    <class name="com.wso2telco.dep.mediator.HandlerMediator">
-        <property name="executorClass" value="com.wso2telco.dep.mediator.impl.ussd.USSDExecutor"/>
-    </class>
-    <switch source="get-property('HANDLER')">
-        <case regex="SendUSSDHandler">
-            <sequence key="sendUssdSeq"/>
-        </case>
-        <case regex="USSDInboundHandler">
-            <sequence key="ussdInboundSeq"/>
-        </case>
-        <case regex="NorthBoundUSSDSubscriptionHandler">
-            <sequence key="ussdSubscriptionSeq"/>
-        </case>
-        <case regex="SouthBoundStopMOUSSDSubscriptionHandler">
-            <sequence key="ussdMOStopSubscriptionSeq"/>
-        </case>
-        <default/>
-    </switch>
+  <sequence key="apiPropertySeq"/>
+  <class name="com.wso2telco.dep.mediator.HandlerMediator">
+    <property name="executorClass" value="com.wso2telco.dep.mediator.impl.ussd.USSDExecutor"/>
+  </class>
+  <filter xpath="boolean($ctx:UserMSISDN)">
+    <then>
+      <!-- concat tel:+ to the msisdn -->
+      <property expression="fn:concat('tel:+', $ctx:UserMSISDN)"
+        name="MSISDN" scope="default" type="STRING"/>
+      <!-- validate the msisdn for black list and white list -->
+      <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
+        <with-param name="paramName" value="address"/>
+        <with-param name="paramValue" value="{$ctx:MSISDN}"/>
+      </call-template>
+    </then>
+    <else/>
+  </filter>
+  <switch source="get-property('HANDLER')">
+    <case regex="SendUSSDHandler">
+      <sequence key="sendUssdSeq"/>
+    </case>
+    <case regex="USSDInboundHandler">
+      <sequence key="ussdInboundSeq"/>
+    </case>
+    <case regex="NorthBoundUSSDSubscriptionHandler">
+      <sequence key="ussdSubscriptionSeq"/>
+    </case>
+    <case regex="SouthBoundStopMOUSSDSubscriptionHandler">
+      <sequence key="ussdMOStopSubscriptionSeq"/>
+    </case>
+    <default/>
+  </switch>
 </sequence>
