@@ -6,11 +6,5 @@
     <call>
         <endpoint key="smsQueryDeliveryStatusEndpoint"/>
     </call>
-    <switch source="$axis2:HTTP_SC">
-        <case regex="200|201">
-            <sequence key="smsQueryDeliveryStatusResponseSeq"/>
-        </case>
-        <default/>
-    </switch>
     <respond/>
 </sequence>
