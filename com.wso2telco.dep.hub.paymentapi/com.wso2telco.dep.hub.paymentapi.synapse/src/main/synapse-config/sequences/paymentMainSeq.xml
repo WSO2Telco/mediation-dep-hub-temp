@@ -4,11 +4,8 @@
   <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
     <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
   </class>
-  <filter xpath="boolean($ctx:UserMSISDN)">
+  <filter xpath="boolean($ctx:MSISDN)">
     <then>
-      <!-- concat tel:+ to the msisdn -->
-      <property expression="fn:concat('tel:+', $ctx:UserMSISDN)"
-        name="MSISDN" scope="default" type="STRING"/>
       <!-- validate the msisdn for black list and white list -->
       <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
         <with-param name="paramName" value="address"/>
