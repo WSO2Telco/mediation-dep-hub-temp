@@ -1,7 +1,6 @@
 <operators>
 	<operator name="">
 		<operatorId></operatorId>
-		<userInfoType></userInfoType> <!--currently not being used -->
 		<defaultPackageType>postpaid</defaultPackageType>
 		<authType>basic</authType>
 		<ttl>3600</ttl>
@@ -12,7 +11,6 @@
 
 	<!-- <operator name="">
 		<operatorId></operatorId>
-		<userInfoType></userInfoType>
 		<defaultPackageType></defaultPackageType>
 		<authType></authType>
 		<ttl></ttl>
@@ -21,7 +19,6 @@
 	<!--delete below before deployment. for testing purpose only! -->
 	<operator name="OPERATOR1">
 		<operatorId>1</operatorId>
-		<userInfoType>apigee</userInfoType> <!--currently not being used -->
 		<defaultPackageType>postpaid</defaultPackageType>
 		<authType>basic</authType>
 		<ttl>3600</ttl>
