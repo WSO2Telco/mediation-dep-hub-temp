@@ -11,9 +11,19 @@
     <property expression="get-property('uri.var.httpendpointurl')"
       name="full.url" xmlns:ns="http://org.apache.synapse/xsd"/>
   </log>
+
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+    <with-param name="direction" value="REQUESTOUT"/>
+  </call-template>
+      
   <call>
     <endpoint key="tokenPoolEndpoint"/>
   </call>
+
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+		<with-param name="direction" value="RESPONSEIN"/>
+  </call-template>
+	  
   <property name="ContentType" scope="axis2" type="STRING" value="text/plain"/>
   <property expression="$body/m0:text" name="access.token"
     scope="default" type="STRING"
@@ -23,5 +33,10 @@
       name="access.token.log" xmlns:ns="http://org.apache.synapse/xsd"/>
   </log>
   <sequence key="userInfoCallSeq"/>
+  
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+ 		<with-param name="direction" value="RESPONSEOUT"/>
+  </call-template> 
+  
   <respond/>
 </sequence>

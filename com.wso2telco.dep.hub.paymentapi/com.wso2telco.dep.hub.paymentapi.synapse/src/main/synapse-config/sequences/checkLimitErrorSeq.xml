@@ -21,5 +21,10 @@
             <property name="HTTP_SC" scope="axis2" type="STRING" value="500"/>
         </default>
     </switch>
+ 
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+ 		<with-param name="direction" value="RESPONSEOUT"/>
+	</call-template>   
+	 
     <respond/>
 </sequence>

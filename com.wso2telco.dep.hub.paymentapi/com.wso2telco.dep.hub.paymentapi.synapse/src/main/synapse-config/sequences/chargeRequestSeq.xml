@@ -25,6 +25,11 @@
   <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
     <property name="CR.LOG.1" expression="get-property('uri.var.operatorEndpoint')"/>
   </log>
+  
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+     <with-param name="direction" value="REQUESTOUT"/>
+  </call-template>
+  
   <send>
     <endpoint>
       <http method="post" trace="disable" uri-template="{uri.var.operatorEndpoint}"/>
