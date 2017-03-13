@@ -9,8 +9,17 @@ var str = mc.getProperty('outboundUSSDMessage');
 var text = str.replace("\n", "\\n").replace("\r", "\\r");
 payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
 mc.setPayloadJSON(payload);]]></script>
+	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      <with-param name="direction" value="REQUESTOUT"/>
+  	</call-template>
     <call>
         <endpoint key="sendUssdSeqEndpoint"/>
     </call>
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      <with-param name="direction" value="RESPONSEIN"/>
+  	</call-template>
+  	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="RESPONSEOUT"/>
+    </call-template>
     <respond/>
 </sequence>
