@@ -3,6 +3,11 @@
     <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
     <header name="Accept" scope="transport" value="application/json"/>
     <header expression="get-property('ENDPOINT')" name="To" scope="default" xmlns:ns="http://org.apache.synapse/xsd"/>
+
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      <with-param name="direction" value="REQUESTOUT"/>
+    </call-template>
+        
     <send>
         <endpoint key="defaultPaymentEndpoint"/>
     </send>

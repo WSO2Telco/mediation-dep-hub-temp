@@ -11,9 +11,19 @@
   <property expression="fn:concat('Bearer ', get-property('access.token'))"
     name="Authorization" scope="transport" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
   <property name="Content-Type" scope="transport" type="STRING" value=""/>
+
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+    <with-param name="direction" value="REQUESTOUT"/>
+  </call-template>
+      
   <call>
     <endpoint key="defaultUserInfoEndpoint"/>
   </call>
+  
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+ 	<with-param name="direction" value="RESPONSEIN"/>
+  </call-template>
+	  
   <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
   <switch source="get-property('axis2', 'HTTP_SC')">
     <case regex="200">
