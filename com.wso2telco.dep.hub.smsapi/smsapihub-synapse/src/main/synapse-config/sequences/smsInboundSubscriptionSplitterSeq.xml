@@ -41,9 +41,19 @@
                 delete payload..*::destinationAddresses;
                 mc.setPayloadXML(payload);]]></script>
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                
+                <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      				<with-param name="direction" value="REQUESTOUT"/>
+    			</call-template>
+    
                 <call>
                     <endpoint key="defaultSMSEndpoint"/>
                 </call>
+
+			    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+			 		<with-param name="direction" value="RESPONSEIN"/>
+				</call-template>
+	                
                 <sequence key="smsInboundSubscriptionGatherSeq"/>
             </sequence>
         </target>

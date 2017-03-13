@@ -22,9 +22,19 @@
                     </then>
                     <else/>
                 </filter>
+
+			    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+			      <with-param name="direction" value="REQUESTOUT"/>
+			    </call-template>
+                    
                 <call>
                     <endpoint key="defaultSMSEndpoint"/>
                 </call>
+                
+			    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+			 		<with-param name="direction" value="RESPONSEIN"/>
+				</call-template>
+	                
                 <sequence key="smsStopSubsMessageNotificationGatherSeq"/>
             </sequence>
         </target>
