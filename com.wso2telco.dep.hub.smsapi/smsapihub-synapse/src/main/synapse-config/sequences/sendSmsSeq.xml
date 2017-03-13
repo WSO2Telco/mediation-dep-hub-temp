@@ -11,6 +11,9 @@
     <foreach expression="//address" xmlns:ns="http://org.apache.synapse/xsd">
         <sequence>
             <property expression="//address/text()" name="MSISDN" scope="default" type="STRING"/>
+            <log level="custom">
+                <property expression="$ctx:MSISDN" name="MSISDN_NO"/>
+            </log>
             <!-- validate the msisdn for black list and white list -->
             <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
                 <with-param name="paramName" value="address"/>
@@ -19,9 +22,6 @@
         </sequence>
     </foreach>
     <script language="js"><![CDATA[mc.setPayloadJSON(mc.getProperty('original_body'));]]></script>
-    <log level="custom">
-        <property expression="$body" name="AAAA"/>
-    </log>
     <call>
         <endpoint key="defaultSMSEndpoint"/>
     </call>
