@@ -14,65 +14,59 @@
   <name>paymentapihub_capp</name>
   <description>paymentapihub_capp</description>
   <properties>
-    <com.wso2telco.dep.hub.sequence_._paymentStatusSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentStatusSeq>
-    <com.wso2telco.dep.hub.sequence_._checkLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._checkLimitSeq>
-    <com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>
-    <com.wso2telco.dep.hub.endpoint_._DefaultPaymentEndPoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DefaultPaymentEndPoint>
-    <com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomTokenEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomTokenEndpoint>
-    <com.wso2telco.dep.hub.sequence_._userInfoFaultSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoFaultSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomDBUserInfoEndpoint>
-    <com.wso2telco.dep.hub.sequence_._userInfoAsyncSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoAsyncSeq>
-    <com.wso2telco.dep.hub.sequence_._paymentChargeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentChargeSeq>
-    <com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>
+    <com.wso2telco.dep.hub.sequence_._pkgTypeSetSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._pkgTypeSetSeq>
     <com.wso2telco.dep.hub.sequence_._chargeRequestSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._chargeRequestSeq>
-    <com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._CelcomUserInfoEndpoint>
-    <com.wso2telco.dep.hub.sequence_._paymentMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentMainSeq>
-    <com.wso2telco.dep.hub.sequence_._dbLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbLookupSeq>
-    <com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dbAsyncInsertSeq>
-    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,service/rule=aar,synapse/message-store=xml,event/stream=json,service/meta=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,wso2/gadget=dar,synapse/api=xml,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
-    <com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._DBUserInfoEndpoint>
+    <artifact.types>jaggery/app=zip,synapse/priority-executor=xml,synapse/inbound-endpoint=xml,lib/registry/handlers=jar,service/rule=aar,lib/registry/filter=jar,synapse/message-store=xml,event/stream=json,service/meta=xml,synapse/proxy-service=xml,bpel/workflow=zip,synapse/sequence=xml,synapse/endpointTemplate=xml,carbon/application=car,synapse/api=xml,wso2/gadget=dar,synapse/event-source=xml,synapse/message-processors=xml,event/receiver=xml,lib/dataservice/validator=jar,synapse/template=xml,synapse/endpoint=xml,lib/carbon/ui=jar,lib/synapse/mediator=jar,event/publisher=xml,synapse/local-entry=xml,synapse/task=xml,webapp/jaxws=war,registry/resource=zip,synapse/configuration=xml,service/axis2=aar,synapse/lib=zip,synapse/sequenceTemplate=xml,event/execution-plan=siddhiql,service/dataservice=dbs,web/application=war,lib/library/bundle=jar</artifact.types>
     <com.wso2telco.dep.hub.sequence_._replaceResourceURLForListSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._replaceResourceURLForListSeq>
-    <com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>
-    <com.wso2telco.dep.hub.sequence_._paymentRefundSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentRefundSeq>
-    <com.wso2telco.dep.hub.sequence_._getCelcomAuthTokenSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._getCelcomAuthTokenSeq>
-    <com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._setCelcomRegistryTokens>
-    <com.wso2telco.dep.hub.api_._paymentAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._paymentAPI>
-    <com.wso2telco.dep.hub.endpoint_._PaymentStatusSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._PaymentStatusSeqEndpoint>
     <com.wso2telco.dep.hub.endpoint_._UserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._UserInfoEndpoint>
-    <com.wso2telco.dep.hub.sequence_._CelcomAuthCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._CelcomAuthCallSeq>
-    <com.wso2telco.dep.hub.sequence_._dropSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dropSeq>
+    <com.wso2telco.dep.hub.sequence_._checkLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._checkLimitSeq>
+    <com.wso2telco.dep.hub.sequence_._userInfoCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoCallSeq>
+    <com.wso2telco.dep.hub.sequence_._paymentRefundSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentRefundSeq>
+    <com.wso2telco.dep.hub.resource_._operatorConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._operatorConfig>
+    
+    <com.wso2telco.dep.hub.endpoint_._defaultPaymentEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._defaultPaymentEndpoint>
+    <com.wso2telco.dep.hub.sequence_._defaultPkgTypeSetSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._defaultPkgTypeSetSeq>
+    <com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._defaultUserInfoEndpoint>
+    <com.wso2telco.dep.hub.sequence_._userInfoCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoCallErrorSeq>
+    <com.wso2telco.dep.hub.resource_._userInfoConfig>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.resource_._userInfoConfig>
+    <com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentListTransactionsSeq>
+    <com.wso2telco.dep.hub.sequence_._operatorConfigReaderSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._operatorConfigReaderSeq>
+    <com.wso2telco.dep.hub.sequence_._cacheUpdateSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._cacheUpdateSeq>
+    <com.wso2telco.dep.hub.api_._paymentAPI>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.api_._paymentAPI>
+    <com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentOutMainSeq>
+    
+    <com.wso2telco.dep.hub.endpoint_._tokenPoolEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._tokenPoolEndpoint>
+    <com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._checkLimitErrorSeq>
+    <com.wso2telco.dep.hub.sequence_._paymentMainSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentMainSeq>
+    
+    <com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._filterCheckLimitSeq>
+    
     <com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._replaceResourceURLSeq>
-    <com.wso2telco.dep.hub.sequence_._userInfoSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._userInfoSeq>
+ <com.wso2telco.dep.hub.sequence_._paymentChargeSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._paymentChargeSeq>
+    
+    <com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallErrorSeq>
+    <com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._tokenEndpointCallSeq>
+    <com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.endpoint_._paymentStatusSeqEndpoint>
+    <com.wso2telco.dep.hub.sequence_._cacheLookupSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._cacheLookupSeq>
+    <com.wso2telco.dep.hub.sequence_._dropSeq>capp/EnterpriseServiceBus</com.wso2telco.dep.hub.sequence_._dropSeq>
+
   </properties>
   <dependencies>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>filterCheckLimitSeq</artifactId>
+      <groupId>com.wso2telco.dep.hub.resource</groupId>
+      <artifactId>operatorConfig</artifactId>
       <version>1.0.0</version>
-      <type>xml</type>
+      <type>zip</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.resource</groupId>
+      <artifactId>userInfoConfig</artifactId>
+      <version>1.0.0</version>
+      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>checkLimitErrorSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>paymentChargeSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>checkLimitSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>dropSeq</artifactId>
+      <artifactId>userInfoCallSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -82,69 +76,9 @@
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>userInfoAsyncSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
+        <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>CelcomDBUserInfoEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>dbLookupSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>paymentListTransactionsSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>CelcomAuthCallSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>userInfoFaultSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>setCelcomRegistryTokens</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>paymentStatusSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>replaceResourceURLSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>paymentMainSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>getCelcomAuthTokenSeq</artifactId>
+      <artifactId>CelcomTokenEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -156,25 +90,62 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>PaymentStatusSeqEndpoint</artifactId>
+      <artifactId>defaultPaymentEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>DefaultPaymentEndPoint</artifactId>
+     
+      <artifactId>UserInfoEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>CelcomTokenEndpoint</artifactId>
+        <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>cacheUpdateSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>userInfoSeq</artifactId>
+      <artifactId>cacheLookupSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>celcomUserInfoAsyncSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>celcomUserInfoFaultSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>celcomUserInfoSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>chargeRequestSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>checkLimitErrorSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>checkLimitSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -186,7 +157,61 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>paymentRefundSeq</artifactId>
+      <artifactId>dbFaultError</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>dbLookupSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>defaultPkgTypeSetSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>dropSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>filterCheckLimitSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>getCelcomAuthTokenSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>operatorConfigReaderSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>paymentChargeSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>paymentListTransactionsSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>paymentMainSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -198,13 +223,19 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>chargeRequestSeq</artifactId>
+      <artifactId>paymentRefundSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>UserInfoEndpoint</artifactId>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>paymentStatusSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>pkgTypeSetSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -215,12 +246,48 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>DBUserInfoEndpoint</artifactId>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>replaceResourceURLSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>setCelcomRegistryTokens</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>userInfoCallErrorSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>tokenEndpointCallSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.sequence</groupId>
+      <artifactId>tokenEndpointCallErrorSeq</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
+      <artifactId>tokenPoolEndpoint</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+    <dependency>
+      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
+      <artifactId>defaultUserInfoEndpoint</artifactId>
+      <version>1.0.0</version>
+      <type>xml</type>
+    </dependency>
+                  </dependencies>
   <repositories>
     <repository>
       <releases>

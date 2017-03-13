@@ -14,8 +14,9 @@
   <name>com.wso2telco.dep.hub.paymentapi</name>
   <description>com.wso2telco.dep.hub.paymentapi</description>
   <modules>
-   <module>com.wso2telco.dep.hub.paymentapi.synapse</module>
-   <module>paymentapihub_capp</module>
+    <module>com.wso2telco.dep.hub.paymentapi.synapse</module>
+    <module>com.wso2telco.dep.hub.paymentapi.registry.resource</module>
+    <module>paymentapihub_capp</module>
   </modules>
   <build>
     <plugins>

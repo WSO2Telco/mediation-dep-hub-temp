@@ -27,3 +27,4 @@ target
 *release.properties
 *.car
 *.idea
+*.meta
