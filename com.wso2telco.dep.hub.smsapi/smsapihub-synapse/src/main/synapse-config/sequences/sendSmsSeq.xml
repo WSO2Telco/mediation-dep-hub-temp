@@ -11,16 +11,58 @@
     <foreach expression="//address" xmlns:ns="http://org.apache.synapse/xsd">
         <sequence>
             <property expression="//address/text()" name="MSISDN" scope="default" type="STRING"/>
-            <log level="custom">
-                <property expression="$ctx:MSISDN" name="MSISDN_NO"/>
-            </log>
             <!-- validate the msisdn for black list and white list -->
             <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
                 <with-param name="paramName" value="address"/>
                 <with-param name="paramValue" value="{$ctx:MSISDN}"/>
+                <with-param name="paramArray" value="{$ctx:MSISDN_LIST}"/>
             </call-template>
+            <filter regex="^true$" source="$trp:api.check.blacklist">
+                <then>
+                    <filter regex="^true$" source="$ctx:BLACKLISTED_MSISDN">
+                        <then>
+                            <drop/>
+                        </then>
+                        <else/>
+                    </filter>
+                </then>
+                <else/>
+            </filter>
+            <filter regex="^true$" source="$trp:api.check.whitelist">
+                <then>
+                    <filter regex="^false$" source="$ctx:WHITELISTED_MSISDN">
+                        <then>
+                            <drop/>
+                        </then>
+                        <else/>
+                    </filter>
+                </then>
+                <else/>
+            </filter>
         </sequence>
     </foreach>
+    <filter regex="^true$" source="$trp:api.check.blacklist" xmlns:ns="http://org.apache.synapse/xsd">
+        <then>
+            <filter regex="^true$" source="$ctx:BLACKLISTED_MSISDN">
+                <then>
+                    <drop/>
+                </then>
+                <else/>
+            </filter>
+        </then>
+        <else/>
+    </filter>
+    <filter regex="^true$" source="$trp:api.check.whitelist" xmlns:ns="http://org.apache.synapse/xsd">
+        <then>
+            <filter regex="^false$" source="$ctx:WHITELISTED_MSISDN">
+                <then>
+                    <drop/>
+                </then>
+                <else/>
+            </filter>
+        </then>
+        <else/>
+    </filter>
     <script language="js"><![CDATA[mc.setPayloadJSON(mc.getProperty('original_body'));]]></script>
     <call>
         <endpoint key="defaultSMSEndpoint"/>
