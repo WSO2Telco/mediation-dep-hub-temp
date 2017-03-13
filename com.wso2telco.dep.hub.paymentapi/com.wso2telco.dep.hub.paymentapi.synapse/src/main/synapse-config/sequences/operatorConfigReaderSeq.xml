@@ -2,67 +2,30 @@
 <sequence name="operatorConfigReaderSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <property expression="get-property('operator')"
               name="operatorName" scope="default" type="STRING"/>
-    <property
-            expression="get-property('registry', 'conf:/repository/wso2telco/configurations/PaymentAPI/operatorConfig.xml')"
+    <property expression="get-property('registry', 'conf:/repository/wso2telco/configurations/PaymentAPI/operatorConfig.xml')"
             name="operatorConfig" scope="default" type="OM"/>
-    <property
-            expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/operatorId"
+    <property expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/operatorId"
             name="operatorId" scope="default" type="STRING"/>
-    <property
-            expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/userInfoType"
-            name="userInfoType" scope="default" type="STRING"/>
-    <property
-            expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/defaultPackageType"
+    <property expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/defaultPackageType"
             name="defaultPackageType" scope="default" type="STRING"/>
-    <property
-            expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/authType"
+    <property expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/authType"
             name="authType" scope="default" type="STRING"/>
-    <property
-            expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/ttl"
+    <property expression="$ctx:operatorConfig//operator[@name=get-property('operatorName')]/ttl"
             name="ttl" scope="default" type="STRING"/>
 
-    <switch source="get-property('userInfoType')">
-        <case regex="default">
-            <property expression="get-property('registry', 'conf:/repository/wso2telco/configurations/PaymentAPI/userInfoConfig.xml')"
-                    name="userInfoConfig" scope="default" type="OM"/>
-            <property expression="$ctx:userInfoConfig//config[@operatorName=get-property('operatorName')]/tokenPoolEnabled"
-                      name="isTokenPoolEnabled" scope="default" type="STRING"/>
-            <filter regex="true" source="get-property('isTokenPoolEnabled')">
-                <then>
-                    <sequence key="tokenEndpointCallSeq"/>
-                </then>
-                <else>
-                    <property expression="$ctx:userInfoConfig//config[@operatorName=get-property('operatorName')]/accessToken"
-                              name="access.token" scope="default" type="STRING"/>
-                    <sequence key="userInfoCallSeq"/>
-                </else>
-            </filter>
-        </case>
 
-        <case regex="apigee">
-            <property expression="get-property('registry', 'conf:/repository/wso2telco/configurations/PaymentAPI/apigeeConfig.xml')"
-                      name="apigeeConfig" scope="default" type="OM"/>
-            <property expression="$ctx:apigeeConfig//config[@operatorName=get-property('operatorName')]/credentials/username"
-                      name="apigeeUsername" scope="default" type="STRING"/>
-            <property expression="$ctx:apigeeConfig//config[@operatorName=get-property('operatorName')]/credentials/password"
-                      name="apigeePassword" scope="default" type="STRING"/>
-            <property expression="$ctx:apigeeConfig//config[@operatorName=get-property('operatorName')]/credentials/authToken"
-                      name="apigeeAuthToken" scope="default" type="STRING"/>
-            <property expression="$ctx:apigeeConfig//config[@operatorName=get-property('operatorName')]/tokenEndpoint"
-                      name="uri.var.apigeeTokenEndpoint" scope="default" type="STRING"/>
-            <property expression="$ctx:apigeeConfig//config[@operatorName=get-property('operatorName')]/userInfoEndpoint"
-                      name="uri.var.apigeeUserInfoEndpoint" scope="default" type="STRING"/>
-
-            <log level="custom" xmlns="http://ws.apache.org/ns/synapse">
-                <property name="############text"
-                          value="calling apigee"/>
-            </log>
-
-            <sequence key="apigeeUserInfoCallSeq"/>
-        </case>
-]
-        <default>
-            <sequence key="defaultPkgTypeSetSeq"/>
-        </default>
-    </switch>
+    <property expression="get-property('registry', 'conf:/repository/wso2telco/configurations/PaymentAPI/userInfoConfig.xml')"
+            name="userInfoConfig" scope="default" type="OM"/>
+    <property expression="$ctx:userInfoConfig//config[@operatorName=get-property('operatorName')]/tokenPoolEnabled"
+              name="isTokenPoolEnabled" scope="default" type="STRING"/>
+    <filter regex="true" source="get-property('isTokenPoolEnabled')">
+        <then>
+            <sequence key="tokenEndpointCallSeq"/>
+        </then>
+        <else>
+            <property expression="$ctx:userInfoConfig//config[@operatorName=get-property('operatorName')]/accessToken"
+                      name="access.token" scope="default" type="STRING"/>
+            <sequence key="userInfoCallSeq"/>
+        </else>
+    </filter>
 </sequence>
