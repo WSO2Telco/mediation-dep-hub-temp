@@ -5,9 +5,18 @@
     <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
     	payload.inboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('spEndpoint');
  		mc.setPayloadJSON(payload);]]></script>
+ 	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      <with-param name="direction" value="REQUESTOUT"/>
+  	</call-template>
     <call>
         <endpoint key="ussdInboundSeqEndpoint"/>
     </call>
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+      <with-param name="direction" value="RESPONSEIN"/>
+  	</call-template>
     <sequence key="ussdInboundResponseSeq"/>
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="RESPONSEOUT"/>
+    </call-template>
     <respond/>
 </sequence>
