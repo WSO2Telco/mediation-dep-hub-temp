@@ -43,7 +43,7 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>locationSeq</artifactId>
+      <artifactId>locationSequence</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
