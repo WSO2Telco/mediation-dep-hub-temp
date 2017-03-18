@@ -5,6 +5,17 @@
     </log>
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201|204)">
+			<dbreport>
+                <connection>
+                    <pool>
+                        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[delete from subscriptions where mo_subscription_did=?;]]></sql>
+                    <parameter expression="$ctx:subscriptionId" type="VARCHAR"/>
+                </statement>
+            </dbreport>
             <dbreport>
                 <connection>
                     <pool>
