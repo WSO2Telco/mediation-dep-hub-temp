@@ -19,6 +19,10 @@
     </then>
     <else/>
   </filter>
+  <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
+    	var clientCorrelator = mc.getProperty('clientCorrelator');
+    	payload.amountTransaction.clientCorrelator = clientCorrelator;
+ 	mc.setPayloadJSON(payload);]]></script>
   <switch source="get-property('HANDLER')">
     <case regex="QueryPaymentStatusHandler">
       <sequence key="paymentStatusSeq"/>
