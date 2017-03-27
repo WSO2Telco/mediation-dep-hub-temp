@@ -50,14 +50,15 @@
                             <callbackData>$1</callbackData>
                             <notifyURL>$2</notifyURL>
                         </callbackReference><?xml-multiple senderAddresses?>
-				    $3		    
-		    
+				    $3
+                        <resourceURL>$4</resourceURL>
                     </deliveryReceiptSubscription>
                 </format>
                 <args>
                     <arg evaluator="xml" expression="$ctx:original_callbackData"/>
                     <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
                     <arg evaluator="xml" expression="//senderAddresses"/>
+                    <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
                 </args>
             </payloadFactory>
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
