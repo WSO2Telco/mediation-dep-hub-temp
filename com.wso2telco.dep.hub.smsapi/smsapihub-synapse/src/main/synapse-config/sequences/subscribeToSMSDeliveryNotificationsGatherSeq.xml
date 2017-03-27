@@ -23,6 +23,17 @@
                             <parameter expression="$ctx:operatorCode" type="VARCHAR"/>
                         </statement>
                     </dbreport>
+                    <dbreport>
+                        <connection>
+                            <pool>
+                                <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                            </pool>
+                        </connection>
+                        <statement>
+                            <sql><![CDATA[update outbound_subscriptions set is_active=1 where dn_subscription_did=?;]]></sql>
+                            <parameter expression="$ctx:subscriptionID" type="VARCHAR"/>
+                        </statement>
+                    </dbreport>
                 </then>
                 <else>
                     <property name="status" scope="default" type="STRING" value="Not Created"/>

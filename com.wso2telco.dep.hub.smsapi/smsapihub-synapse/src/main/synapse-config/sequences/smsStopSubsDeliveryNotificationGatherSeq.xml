@@ -16,6 +16,17 @@
                     <parameter expression="$ctx:subscriptionId" type="VARCHAR"/>
                 </statement>
             </dbreport>
+            <dbreport>
+                <connection>
+                    <pool>
+                        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                    </pool>
+                </connection>
+                <statement>
+                    <sql><![CDATA[delete from outbound_subscriptions where dn_subscription_did=?;]]></sql>
+                    <parameter expression="$ctx:subscriptionId" type="VARCHAR"/>
+                </statement>
+            </dbreport>
         </case>
         <default/>
     </switch>
