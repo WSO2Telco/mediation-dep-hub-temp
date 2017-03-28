@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="ussdSubscriptionSplitterSeq" onError="ussdSubscriptionSplitterFaultSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <log level="custom">
-        <property name="STATUS" value="==== @ SplitterSeq ===="/>
-    </log>
     <log level="full"/>
     <iterate attachPath="//subscription" expression="//shortCodes" id="ussd_splitter" preservePayload="true">
         <target>
