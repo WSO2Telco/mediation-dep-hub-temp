@@ -7,5 +7,6 @@ payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('s
 var str = mc.getProperty('outboundUSSDMessage');
 var text = str.replace("\n", "\\n").replace("\r", "\\r");
 payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
+payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
 mc.setPayloadJSON(payload);]]></script>
 </sequence>
