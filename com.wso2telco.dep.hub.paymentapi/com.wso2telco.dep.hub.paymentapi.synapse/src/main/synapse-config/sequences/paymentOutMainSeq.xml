@@ -17,6 +17,7 @@
         <case regex="(AmountChargeHandler|AmountRefundHandler)">
             <switch source="$axis2:HTTP_SC">
                 <case regex="(200|201)">
+                    <class name="com.wso2telco.dep.mediator.AuthorizeResponseHandlerMediator"/>
                     <sequence key="replaceResourceURLSeq"/>
                 </case>
                 <default/>
