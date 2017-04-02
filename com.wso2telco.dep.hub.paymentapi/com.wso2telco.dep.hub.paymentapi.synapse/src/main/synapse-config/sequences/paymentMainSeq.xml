@@ -3,13 +3,7 @@
 
     <property expression="json-eval($.amountTransaction.clientCorrelator)"
               name="originalClientCorrelator" scope="default" type="STRING"/>
-
-    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-        <with-param name="direction" value="REQUESTIN"/>
-    </call-template>
-
     <sequence key="apiPropertySeq"/>
-
     <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
         <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
     </class>
@@ -23,11 +17,7 @@
         </then>
         <else/>
     </filter>
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
-    	var clientCorrelator = mc.getProperty('clientCorrelator');
-    	payload.amountTransaction.clientCorrelator = clientCorrelator;
- 	mc.setPayloadJSON(payload);]]></script>
-    <switch source="get-property('HANDLER')">
+        <switch source="get-property('HANDLER')">
         <case regex="QueryPaymentStatusHandler">
             <sequence key="paymentStatusSeq"/>
         </case>
