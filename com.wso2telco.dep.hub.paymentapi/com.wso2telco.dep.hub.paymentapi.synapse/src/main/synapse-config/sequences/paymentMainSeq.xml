@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-
+    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="REQUESTIN"/>
+    </call-template>
     <property expression="json-eval($.amountTransaction.clientCorrelator)"
               name="originalClientCorrelator" scope="default" type="STRING"/>
     <sequence key="apiPropertySeq"/>

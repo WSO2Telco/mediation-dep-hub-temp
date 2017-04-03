@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentChargeSeq" xmlns="http://ws.apache.org/ns/synapse">
-    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-        <with-param name="direction" value="REQUESTIN"/>
-    </call-template>
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
+       <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
     	var clientCorrelator = mc.getProperty('clientCorrelator');
     	payload.amountTransaction.clientCorrelator = clientCorrelator;
  	    mc.setPayloadJSON(payload);]]></script>
@@ -12,8 +9,7 @@
             scope="default"/>
     <property expression="json-eval($.amountTransaction.endUserId)"
               name="endUserId" scope="default" type="STRING"/>
-    <property
-            expression="json-eval($.amountTransaction.paymentAmount.chargingInformation.amount)"
+    <property expression="json-eval($.amountTransaction.paymentAmount.chargingInformation.amount)"
             name="chargeAmount" scope="default" type="STRING"/>
     <property expression="get-property('IS_USER_INFO_ENABLED')"
               name="isUserInfoEnabled" scope="default" type="STRING"/>
