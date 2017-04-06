@@ -20,10 +20,6 @@
                     <source clone="true" xpath="//callbackReference"/>
                     <target property="original_callbackReference" type="property"/>
                 </enrich>
-                <enrich>
-                    <source clone="true" xpath="//clientCorrelator"/>
-                    <target property="original_clientCorrelator" type="property"/>
-                </enrich>
                 <property expression="//subscription/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
                 <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
                     <then>

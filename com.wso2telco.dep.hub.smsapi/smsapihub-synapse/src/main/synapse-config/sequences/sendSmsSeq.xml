@@ -3,6 +3,14 @@
     <property name="HTTP_METHOD" scope="axis2" type="STRING" value="POST"/>
     <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
 
+    <property expression="json-eval($.outboundSMSMessageRequest.clientCorrelator)" name="clientCorrelator" scope="default" type="STRING"/>
+    <property expression="fn:normalize-space($ctx:clientCorrelator)" group="1" name="clientCorrelator" pattern="((^(?!null).*$)|(^(null).+$))" scope="default" type="STRING"/>
+
+    <!-- generating request clientCorrelator -->
+    <call-template target="com.wso2telco.dep.common.clientCorrelator.generator.Template">
+        <with-param name="clientCorrelator" value="{$ctx:clientCorrelator}"/>
+    </call-template>
+
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
     <property expression="json-eval($.)" name="original_body" scope="default" type="STRING"/>
     <enrich>
@@ -64,7 +72,15 @@
         </then>
         <else/>
     </filter>
-    <script language="js"><![CDATA[mc.setPayloadJSON(mc.getProperty('original_body'));]]></script>
+    <script language="js">
+        <![CDATA[
+            mc.setPayloadJSON(mc.getProperty('original_body'));
+
+            var new_payload= mc.getPayloadJSON();
+            new_payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+            mc.setPayloadJSON(new_payload);
+        ]]>
+    </script>
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
@@ -84,6 +100,14 @@
         </case>
         <default/>
     </switch>
+
+    <script language="js">
+        <![CDATA[
+            var payload = mc.getPayloadJSON();
+            payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+            mc.setPayloadJSON(payload);
+        ]]>
+    </script>
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
