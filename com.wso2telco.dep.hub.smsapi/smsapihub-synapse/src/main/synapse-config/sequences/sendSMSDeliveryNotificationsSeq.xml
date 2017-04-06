@@ -8,6 +8,6 @@
     </call-template>    
     
     <send>
-        <endpoint key="DefaultSmsEndpoint"/>
+        <endpoint key="defaultSMSEndpoint"/>
     </send>
 </sequence>
