@@ -18,7 +18,14 @@
 
    	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template> 
-		    
+	</call-template>
+
+    <switch source="$axis2:HTTP_SC">
+        <case regex="200|201">
+            <sequence key="smsQueryDeliveryStatusResponseSeq"/>
+        </case>
+        <default/>
+    </switch>
+
     <respond/>
 </sequence>
