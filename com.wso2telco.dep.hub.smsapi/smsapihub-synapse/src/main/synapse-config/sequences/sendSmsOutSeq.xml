@@ -12,6 +12,14 @@
 			throw "ERROR - Unable extract operator request id (plugin_requestid) from response";
 		}
 		// set request id sent from operator side to message context
-		mc.setProperty('SEND_SMS_OPERATOR_REQUEST_ID', operatorRequestId);]]></script>
+		mc.setProperty('SEND_SMS_OPERATOR_REQUEST_ID', operatorRequestId);
+
+        var responseDeliveryInfoResourceUrl = mc.getProperty('RESPONSE_DELIVERY_INFO_RESOURCE_URL');
+
+        payload.outboundSMSMessageRequest.deliveryInfoList.resourceURL = responseDeliveryInfoResourceUrl;
+
+        mc.setPayloadJSON(payload);
+
+]]></script>
     <class name="com.wso2telco.dep.mediator.impl.smsmessaging.SendSMSRequestIdPersistMediator"/>
 </sequence>
