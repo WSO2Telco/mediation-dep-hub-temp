@@ -23,20 +23,35 @@
   <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 		<with-param name="direction" value="RESPONSEIN"/>
   </call-template>
-	  
-  <property name="ContentType" scope="axis2" type="STRING" value="text/plain"/>
-  <property expression="$body/m0:text" name="access.token"
-    scope="default" type="STRING"
-    xmlns:m0="http://ws.apache.org/commons/ns/payload" xmlns:ns="http://org.apache.synapse/xsd"/>
-  <log level="custom">
-    <property expression="get-property('access.token')"
-      name="access.token.log" xmlns:ns="http://org.apache.synapse/xsd"/>
-  </log>
-  <sequence key="userInfoCallSeq"/>
-  
-  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
- 		<with-param name="direction" value="RESPONSEOUT"/>
-  </call-template> 
-  
-  <respond/>
+
+  <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+  <switch source="get-property('axis2', 'HTTP_SC')">
+    <case regex="200">
+
+      <property name="ContentType" scope="axis2" type="STRING" value="text/plain"/>
+      <property expression="$body/m0:text" name="access.token"
+                scope="default" type="STRING"
+                xmlns:m0="http://ws.apache.org/commons/ns/payload" xmlns:ns="http://org.apache.synapse/xsd"/>
+      <log level="custom">
+        <property expression="get-property('access.token')"
+                  name="access.token.log" xmlns:ns="http://org.apache.synapse/xsd"/>
+      </log>
+      <sequence key="userInfoCallSeq"/>
+
+      <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="RESPONSEOUT"/>
+      </call-template>
+
+      <respond/>
+
+    </case>
+    <case regex="401|403">
+      <sequence key="tokenEndpointCallErrorSeq"/>
+    </case>
+    <default>
+      <sequence key="tokenEndpointCallErrorSeq"/>
+    </default>
+
+  </switch>
+
 </sequence>
