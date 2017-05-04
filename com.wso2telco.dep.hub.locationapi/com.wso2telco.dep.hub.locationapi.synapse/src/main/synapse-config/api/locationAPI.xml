@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/location" name="locationAPI" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="commonFault" inSequence="locationSequence" methods="GET">
-        <outSequence>
-        	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-      			<with-param name="direction" value="RESPONSEIN"/>
-  			</call-template>
-        	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-      			<with-param name="direction" value="RESPONSEOUT"/>
-  			</call-template>  			
-            <respond/>
-        </outSequence>
-    </resource>
+  <resource faultSequence="commonFault" inSequence="locationSequence"
+    methods="GET" protocol="http">
+    <outSequence>
+      <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="RESPONSEIN"/>
+      </call-template>
+      <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+      </call-template>
+      <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+        <with-param name="direction" value="RESPONSEOUT"/>
+      </call-template>
+      <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+      </call-template>
+      <respond/>
+    </outSequence>
+  </resource>
 </api>
