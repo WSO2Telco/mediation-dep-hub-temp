@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-        <with-param name="direction" value="REQUESTIN"/>
-    </call-template>
-    <property expression="json-eval($.amountTransaction.clientCorrelator)"
-              name="originalClientCorrelator" scope="default" type="STRING"/>
-    <sequence key="apiPropertySeq"/>
-    <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
-        <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
-    </class>
-    <filter xpath="boolean($ctx:MSISDN)">
-        <then>
-            <!-- validate the msisdn for black list and white list -->
-            <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
-                <with-param name="paramName" value="address"/>
-                <with-param name="paramValue" value="{$ctx:MSISDN}"/>
-            </call-template>
-        </then>
-        <else/>
-    </filter>
-        <switch source="get-property('HANDLER')">
-        <case regex="QueryPaymentStatusHandler">
-            <sequence key="paymentStatusSeq"/>
-        </case>
-        <case regex="AmountChargeHandler">
-            <sequence key="paymentChargeSeq"/>
-        </case>
-        <case regex="AmountRefundHandler">
-            <sequence key="paymentRefundSeq"/>
-        </case>
-        <case regex="ListTransactionsHandler">
-            <sequence key="paymentListTransactionsSeq"/>
-        </case>
-        <default>
-            <!-- TODO:handle error -->
-        </default>
-    </switch>
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+    <with-param name="direction" value="REQUESTIN"/>
+  </call-template>
+  <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:endUserId}"/>
+    <with-param name="direction" value="nb"/>
+  </call-template>
+  <property expression="json-eval($.amountTransaction.clientCorrelator)"
+    name="originalClientCorrelator" scope="default" type="STRING"/>
+  <sequence key="apiPropertySeq"/>
+  <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
+    <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
+  </class>
+  <filter xpath="boolean($ctx:MSISDN)">
+    <then>
+      <!-- validate the msisdn for black list and white list -->
+      <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
+        <with-param name="paramName" value="address"/>
+        <with-param name="paramValue" value="{$ctx:MSISDN}"/>
+      </call-template>
+    </then>
+    <else/>
+  </filter>
+  <switch source="get-property('HANDLER')">
+    <case regex="QueryPaymentStatusHandler">
+      <sequence key="paymentStatusSeq"/>
+    </case>
+    <case regex="AmountChargeHandler">
+      <sequence key="paymentChargeSeq"/>
+    </case>
+    <case regex="AmountRefundHandler">
+      <sequence key="paymentRefundSeq"/>
+    </case>
+    <case regex="ListTransactionsHandler">
+      <sequence key="paymentListTransactionsSeq"/>
+    </case>
+    <default>
+      <!-- TODO:handle error -->
+    </default>
+  </switch>
 </sequence>

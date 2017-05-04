@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentOutMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-
-    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
- 		<with-param name="direction" value="RESPONSEIN"/>
-	</call-template>
-	
-    <switch source="get-property('HANDLER')" xmlns:ns="http://org.apache.synapse/xsd">
-        <case regex="ListTransactionsHandler">
-            <switch source="$axis2:HTTP_SC">
-                <case regex="(200|201)">
-                    <sequence key="replaceResourceURLForListSeq"/>
-                </case>
-                <default/>
-            </switch>
-        </case>
-        <case regex="(AmountChargeHandler|AmountRefundHandler)">
-            <switch source="$axis2:HTTP_SC">
-                <case regex="(200|201)">
-                    <class name="com.wso2telco.dep.mediator.AuthorizeResponseHandlerMediator"/>
-                    <sequence key="replaceResourceURLSeq"/>
-                </case>
-                <default/>
-            </switch>
+  <log level="full"/>
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+    <with-param name="direction" value="RESPONSEIN"/>
+  </call-template>
+  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:endUserId}"/>
+    <with-param name="direction" value="sb"/>
+  </call-template>
+  <switch source="get-property('HANDLER')" xmlns:ns="http://org.apache.synapse/xsd">
+    <case regex="ListTransactionsHandler">
+      <switch source="$axis2:HTTP_SC">
+        <case regex="(200|201)">
+          <sequence key="replaceResourceURLForListSeq"/>
         </case>
         <default/>
-    </switch>
-    
-    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
- 		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template> 
-	
+      </switch>
+    </case>
+    <case regex="(AmountChargeHandler|AmountRefundHandler)">
+      <switch source="$axis2:HTTP_SC">
+        <case regex="(200|201)">
+          <class name="com.wso2telco.dep.mediator.AuthorizeResponseHandlerMediator"/>
+          <sequence key="replaceResourceURLSeq"/>
+        </case>
+        <default/>
+      </switch>
+    </case>
+    <default/>
+  </switch>
+  <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
+    <with-param name="direction" value="RESPONSEOUT"/>
+  </call-template>
+  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:endUserId}"/>
+    <with-param name="direction" value="nb"/>
+  </call-template>
 </sequence>
