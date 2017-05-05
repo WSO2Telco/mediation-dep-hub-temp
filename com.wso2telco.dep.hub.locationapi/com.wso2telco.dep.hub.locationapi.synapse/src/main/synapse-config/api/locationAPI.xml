@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <api context="/location" name="locationAPI" xmlns="http://ws.apache.org/ns/synapse">
-    <resource faultSequence="commonFault" inSequence="locationSequence" methods="GET">
-        <outSequence>
-        	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-      			<with-param name="direction" value="RESPONSEIN"/>
-  			</call-template>
-        	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
-      			<with-param name="direction" value="RESPONSEOUT"/>
-  			</call-template>  			
-            <respond/>
-        </outSequence>
+    <resource methods="GET">
+		<inSequence>
+			<sequence key="locationSequence"/>
+		</inSequence>
+		<outSequence/>
+		<faultSequence>
+			<sequence key="commonFault"/>
+		</faultSequence>
     </resource>
 </api>
