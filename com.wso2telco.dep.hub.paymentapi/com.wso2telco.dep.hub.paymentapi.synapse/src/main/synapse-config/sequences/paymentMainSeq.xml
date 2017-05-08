@@ -9,6 +9,12 @@
     <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
         <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
     </class>
+    <!-- data publishing -->
+    <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+    </call-template>
+
     <filter xpath="boolean($ctx:MSISDN)">
         <then>
             <!-- validate the msisdn for black list and white list -->
