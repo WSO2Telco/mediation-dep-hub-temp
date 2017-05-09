@@ -16,9 +16,19 @@
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
 
+    <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
+
    	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
 	</call-template>
+
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
 
     <switch source="$axis2:HTTP_SC">
         <case regex="200|201">
@@ -26,6 +36,11 @@
         </case>
         <default/>
     </switch>
+
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+    </call-template>
 
     <respond/>
 </sequence>
