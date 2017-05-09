@@ -22,6 +22,12 @@
         <with-param name="direction" value="REQUESTOUT"/>
     </call-template>
 
+    <!-- data publishing -->
+    <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
+
     <call>
         <endpoint>
             <default/>
