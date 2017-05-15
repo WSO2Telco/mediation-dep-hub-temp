@@ -10,6 +10,8 @@
                     <property name="STATUS" value="==== @ Splitted Parts ===="/>
                 </log>
                 <property expression="//operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <header expression="//toAddress/text()" name="To" scope="default"/>
                 <header expression="//authorizationHeader/text()" name="Authorization" scope="transport"/>
                 <script language="js"><![CDATA[var payload = mc.getPayloadXML();

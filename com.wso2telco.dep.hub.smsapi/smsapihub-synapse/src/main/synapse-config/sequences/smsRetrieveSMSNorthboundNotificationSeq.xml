@@ -10,7 +10,9 @@
                 <property expression="//registrations/criteria" name="criteria" scope="default" type="STRING"/>
                 <property expression="//clientCorrelator" name="clientCorrelator" scope="default" type="STRING"/>
                 <header expression="//registrations/toAddress/text()" name="To" scope="default"/>
-                <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>                
+                <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <property expression="//registrations/operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//registrations/operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
