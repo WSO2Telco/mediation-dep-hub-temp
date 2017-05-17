@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="smsStopSubsDeliveryNotificationSplitterFaultSeq" onError="commonFault" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <log/>
+    <log level="custom">
+        <property name="STATUS" value="==== @ SMS Subscribe DeliveryNotification SplitterFaultSeq ===="/>
+    </log>
     <sequence key="smsStopSubsDeliveryNotificationGatherSeq"/>
 </sequence>
