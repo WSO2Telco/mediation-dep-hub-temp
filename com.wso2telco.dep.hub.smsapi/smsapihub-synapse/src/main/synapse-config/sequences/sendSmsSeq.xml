@@ -87,7 +87,7 @@
     </call-template>
 
     <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
-        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
         
@@ -100,7 +100,7 @@
 	</call-template>
 
     <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
-        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
     
@@ -124,7 +124,7 @@
 	</call-template>
 
     <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
-        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="nb"/>
     </call-template>
 
