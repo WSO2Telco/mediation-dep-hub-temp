@@ -53,7 +53,6 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete enclosingElementProperty="collection" expression="//senderAddresses">
-            <log level="full"/>
             <payloadFactory media-type="xml">
                 <format>
                     <deliveryReceiptSubscription>
