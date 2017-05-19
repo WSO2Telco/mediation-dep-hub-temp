@@ -8,6 +8,7 @@
             <property name="status" scope="default" type="STRING" value="failed"/>
         </else>
     </filter>
+    
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201|204)">
             <dbreport>
@@ -21,6 +22,7 @@
                     <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
                 </statement>
             </dbreport>
+            
             <dbreport>
                 <connection>
                     <pool>
@@ -35,45 +37,56 @@
         </case>
         <default/>
     </switch>
+    
     <payloadFactory media-type="json">
         <format>
-		    { 
-		    "operators" : {
-			    "operatorCode" : "$1",
-			    "status": "$2"
+			    { 
+			    	"operators" : {
+				    	"operatorCode" : "$1",
+				    	"status": "$2"
+				    }    
 			    }    
-		    }    
     	</format>
         <args>
             <arg evaluator="xml" expression="get-property('operatorCode')"/>
             <arg evaluator="xml" expression="get-property('status')"/>
         </args>
     </payloadFactory>
+
     <property name="collection" scope="default">
         <deleteSubscription xmlns=""/>
     </property>
+    
     <aggregate id="ussd_stop_splitter">
         <completeCondition>
             <messageCount max="-1" min="-1"/>
         </completeCondition>
+    
         <onComplete enclosingElementProperty="collection" expression="//operators">
             <log level="full"/>
             <payloadFactory media-type="xml">
                 <format>
-                    <deleteSubscription><?xml-multiple operators?>
-		    $1
-		    
-		    </deleteSubscription>
+                    <deleteSubscription>
+                    	<?xml-multiple operators?>$1		    
+		    		</deleteSubscription>
                 </format>
                 <args>
                     <arg evaluator="xml" expression="//operators"/>
                 </args>
             </payloadFactory>
+            
             <log level="full"/>
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            
             <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         		<with-param name="direction" value="RESPONSEOUT"/>
     		</call-template>
+    		
+		  	<call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+		    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+		    	<with-param name="direction" value="nb"/>
+		  	</call-template>    		
+    		
             <respond/>
         </onComplete>
     </aggregate>

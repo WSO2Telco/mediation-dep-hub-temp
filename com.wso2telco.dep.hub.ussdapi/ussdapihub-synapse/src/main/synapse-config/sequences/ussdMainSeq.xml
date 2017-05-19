@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="ussdMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
   <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTIN"/>
   </call-template>
+
   <sequence key="apiPropertySeq"/>
+  
+  <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    <with-param name="direction" value="nb"/>
+  </call-template>  
+  
   <class name="com.wso2telco.dep.mediator.HandlerMediator">
     <property name="executorClass" value="com.wso2telco.dep.mediator.impl.ussd.USSDExecutor"/>
   </class>

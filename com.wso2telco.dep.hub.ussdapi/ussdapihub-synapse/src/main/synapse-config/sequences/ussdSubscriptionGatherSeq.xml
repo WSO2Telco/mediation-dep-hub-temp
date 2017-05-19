@@ -27,23 +27,28 @@
             </dbreport>
         </else>
     </filter>
+
     <enrich>
         <source clone="true" property="original_payload" type="property"/>
         <target type="body"/>
     </enrich>
+
     <enrich>
         <source clone="true" type="inline">
             <status xmlns="">TEST</status>
         </source>
         <target action="child" xpath="//shortCodes"/>
     </enrich>
+
     <enrich>
         <source clone="true" property="status" type="property"/>
         <target xpath="//shortCodes/status/text()"/>
     </enrich>
+
     <property name="collection" scope="default">
         <subscription xmlns=""/>
     </property>
+
     <aggregate id="ussd_splitter">
         <completeCondition>
             <messageCount max="-1" min="-1"/>
@@ -51,13 +56,9 @@
         <onComplete enclosingElementProperty="collection" expression="//shortCodes">
             <payloadFactory media-type="xml">
                 <format>
-                    <subscription>
-		    $1
-		    
-		    <?xml-multiple shortCodes?>
-		    $2
-		    
-		    <clientCorrelator>$3</clientCorrelator>
+                    <subscription>$1
+		    			<?xml-multiple shortCodes?>$2
+					    <clientCorrelator>$3</clientCorrelator>
                         <resourceURL>$4</resourceURL>
                     </subscription>
                 </format>
@@ -72,6 +73,12 @@
             <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         		<with-param name="direction" value="RESPONSEOUT"/>
     		</call-template>
+    		
+    		  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+			    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+			    <with-param name="direction" value="nb"/>
+			  </call-template>
+    		
             <respond/>
         </onComplete>
     </aggregate>
