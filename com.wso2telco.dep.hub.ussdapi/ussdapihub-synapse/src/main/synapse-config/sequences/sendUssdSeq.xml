@@ -46,9 +46,12 @@
   </call-template>
 
     <!-- setting the original clientCorrelator for response -->
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
-payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
-mc.setPayloadJSON(payload);]]></script>
+    <script language="js">
+	    <![CDATA[	var payload= mc.getPayloadJSON();
+					payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+					mc.setPayloadJSON(payload);
+		]]>
+	</script>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>

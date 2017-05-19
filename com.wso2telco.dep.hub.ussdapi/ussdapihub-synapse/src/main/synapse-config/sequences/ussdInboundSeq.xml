@@ -1,29 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="ussdInboundSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
     <property name="REST_URL_POSTFIX" action="remove" scope="axis2"/>
     <property expression="json-eval($.inboundUSSDMessageRequest.clientCorrelator)" name="clientCorrelator" scope="default" type="STRING"/>
     <property expression="fn:normalize-space($ctx:clientCorrelator)" group="1" name="clientCorrelator" pattern="((^(?!null).*$)|(^(null).+$))" scope="default" type="STRING"/>
+    
     <!-- generating request clientCorrelator -->
     <call-template target="com.wso2telco.dep.common.clientCorrelator.generator.Template">
         <with-param name="clientCorrelator" value="{$ctx:clientCorrelator}"/>
     </call-template>
+    
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
-    	payload.inboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('spEndpoint');
-    	payload.inboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
- 		mc.setPayloadJSON(payload);]]></script>
+    
+    <script language="js">
+    <![CDATA[	var payload= mc.getPayloadJSON();
+    			payload.inboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('spEndpoint');
+    			payload.inboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+ 				mc.setPayloadJSON(payload);]]>
+ 	</script>
+ 	
  	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
   	</call-template>
+  	
+  	<call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    	<with-param name="direction" value="sb"/>
+  	</call-template>  
+  	
     <call>
         <endpoint key="ussdInboundSeqEndpoint"/>
     </call>
+    
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="RESPONSEIN"/>
   	</call-template>
+  	
+	<call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+		<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+	    <with-param name="direction" value="sb"/>
+	</call-template>
+	    	
     <sequence key="ussdInboundResponseSeq"/>
+    
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>
     </call-template>
+    
+	<call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    	<with-param name="direction" value="nb"/>
+  	</call-template>    
+    
     <respond/>
 </sequence>
