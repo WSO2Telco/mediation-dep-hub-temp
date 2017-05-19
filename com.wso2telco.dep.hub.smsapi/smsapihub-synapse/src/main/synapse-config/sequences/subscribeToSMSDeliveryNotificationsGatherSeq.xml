@@ -53,7 +53,6 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete enclosingElementProperty="collection" expression="//senderAddresses">
-            <log level="full"/>
             <payloadFactory media-type="xml">
                 <format>
                     <deliveryReceiptSubscription>
@@ -76,8 +75,13 @@
             
             <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  				<with-param name="direction" value="RESPONSEOUT"/>
-			</call-template> 
-	
+			</call-template>
+
+            <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+                <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                <with-param name="direction" value="nb"/>
+            </call-template>
+
             <respond/>
         </onComplete>
     </aggregate>

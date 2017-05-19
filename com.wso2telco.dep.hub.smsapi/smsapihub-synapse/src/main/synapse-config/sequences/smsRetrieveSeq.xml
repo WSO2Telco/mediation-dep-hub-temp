@@ -6,6 +6,11 @@
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
     </call-template>
+
+    <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
   
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
     <call>
@@ -15,6 +20,11 @@
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
+
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
 			  			    
     <switch source="$axis2:HTTP_SC">
         <case regex="200">
@@ -25,7 +35,12 @@
     
    	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template> 
+	</call-template>
+
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+    </call-template>
     
     <respond/>
 </sequence>

@@ -13,11 +13,14 @@
                 </enrich>
                 <property expression="//senderAddresses/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
                 <property expression="//senderAddresses/toAddress/text()" name="toAddress" scope="default" type="STRING"/>
+                <property expression="//senderAddresses/operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//senderAddresses/operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <header expression="//senderAddresses/toAddress/text()" name="To" scope="default"/>
                 <header expression="//senderAddresses/authorizationHeader/text()" name="Authorization" scope="transport"/>
                 <script language="js"><![CDATA[var payload = mc.getPayloadXML();
                 delete payload..*::senderAddresses.toAddress;
                 delete payload..*::senderAddresses.authorizationHeader;
+                delete payload..*::senderAddresses.operatorId;
                 mc.setPayloadXML(payload);]]></script>
                 <enrich>
                     <source clone="true" xpath="//senderAddresses"/>
@@ -43,15 +46,25 @@
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       				<with-param name="direction" value="REQUESTOUT"/>
     			</call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
     			                
                 <call>
                     <endpoint key="defaultSMSEndpoint"/>
                 </call>
                 
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
- 					<with-param name="direction" value="RESPONSEIN"/>
-				</call-template>
-	
+                    <with-param name="direction" value="RESPONSEIN"/>
+                </call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
+
                 <sequence key="subscribeToSMSDeliveryNotificationsGatherSeq"/>
             </sequence>
         </target>
