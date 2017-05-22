@@ -14,15 +14,16 @@
         <with-param name="clientCorrelator" value="{$ctx:clientCorrelator}"/>
     </call-template>
 
-    <script language="js">
-    <![CDATA[	var payload= mc.getPayloadJSON();
-				payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('subsEndPoint');
-				payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
-				var str = mc.getProperty('outboundUSSDMessage');
-				var text = str.replace("\n", "\\n").replace("\r", "\\r");
-				payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
-				mc.setPayloadJSON(payload);]]>
-	</script>
+	<enrich>
+	   <source type="property" property="subsEndPoint"/>
+	   <target xpath="//outboundUSSDMessageRequest/responseRequest/notifyURL/text()"/>
+	</enrich>
+	
+	<enrich>
+	   <source type="property" property="uniqueClientCorrelator"/>
+	   <target xpath="//outboundUSSDMessageRequest/clientCorrelator/text()"/>
+	</enrich>
+
 	
 	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
@@ -46,12 +47,10 @@
   </call-template>
 
     <!-- setting the original clientCorrelator for response -->
-    <script language="js">
-	    <![CDATA[	var payload= mc.getPayloadJSON();
-					payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
-					mc.setPayloadJSON(payload);
-		]]>
-	</script>
+	<enrich>
+	   <source type="property" property="clientCorrelator"/>
+	   <target xpath="//outboundUSSDMessageRequest/clientCorrelator/text()"/>
+	</enrich>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>
