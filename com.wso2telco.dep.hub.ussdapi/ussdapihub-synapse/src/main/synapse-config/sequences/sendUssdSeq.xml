@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendUssdSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
     <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
+    
     <property expression="json-eval($.outboundUSSDMessageRequest.outboundUSSDMessage)" name="outboundUSSDMessage" scope="default" type="STRING"/>
     <property expression="json-eval($.outboundUSSDMessageRequest.clientCorrelator)" name="clientCorrelator" scope="default" type="STRING"/>
+    
     <property expression="fn:normalize-space($ctx:clientCorrelator)" group="1" name="clientCorrelator" pattern="((^(?!null).*$)|(^(null).+$))" scope="default" type="STRING"/>
+
     <!-- generating request clientCorrelator -->
     <call-template target="com.wso2telco.dep.common.clientCorrelator.generator.Template">
         <with-param name="clientCorrelator" value="{$ctx:clientCorrelator}"/>
     </call-template>
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
-payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('subsEndPoint');
-payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
-var str = mc.getProperty('outboundUSSDMessage');
-var text = str.replace("\n", "\\n").replace("\r", "\\r");
-payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
-mc.setPayloadJSON(payload);]]></script>
+
+	<enrich>
+	   <source type="property" property="subsEndPoint"/>
+	   <target xpath="//outboundUSSDMessageRequest/responseRequest/notifyURL/text()"/>
+	</enrich>
+	
+	<enrich>
+	   <source type="property" property="uniqueClientCorrelator"/>
+	   <target xpath="//outboundUSSDMessageRequest/clientCorrelator/text()"/>
+	</enrich>
+
+	
 	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
   	</call-template>
+  	
+  	<call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    	<with-param name="direction" value="sb"/>
+  	</call-template>  	
+  	
     <call>
         <endpoint key="sendUssdSeqEndpoint"/>
     </call>
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="RESPONSEIN"/>
   	</call-template>
+  	
+  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    <with-param name="direction" value="sb"/>
+  </call-template>
 
     <!-- setting the original clientCorrelator for response -->
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
-payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
-mc.setPayloadJSON(payload);]]></script>
+	<enrich>
+	   <source type="property" property="clientCorrelator"/>
+	   <target xpath="//outboundUSSDMessageRequest/clientCorrelator/text()"/>
+	</enrich>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>
     </call-template>
+    
+  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    <with-param name="direction" value="nb"/>
+  </call-template>
+    
     <respond/>
 </sequence>

@@ -10,18 +10,31 @@
                 <property expression="//registrations/criteria" name="criteria" scope="default" type="STRING"/>
                 <property expression="//clientCorrelator" name="clientCorrelator" scope="default" type="STRING"/>
                 <header expression="//registrations/toAddress/text()" name="To" scope="default"/>
-                <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>                
+                <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>
+                <property expression="//registrations/operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//registrations/operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       				<with-param name="direction" value="REQUESTOUT"/>
     			</call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
     
                 <call/>
                 
 			    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 			 		<with-param name="direction" value="RESPONSEIN"/>
 				</call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
+
             </sequence>
         </target>
     </iterate>
@@ -147,7 +160,12 @@
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template> 
+	</call-template>
+
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+    </call-template>
 	
     <respond/>
 </sequence>

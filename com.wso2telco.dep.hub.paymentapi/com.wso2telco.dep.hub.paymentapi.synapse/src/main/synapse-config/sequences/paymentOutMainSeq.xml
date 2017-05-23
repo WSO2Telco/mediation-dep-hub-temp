@@ -4,7 +4,13 @@
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
-	
+
+    <!-- data publishing -->
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="sb"/>
+    </call-template>
+
     <switch source="get-property('HANDLER')" xmlns:ns="http://org.apache.synapse/xsd">
         <case regex="ListTransactionsHandler">
             <switch source="$axis2:HTTP_SC">
@@ -28,6 +34,12 @@
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template> 
+	</call-template>
+
+    <!-- data publishing -->
+    <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+        <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+        <with-param name="direction" value="nb"/>
+    </call-template>
 	
 </sequence>

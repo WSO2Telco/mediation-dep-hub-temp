@@ -8,19 +8,35 @@
                     <source clone="true" xpath="//shortCodes/node()"/>
                     <target action="child" xpath="//subscription"/>
                 </enrich>
-                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
-                delete payload..*::shortCodes.toAddress;
-                delete payload..*::shortCodes.authorizationHeader;
-                mc.setPayloadXML(payload);]]></script>
+
+                
+                <script language="js">
+	                <![CDATA[
+	                	var payload = mc.getPayloadXML();
+	                	delete payload..*::shortCodes.toAddress;
+	                	delete payload..*::shortCodes.authorizationHeader;
+	                	
+	                	delete payload..*::shortCodes.operatorId;
+	                	mc.setPayloadXML(payload);
+	                ]]>
+                </script>
+
+                
                 <enrich>
                     <source clone="true" xpath="//shortCodes"/>
                     <target property="original_payload" type="property"/>
                 </enrich>
+                
                 <enrich>
                     <source clone="true" xpath="//callbackReference"/>
                     <target property="original_callbackReference" type="property"/>
                 </enrich>
+                
                 <property expression="//subscription/operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//subscription/operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//subscription/operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
+
+                
                 <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
                     <then>
                         <property name="status" scope="default" type="STRING" value="Not Provisioned"/>
@@ -28,24 +44,46 @@
                     </then>
                     <else/>
                 </filter>
+                
                 <header expression="//subscription/toAddress/text()" name="To" scope="default"/>
                 <header expression="//subscription/authorizationHeader/text()" name="Authorization" scope="transport"/>
-                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
-                delete payload..*::toAddress;
-                delete payload..*::authorizationHeader;
-                delete payload..*::operatorCode;
-                delete payload..*::shortCodes;
-                mc.setPayloadXML(payload);]]></script>
+                
+                <script language="js">
+	                <![CDATA[
+	                	var payload = mc.getPayloadXML();
+	                	delete payload..*::toAddress;
+	                	delete payload..*::authorizationHeader;
+	                	delete payload..*::operatorCode;
+	                	delete payload..*::operatorId;
+	                	delete payload..*::shortCodes;
+	                	mc.setPayloadXML(payload);
+	                ]]>
+	            </script>
+                
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+                
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       				<with-param name="direction" value="REQUESTOUT"/>
   				</call-template>
+                
+                  <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+				    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+				    <with-param name="direction" value="sb"/>
+				  </call-template>
+                
                 <call>
                     <endpoint key="defaultUSSDEndpoint"/>
                 </call>
+                
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       				<with-param name="direction" value="RESPONSEIN"/>
   				</call-template>
+  				
+			  	<call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+			    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
+			    	<with-param name="direction" value="sb"/>
+			  	</call-template>  				
+  				
                 <sequence key="ussdSubscriptionGatherSeq"/>
             </sequence>
         </target>

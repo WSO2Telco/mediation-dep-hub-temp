@@ -10,6 +10,8 @@
                     <property name="STATUS" value="==== @ Splitted Parts ===="/>
                 </log>
                 <property expression="//operatorCode/text()" name="operatorCode" scope="default" type="STRING"/>
+                <property expression="//operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
+                <property expression="//operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <header expression="//toAddress/text()" name="To" scope="default"/>
                 <header expression="//authorizationHeader/text()" name="Authorization" scope="transport"/>
                 <script language="js"><![CDATA[var payload = mc.getPayloadXML();
@@ -26,6 +28,11 @@
 			    <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 			      <with-param name="direction" value="REQUESTOUT"/>
 			    </call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
                     
                 <call>
                     <endpoint key="defaultSMSEndpoint"/>
@@ -34,6 +41,11 @@
 				<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 						<with-param name="direction" value="RESPONSEIN"/>
 				</call-template>
+
+                <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+                    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+                    <with-param name="direction" value="sb"/>
+                </call-template>
 	                
                 <sequence key="smsStopSubsDeliveryNotificationGatherSeq"/>
             </sequence>
