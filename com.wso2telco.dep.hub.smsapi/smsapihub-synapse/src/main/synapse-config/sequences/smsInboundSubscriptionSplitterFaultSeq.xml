@@ -4,5 +4,5 @@
         <property name="STATUS" value="==== @ SMS Deli Notify SplitterFaultSeq ===="/>
     </log>
     <property name="status" scope="default" type="STRING" value="Failed"/>
-    <sequence key="smsInboundSubscriptionSplitterGatherSeq"/>
+    <sequence key="smsInboundSubscriptionGatherSeq"/>
 </sequence>
