@@ -45,6 +45,16 @@
         <source clone="true" property="original_payload" type="property"/>
         <target type="body"/>
     </enrich>
+    <enrich>
+        <source clone="true" type="inline">
+            <status xmlns="">TEST</status>
+        </source>
+        <target action="child" xpath="//senderAddresses"/>
+    </enrich>
+    <enrich>
+        <source clone="true" property="status" type="property"/>
+        <target xpath="//senderAddresses/status/text()"/>
+    </enrich>
     <property name="collection" scope="default">
         <deliveryReceiptSubscription xmlns=""/>
     </property>
