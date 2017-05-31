@@ -21,6 +21,13 @@
 	                ]]>
                 </script>
 
+                <filter regex="false" source="boolean(fn:normalize-space(//shortCodes/keyword/text()))">
+                    <then>
+                          <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                           delete payload..*::keyword;
+                           mc.setPayloadXML(payload);]]></script>
+                    </then>
+                </filter>
                 
                 <enrich>
                     <source clone="true" xpath="//shortCodes"/>
