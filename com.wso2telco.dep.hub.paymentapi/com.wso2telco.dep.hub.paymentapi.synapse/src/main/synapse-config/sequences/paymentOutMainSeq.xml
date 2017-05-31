@@ -15,7 +15,12 @@
         <case regex="ListTransactionsHandler">
             <switch source="$axis2:HTTP_SC">
                 <case regex="(200|201)">
-                    <sequence key="replaceResourceURLForListSeq"/>
+                    <filter regex="true" source="json-eval($.)">
+                        <then>
+                            <sequence key="replaceResourceURLForListSeq"/>
+                        </then>
+                        <else/>
+                    </filter>
                 </case>
                 <default/>
             </switch>
