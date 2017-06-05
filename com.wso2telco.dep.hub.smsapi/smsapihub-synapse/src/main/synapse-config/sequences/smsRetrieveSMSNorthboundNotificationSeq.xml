@@ -8,7 +8,7 @@
                 <property name="HTTP_METHOD" scope="axis2" type="STRING" value="GET"/>
                 <property expression="//registrations/operatorCode" name="operatorCode" scope="default" type="STRING"/>
                 <property expression="//registrations/criteria" name="criteria" scope="default" type="STRING"/>
-                <property expression="//clientCorrelator" name="clientCorrelator" scope="default" type="STRING"/>
+                <property expression="//clientCorrelator/text()" name="clientCorrelator" scope="default" type="STRING"/>
                 <header expression="//registrations/toAddress/text()" name="To" scope="default"/>
                 <header expression="//registrations/authorizationHeader/text()" name="Authorization" scope="transport"/>
                 <property expression="//registrations/operatorCode/text()" name="OPERATOR_NAME" scope="default" type="STRING"/>
