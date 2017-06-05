@@ -153,7 +153,7 @@
             <arg evaluator="xml" expression="get-property('operation','totalNumofMsgs')" xmlns:ns="http://org.apache.synapse/xsd"/>
             <arg evaluator="xml" expression="get-property('operation','totalNumofPendingMsgs')" xmlns:ns="http://org.apache.synapse/xsd"/>
             <arg evaluator="xml" expression="get-property('clientCorrelator')" xmlns:ns="http://org.apache.synapse/xsd"/>
-            <arg evaluator="xml" expression="get-property('resourceURL')" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('responseResourceURL')" xmlns:ns="http://org.apache.synapse/xsd"/>
         </args>
     </payloadFactory>
     <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
