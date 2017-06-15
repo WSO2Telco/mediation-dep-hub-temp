@@ -72,15 +72,15 @@
         </then>
         <else/>
     </filter>
-    <script language="js">
-        <![CDATA[
+    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+        <property name="script" value="
             mc.setPayloadJSON(mc.getProperty('original_body'));
 
             var new_payload= mc.getPayloadJSON();
-            new_payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+            new_payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('uniqueClientCorrelator');
             mc.setPayloadJSON(new_payload);
-        ]]>
-    </script>
+        "/>
+    </class>
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
@@ -111,13 +111,13 @@
         <default/>
     </switch>
 
-    <script language="js">
-        <![CDATA[
+    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+        <property name="script" value="
             var payload = mc.getPayloadJSON();
-            payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+            payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
             mc.setPayloadJSON(payload);
-        ]]>
-    </script>
+        "/>
+    </class>
     
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
