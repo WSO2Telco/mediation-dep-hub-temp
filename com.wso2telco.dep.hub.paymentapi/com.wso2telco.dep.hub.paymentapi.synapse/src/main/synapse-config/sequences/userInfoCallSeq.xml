@@ -5,11 +5,7 @@
     name="userInfoConfig" scope="default" type="OM"/>
   <property expression="$ctx:userInfoConfig//config[@operatorName=get-property('operatorName')]/infoapi/apiEndpoint"
     name="uri.var.infoapiendpoint" scope="default" type="STRING"/>
-  <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-    <property name="script" value="
-      var requestIdentifier=Math.floor(Math.random() * (999999 - 100000) + 100000);  mc.setProperty('requestIdentifier', requestIdentifier);
-    "/>
-  </class>
+  <script language="js"><![CDATA[var requestIdentifier=Math.floor(Math.random() * (999999 - 100000) + 100000);          mc.setProperty("requestIdentifier", requestIdentifier);]]></script>
   <property expression="get-property('requestIdentifier')"
     name="uri.var.requestIdentifier" scope="default" type="STRING"/>
   <property expression="fn:concat('Bearer ', get-property('access.token'))"
