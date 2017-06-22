@@ -14,17 +14,15 @@
         <with-param name="clientCorrelator" value="{$ctx:clientCorrelator}"/>
     </call-template>
 
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-		    var payload= mc.getPayloadJSON();
-            payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('subsEndPoint');
-            payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty('uniqueClientCorrelator');
-            var str = mc.getProperty('outboundUSSDMessage');
-            var text = str.replace('\n', '\\n').replace('\r', '\\r');
-            payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
-            mc.setPayloadJSON(payload);
-	    "/>
-    </class>
+    <script language="js">
+        <![CDATA[	var payload= mc.getPayloadJSON();
+				payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('subsEndPoint');
+				payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+				var str = mc.getProperty('outboundUSSDMessage');
+				var text = str.replace("\n", "\\n").replace("\r", "\\r");
+				payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
+				mc.setPayloadJSON(payload);]]>
+    </script>
 	
 	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
@@ -48,13 +46,12 @@
   </call-template>
 
     <!-- setting the original clientCorrelator for response -->
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-            var payload= mc.getPayloadJSON();
-            payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
-            mc.setPayloadJSON(payload);
-        "/>
-    </class>
+    <script language="js">
+        <![CDATA[	var payload= mc.getPayloadJSON();
+					payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+					mc.setPayloadJSON(payload);
+		]]>
+    </script>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>
