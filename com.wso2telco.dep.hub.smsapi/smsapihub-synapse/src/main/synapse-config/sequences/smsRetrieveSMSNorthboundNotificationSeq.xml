@@ -41,20 +41,16 @@
     <property name="collection" scope="default">
         <northboundRetrieveResponse xmlns=""/>
     </property>
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-            var payload= mc.getPayloadJSON();
-            var operatorCode = mc.getProperty('operatorCode');
-            var criteria = mc.getProperty('criteria');
-            var clientCorrelator = mc.getProperty('clientCorrelator');
-
-            payload.inboundSMSMessageList.operatorCode = operatorCode;
-            payload.inboundSMSMessageList.criteria = criteria;
-            payload.inboundSMSMessageList.clientCorrelator=clientCorrelator;
-
-            mc.setPayloadJSON(payload);
-        "/>
-    </class>
+    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
+    var operatorCode = mc.getProperty('operatorCode');
+    var criteria = mc.getProperty('criteria');
+    var clientCorrelator = mc.getProperty('clientCorrelator');
+    
+    payload.inboundSMSMessageList.operatorCode = operatorCode;
+    payload.inboundSMSMessageList.criteria = criteria;
+    payload.inboundSMSMessageList.clientCorrelator=clientCorrelator;
+    
+    mc.setPayloadJSON(payload);]]></script>
     <log level="full"/>
     <aggregate id="sms_splitter">
         <completeCondition>
@@ -83,13 +79,9 @@
                             <property expression="//inboundSMSMessageList/inboundSMSMessage/senderAddress" name="senderAddress" scope="default" type="STRING"/>
                             <property expression="//inboundSMSMessageList/operatorCode" name="operatorCode" scope="default" type="STRING"/>
                             <property expression="//inboundSMSMessageList/criteria" name="criteria" scope="default" type="STRING"/>
-                            <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-                                <property name="script" value="
-                                    var res=mc.getProperty('resourceURL');
-                                    res = res.replace('registrations/','registrations/' + mc.getProperty('operatorCode') + '/'+ mc.getProperty('senderAddress')+ '/'+mc.getProperty('messageId')).toString();
-                                    mc.setProperty('resourceURL',res);
-                                "/>
-                            </class>
+                            <script language="js"><![CDATA[var res=mc.getProperty("resourceURL");
+                                 res = res.replace('registrations/','registrations/' + mc.getProperty("operatorCode") + '/'+ mc.getProperty("senderAddress")+ '/'+mc.getProperty("messageId")).toString();
+                                 mc.setProperty('resourceURL',res);]]></script>
                             <property expression="//inboundSMSMessageList/inboundSMSMessage" name="itrSMSMessage" scope="default" type="STRING"/>
                             <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;inboundSMSMessage>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
                             <property expression="fn:concat(get-property('operation','SMSMessageArr'),'&lt;dateTime>','')" name="SMSMessageArr" scope="operation" type="STRING"/>
@@ -125,15 +117,11 @@
                 <property expression="//inboundSMSMessageList/numberOfMessagesInThisBatch" name="itrNumofMsgInBatch" scope="default" type="STRING"/>
                 <property expression="get-property('operation','totalNumofMsgs')" name="synapsetotalNumofMsgs" scope="default" type="STRING"/>
                 <property expression="get-property('operation','totalNumofPendingMsgs')" name="synapsetotalNumofPendingMsgs" scope="default" type="STRING"/>
-                <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-                    <property name="script" value="
-                         var msgsInBatch = parseInt(mc.getProperty('itrNumofMsgInBatch')) + parseInt(mc.getProperty('synapsetotalNumofMsgs')) ;
-                         var numMsgPending = parseInt(mc.getProperty('itrtotnumofmsgsPending')) +   parseInt(mc.getProperty('synapsetotalNumofPendingMsgs'));
-                         print('msgsInBatch'+msgsInBatch);
-                         mc.setProperty('synapsetotalNumofMsgs',msgsInBatch);
-                         mc.setProperty('synapsetotalNumofPendingMsgs',numMsgPending);
-                    "/>
-                </class>
+                <script language="js"><![CDATA[var msgsInBatch = parseInt(mc.getProperty("itrNumofMsgInBatch")) + parseInt(mc.getProperty("synapsetotalNumofMsgs")) ;                                             
+                 var numMsgPending = parseInt(mc.getProperty("itrtotnumofmsgsPending")) +   parseInt(mc.getProperty("synapsetotalNumofPendingMsgs"));    
+                 print("msgsInBatch"+msgsInBatch);  
+                 mc.setProperty('synapsetotalNumofMsgs',msgsInBatch);       
+                 mc.setProperty('synapsetotalNumofPendingMsgs',numMsgPending);]]></script>
                 <log>
                     <property expression="get-property('operation','synapsetotalNumofMsgs')" name="synapsetotalNumofMsgs"/>
                 </log>
