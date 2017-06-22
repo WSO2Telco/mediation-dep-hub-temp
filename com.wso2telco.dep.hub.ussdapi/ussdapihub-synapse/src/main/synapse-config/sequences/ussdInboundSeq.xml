@@ -12,14 +12,12 @@
     
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
     
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-            var payload= mc.getPayloadJSON();
-            payload.inboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('spEndpoint');
-            payload.inboundUSSDMessageRequest.clientCorrelator = mc.getProperty('uniqueClientCorrelator');
-            mc.setPayloadJSON(payload);
-        "/>
-    </class>
+    <script language="js">
+    <![CDATA[	var payload= mc.getPayloadJSON();
+    			payload.inboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('spEndpoint');
+    			payload.inboundUSSDMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+ 				mc.setPayloadJSON(payload);]]>
+ 	</script>
  	
  	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
