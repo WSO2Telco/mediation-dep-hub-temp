@@ -29,7 +29,7 @@
   	</call-template>
   	
   	<call-template target="com.wso2telco.dep.common.quota.limit.Template">
-    	<with-param name="operator" value="sb"/>
+    	<with-param name="direction" value="sb"/>
   	</call-template>  
   	
   	<call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
