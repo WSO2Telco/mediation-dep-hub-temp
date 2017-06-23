@@ -12,7 +12,7 @@
         delete payload.amountTransaction.clientCorrelator;
         }
 
- 	payload.amountTransaction.resourceURL = hubGateway + requestResourceUrl + requestID;
+ 	payload.amountTransaction.resourceURL = hubGateway + requestResourceUrl +'/' + requestID;
  	mc.setPayloadJSON(payload);]]></script>
 </sequence>
 
