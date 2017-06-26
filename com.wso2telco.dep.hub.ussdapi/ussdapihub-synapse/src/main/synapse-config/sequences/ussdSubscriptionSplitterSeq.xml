@@ -77,6 +77,13 @@
     				<with-param name="direction" value="sb"/>
     				<with-param name="skipErrorSeq" value="true"/>
   				</call-template> 
+
+				 <filter regex="true" source="get-property('INTERNAL_ERROR')">
+					<then>
+						<sequence key="ussdSubscriptionSplitterFaultSeq" />
+					</then>
+					<else />
+				</filter>  	
                 
                   <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
 				    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
