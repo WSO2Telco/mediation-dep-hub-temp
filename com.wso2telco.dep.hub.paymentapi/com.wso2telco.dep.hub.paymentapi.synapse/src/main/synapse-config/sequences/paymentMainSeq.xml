@@ -9,6 +9,12 @@
     <class description="HandlerMediatorClass" name="com.wso2telco.dep.mediator.HandlerMediator">
         <property name="executorClass" value="com.wso2telco.dep.mediator.impl.payment.PaymentExecutor"/>
     </class>
+
+    <!-- quota limit -->
+    <call-template target="com.wso2telco.dep.common.quota.limit.Template">
+        <with-param name="direction" value="nb"/>
+    </call-template>
+
     <!-- data publishing -->
     <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
         <with-param name="msisdn" value="{$ctx:MSISDN}"/>
