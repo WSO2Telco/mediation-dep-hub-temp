@@ -4,6 +4,12 @@
        <with-param name="direction" value="REQUESTIN"/>
    </call-template>
   <sequence key="apiPropertySeq"/>
+  
+  <call-template target="com.wso2telco.dep.common.quota.limit.Template">
+    <with-param name="direction" value="nb"/>
+    <with-param name="skipErrorSeq" value="true"/>
+  </call-template>   
+  
   <!-- publishing data -->
   <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
     <with-param name="msisdn" value="{$ctx:MSISDN}"/>
