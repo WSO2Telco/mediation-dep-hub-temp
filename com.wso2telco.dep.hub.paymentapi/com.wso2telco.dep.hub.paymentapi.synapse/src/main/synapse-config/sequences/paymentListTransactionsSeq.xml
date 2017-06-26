@@ -8,6 +8,11 @@
       <with-param name="direction" value="REQUESTOUT"/>
     </call-template>
 
+    <!-- quota limit -->
+    <call-template target="com.wso2telco.dep.common.quota.limit.Template">
+        <with-param name="direction" value="sb"/>
+    </call-template>
+
     <!-- data publishing -->
     <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
         <with-param name="msisdn" value="{$ctx:MSISDN}"/>
