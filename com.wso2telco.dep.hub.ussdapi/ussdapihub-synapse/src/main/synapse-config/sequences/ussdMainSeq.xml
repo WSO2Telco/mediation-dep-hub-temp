@@ -7,10 +7,15 @@
 
   <sequence key="apiPropertySeq"/>
   
+  <call-template target="com.wso2telco.dep.common.quota.limit.Template">
+    <with-param name="direction" value="nb"/>
+    <with-param name="skipErrorSeq" value="true"/>
+  </call-template>  
+  
   <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">
     <with-param name="msisdn" value="{$ctx:MSISDN}"/>
     <with-param name="direction" value="nb"/>
-  </call-template>  
+  </call-template>
   
   <class name="com.wso2telco.dep.mediator.HandlerMediator">
     <property name="executorClass" value="com.wso2telco.dep.mediator.impl.ussd.USSDExecutor"/>
