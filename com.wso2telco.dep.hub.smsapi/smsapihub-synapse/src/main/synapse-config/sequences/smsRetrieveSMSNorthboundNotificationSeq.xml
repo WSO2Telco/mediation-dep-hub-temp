@@ -21,7 +21,7 @@
     			
 			  	<call-template target="com.wso2telco.dep.common.quota.limit.Template">
 			    	<with-param name="direction" value="sb"/>
-			    	<with-param name="skipErrorSeq" value="true"/>
+			    	
 			  	</call-template>     			
 
                 <call-template target="com.wso2telco.dep.common.main.request.datapublisher.Template">

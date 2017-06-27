@@ -7,7 +7,6 @@
   
   <call-template target="com.wso2telco.dep.common.quota.limit.Template">
     <with-param name="direction" value="nb"/>
-    <with-param name="skipErrorSeq" value="true"/>
   </call-template>   
   
   <!-- publishing data -->
