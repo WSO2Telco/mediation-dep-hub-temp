@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentOutMainSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
@@ -11,11 +10,12 @@
         <with-param name="direction" value="sb"/>
     </call-template>
 
-    <switch source="get-property('HANDLER')" xmlns:ns="http://org.apache.synapse/xsd">
+    <switch xmlns:ns="http://org.apache.synapse/xsd" source="get-property('HANDLER')">
         <case regex="ListTransactionsHandler">
             <switch source="$axis2:HTTP_SC">
                 <case regex="(200|201)">
-                    <filter regex="true" source="json-eval($.)">
+                    <property name="hasPayload" expression="json-eval($.)"/>
+                    <filter xpath="boolean($ctx:hasPayload)">
                         <then>
                             <sequence key="replaceResourceURLForListSeq"/>
                         </then>
