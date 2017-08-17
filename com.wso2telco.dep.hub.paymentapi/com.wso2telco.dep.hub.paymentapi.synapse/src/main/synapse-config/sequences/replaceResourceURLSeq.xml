@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="replaceResourceURLSeq" xmlns="http://ws.apache.org/ns/synapse">
-    <script language="js"><![CDATA[var payload= mc.getPayloadJSON();
+<script language="js"><![CDATA[var payload= mc.getPayloadJSON();
     	var hubGateway = mc.getProperty('hubGateway').trim();
-    	var requestResourceUrl = mc.getProperty('requestResourceUrl').trim();
+    	var context = mc.getProperty('CONTEXT').trim();
+    	var subResourcePath = mc.getProperty('REST_SUB_REQUEST_PATH').trim();
     	var requestID = mc.getProperty('requestID').trim();
     	var originalClientCorrelator = mc.getProperty('originalClientCorrelator');
 
         if (originalClientCorrelator != null && originalClientCorrelator !="") {
-        payload.amountTransaction.clientCorrelator = originalClientCorrelator;
+            payload.amountTransaction.clientCorrelator = originalClientCorrelator;
         } else {
-        delete payload.amountTransaction.clientCorrelator;
+            delete payload.amountTransaction.clientCorrelator;
         }
 
- 	payload.amountTransaction.resourceURL = hubGateway + requestResourceUrl +'/' + requestID;
- 	mc.setPayloadJSON(payload);]]></script>
+ 	    payload.amountTransaction.resourceURL = hubGateway + context + subResourcePath +'/' + requestID;
+ 	    mc.setPayloadJSON(payload);]]>
+</script>
 </sequence>
-
-

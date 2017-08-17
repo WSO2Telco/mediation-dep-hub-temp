@@ -4,8 +4,9 @@
         <property name="script" value="
             var payload= mc.getPayloadJSON();
             var hubGateway = mc.getProperty('hubGateway').trim();
-            var requestResourceUrl = mc.getProperty('requestResourceUrl').trim();
-            var resourceUrlPrefix = hubGateway + requestResourceUrl + 'amount/';
+            var context = mc.getProperty('CONTEXT').trim();
+        	var subResourcePath = mc.getProperty('REST_SUB_REQUEST_PATH').trim().concat('/');
+            var resourceUrlPrefix = hubGateway + context + subResourcePath + 'amount/';
             var transactions = payload.paymentTransactionList.amountTransaction;
 
             for ( var i in transactions) {
@@ -13,8 +14,7 @@
             }
 
             payload.paymentTransactionList.resourceURL = resourceUrlPrefix;
-            print(payload);
-            mc.setPayloadJSON(payload);
-        "/>
+
+            mc.setPayloadJSON(payload);"/>
     </class>
 </sequence>
