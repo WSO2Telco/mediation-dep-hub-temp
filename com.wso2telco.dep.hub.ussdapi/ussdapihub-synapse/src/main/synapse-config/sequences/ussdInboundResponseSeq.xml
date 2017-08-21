@@ -9,9 +9,7 @@
         <property name="script" value="
             var payload = mc.getPayloadJSON();
             payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('subsEndPoint');
-            var str = mc.getProperty('outboundUSSDMessage');
-            var text = str.replace('\n', '\\n').replace('\r', '\\r');
-            payload.outboundUSSDMessageRequest.outboundUSSDMessage = text;
+            payload.outboundUSSDMessageRequest.outboundUSSDMessage = mc.getProperty('outboundUSSDMessage');
             payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
             mc.setPayloadJSON(payload);
         "/>
