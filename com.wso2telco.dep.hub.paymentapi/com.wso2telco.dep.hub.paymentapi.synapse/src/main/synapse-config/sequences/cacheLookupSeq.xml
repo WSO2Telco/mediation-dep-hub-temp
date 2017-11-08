@@ -4,12 +4,14 @@
   <property expression="$trp:Authorization" name="auth-header"
     scope="default" type="STRING"/>
   <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-    <property name="script" value="
-      var temp_auth = mc.getProperty('jwt-header').trim();var val = new Array();val= temp_auth.split('\\.');
-      var auth=val[1];var jsonStr = Packages.java.lang.String(Packages.org.apache.axiom.om.util.Base64.decode(auth), 'UTF-8');
-      var tempStr = new Array();tempStr= jsonStr.split('http://wso2.org/claims/subscriber&quot;:&quot;'); var decoded = new Array();
-      decoded = tempStr[0].split('&quot;');mc.setProperty('uri.var.onBehalfOf',decoded[0]);
-    "/>
+      <property name="script" value="
+        var String = Java.type('java.lang.String');
+        var temp_auth = mc.getProperty('jwt-header').trim();
+        var val= temp_auth.split('.');
+        var auth=val[1];
+        var jsonObj = JSON.parse(new String(Packages.org.apache.commons.codec.binary.Base64.decodeBase64(auth),'UTF-8'));
+        mc.setProperty('uri.var.onBehalfOf',jsonObj['http://wso2.org/claims/subscriber']);
+      "/>
   </class>
   <property expression="get-property('endUserId')"
     name="uri.var.userAddress" scope="default" type="STRING"/>
