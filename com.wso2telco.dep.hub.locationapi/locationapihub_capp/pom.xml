@@ -5,12 +5,12 @@
   <parent>
     <groupId>com.wso2telco.dep.hub</groupId>
     <artifactId>com.wso2telco.dep.hub.locationapi</artifactId>
-    <version>2.1.1</version>
+    <version>2.1.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>com.wso2telco.dep.hub</groupId>
   <artifactId>locationapihub_capp</artifactId>
-  <version>2.1.1</version>
+  <version>2.1.2-SNAPSHOT</version>
   <packaging>carbon/application</packaging>
   <name>locationapihub_capp</name>
   <description>locationapihub_capp</description>
@@ -93,7 +93,7 @@
       <plugin>
         <groupId>org.wso2.maven</groupId>
         <artifactId>maven-car-plugin</artifactId>
-        <version>2.1.1</version>
+        <version>2.1.2-SNAPSHOT</version>
         <extensions>true</extensions>
         <executions>
           <execution>
