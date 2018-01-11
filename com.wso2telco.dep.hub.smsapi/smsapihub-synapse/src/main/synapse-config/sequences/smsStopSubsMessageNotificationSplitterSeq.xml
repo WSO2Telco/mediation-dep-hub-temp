@@ -14,9 +14,12 @@
                 <property expression="//operatorId/text()" name="OPERATOR_ID" scope="default" type="STRING"/>
                 <header expression="//toAddress/text()" name="To" scope="default"/>
                 <header expression="//authorizationHeader/text()" name="Authorization" scope="transport"/>
-                <script language="js"><![CDATA[var payload = mc.getPayloadXML();
+                <!--<script language="js"><![CDATA[var payload = mc.getPayloadXML();
                 delete payload..*::deleteSubscriptions;
-                mc.setPayloadXML(payload);]]></script>
+                mc.setPayloadXML(payload);]]></script>-->
+                <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
+                    <property name="removeEl" value="jsonObject.deleteSubscriptions"/>
+                </class>
                 <filter regex="Not Provisioned" source="//subscription/toAddress/text()">
                     <then>
                         <property name="status" scope="default" type="STRING" value="Not Provisioned"/>

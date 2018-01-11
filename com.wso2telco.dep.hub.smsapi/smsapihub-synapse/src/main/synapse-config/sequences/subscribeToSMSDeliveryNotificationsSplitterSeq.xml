@@ -28,7 +28,7 @@
                 </enrich>
                 <enrich>
                     <source clone="true" xpath="//callbackReference"/>
-                    <target property="original_callbackReference" type="property"/>
+                    <target property="original_callbackFReference" type="property"/>
                 </enrich>
                 <filter regex="Not Provisioned" source="$ctx:toAddress">
                     <then>
@@ -37,11 +37,12 @@
                     </then>
                     <else/>
                 </filter>
-                <script language="js">
-	                <![CDATA[var payload = mc.getPayloadXML();
-	                delete payload..*::senderAddresses;
-	                mc.setPayloadXML(payload);]]>
-                </script>
+
+                <log level="full"/>
+
+                <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
+                    <property name="removeEl" value="deliveryReceiptSubscription.senderAddresses"/>
+                </class>
 
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
 
