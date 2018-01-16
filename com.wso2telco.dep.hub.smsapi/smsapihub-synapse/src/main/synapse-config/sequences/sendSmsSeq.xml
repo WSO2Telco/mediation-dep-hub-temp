@@ -72,14 +72,14 @@
         </then>
         <else/>
     </filter>
-    <script language="js">
-        <![CDATA[
-            mc.setPayloadJSON(mc.getProperty('original_body'));
-            var new_payload= mc.getPayloadJSON();
-            new_payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
-            mc.setPayloadJSON(new_payload);
-        ]]>
-    </script>
+    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+        <property name="script" value="
+        var originalJSONPayloadString = mc.getProperty('original_body');
+        var originalJSONPayload = JSON.parse(originalJSONPayloadString);
+        originalJSONPayload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('uniqueClientCorrelator');
+        mc.setPayloadJSON(JSON.stringify(originalJSONPayload));
+        "/>
+    </class>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
@@ -110,13 +110,13 @@
     <switch source="$axis2:HTTP_SC">
         <case regex="201">
             <sequence key="sendSmsOutSeq"/>
-            <script language="js">
-                <![CDATA[
+            <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+                <property name="script" value="
                     var payload = mc.getPayloadJSON();
-                    payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+                    payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
                     mc.setPayloadJSON(payload);
-                ]]>
-            </script>
+                "/>
+            </class>
         </case>
         <default/>
     </switch>
