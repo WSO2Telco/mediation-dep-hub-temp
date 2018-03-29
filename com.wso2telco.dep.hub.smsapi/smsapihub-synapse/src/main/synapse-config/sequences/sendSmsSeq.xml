@@ -72,18 +72,16 @@
         </then>
         <else/>
     </filter>
+    <script language="js">
+        <![CDATA[
+            mc.setPayloadJSON(mc.getProperty('original_body'));
 
-	<class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-		<property name="script" value="
-				var original_body= mc.getProperty('original_body');
-	            mc.setPayloadJSON(original_body);
-	            var new_payload= mc.getPayloadJSON();
-				var uniqueClientCorrelator= mc.getProperty('uniqueClientCorrelator');
-	            new_payload.outboundSMSMessageRequest.clientCorrelator = uniqueClientCorrelator;
-	            mc.setPayloadJSON(new_payload);
-		"/>
-	</class>
-
+            var new_payload= mc.getPayloadJSON();
+            new_payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("uniqueClientCorrelator");
+            mc.setPayloadJSON(new_payload);
+        ]]>
+    </script>
+    
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="REQUESTOUT"/>
     </call-template>
@@ -96,11 +94,11 @@
         <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
-
+        
     <call>
         <endpoint key="defaultSMSEndpoint"/>
     </call>
-
+    
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
@@ -109,24 +107,21 @@
         <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
-
+    
     <switch source="$axis2:HTTP_SC">
         <case regex="201">
             <sequence key="sendSmsOutSeq"/>
-
-			<class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-				<property name="script" value="
-					var payload = mc.getPayloadJSON();
-					var clientCorrelator=mc.getProperty('clientCorrelator');
-					payload.outboundSMSMessageRequest.clientCorrelator = clientCorrelator;
-					mc.setPayloadJSON(payload);
-				"/>
-			</class>
-
+            <script language="js">
+                <![CDATA[
+                    var payload = mc.getPayloadJSON();
+                    payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty("clientCorrelator");
+                    mc.setPayloadJSON(payload);
+                ]]>
+            </script>
         </case>
         <default/>
     </switch>
-
+    
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
 	</call-template>
