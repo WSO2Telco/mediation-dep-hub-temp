@@ -661,7 +661,7 @@
             </payloadFactory>
         </default>
     </switch>
-    <filter regex="POL*" source="$ctx:ERROR_CODE">
+    <filter regex="POL.*" source="$ctx:ERROR_CODE">
         <then>
             <property name="HTTP_SC" scope="axis2" type="STRING" value="403"/>
         </then>
