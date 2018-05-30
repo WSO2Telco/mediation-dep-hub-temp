@@ -9,23 +9,16 @@
                     <target action="child" xpath="//subscription"/>
                 </enrich>
 
-                
-                <script language="js">
-	                <![CDATA[
-	                	var payload = mc.getPayloadXML();
-	                	delete payload..*::shortCodes.toAddress;
-	                	delete payload..*::shortCodes.authorizationHeader;
-	                	
-	                	delete payload..*::shortCodes.operatorId;
-	                	mc.setPayloadXML(payload);
-	                ]]>
-                </script>
+
+                <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
+                    <property name="removeEl" value="shortCodes.toAddress_shortCodes.authorizationHeader_shortCodes.operatorId"/>
+                </class>
 
                 <filter regex="false" source="boolean(fn:normalize-space(//shortCodes/keyword/text()))">
                     <then>
-                          <script language="js"><![CDATA[var payload = mc.getPayloadXML();
-                           delete payload..*::keyword;
-                           mc.setPayloadXML(payload);]]></script>
+                        <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
+                            <property name="removeEl" value="subscription.keyword_shortCodes.keyword"/>
+                        </class>
                     </then>
                 </filter>
                 
@@ -54,18 +47,10 @@
                 
                 <header expression="//subscription/toAddress/text()" name="To" scope="default"/>
                 <header expression="//subscription/authorizationHeader/text()" name="Authorization" scope="transport"/>
-                
-                <script language="js">
-	                <![CDATA[
-	                	var payload = mc.getPayloadXML();
-	                	delete payload..*::toAddress;
-	                	delete payload..*::authorizationHeader;
-	                	delete payload..*::operatorCode;
-	                	delete payload..*::operatorId;
-	                	delete payload..*::shortCodes;
-	                	mc.setPayloadXML(payload);
-	                ]]>
-	            </script>
+
+                <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
+                    <property name="removeEl" value="subscription.toAddress_subscription.authorizationHeader_subscription.operatorCode_subscription.operatorId_subscription.shortCodes"/>
+                </class>
                 
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 
