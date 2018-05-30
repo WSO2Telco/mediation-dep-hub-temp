@@ -86,7 +86,7 @@
 		    	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
 		    	<with-param name="direction" value="nb"/>
 		  	</call-template>    		
-    		
+    		<property name="HTTP_SC" scope="axis2" value="200"/>
             <respond/>
         </onComplete>
     </aggregate>
