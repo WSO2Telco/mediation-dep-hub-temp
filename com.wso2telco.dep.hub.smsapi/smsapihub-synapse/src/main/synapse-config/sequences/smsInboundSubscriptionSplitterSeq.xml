@@ -49,6 +49,16 @@
                 <class name="com.wso2telco.dep.mediator.XmlAlterMediator">
                     <property name="removeEl" value="subscription.destinationAddresses"/>
                 </class>
+
+                <payloadFactory media-type="xml">
+                    <format>
+                        <jsonObject xmlns="">$1</jsonObject>
+                    </format>
+                    <args>
+                        <arg evaluator="xml" expression="//jsonObject"/>
+                    </args>
+                </payloadFactory>
+                
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
