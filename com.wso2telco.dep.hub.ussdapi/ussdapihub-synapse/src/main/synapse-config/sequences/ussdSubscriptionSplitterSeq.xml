@@ -52,6 +52,15 @@
                     <property name="removeEl" value="subscription.toAddress_subscription.authorizationHeader_subscription.operatorCode_subscription.operatorId_subscription.shortCodes"/>
                 </class>
                 
+                <payloadFactory media-type="xml">
+                    <format>
+                        <jsonObject xmlns="">$1</jsonObject>
+                    </format>
+                    <args>
+                        <arg evaluator="xml" expression="//jsonObject"/>
+                    </args>
+                </payloadFactory>
+                
                 <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
                 
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
