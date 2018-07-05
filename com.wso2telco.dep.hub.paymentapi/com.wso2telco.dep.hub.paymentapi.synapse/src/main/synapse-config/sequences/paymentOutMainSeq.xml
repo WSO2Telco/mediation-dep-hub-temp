@@ -10,6 +10,8 @@
         <with-param name="direction" value="sb"/>
     </call-template>
 
+    <sequence key="cacheClearingSeq"/>
+
     <switch xmlns:ns="http://org.apache.synapse/xsd" source="get-property('HANDLER')">
         <case regex="ListTransactionsHandler">
             <switch source="$axis2:HTTP_SC">

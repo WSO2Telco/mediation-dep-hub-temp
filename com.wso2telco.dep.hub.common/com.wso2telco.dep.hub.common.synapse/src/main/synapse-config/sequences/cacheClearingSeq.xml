@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="cacheClearingSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <filter regex="401" source="$axis2:HTTP_SC" xmlns:ns="http://org.apache.synapse/xsd">
+        <then>
+            <class name="com.wso2telco.dep.mediator.CacheClearingMediator"/>
+        </then>
+        <else/>
+    </filter>
+</sequence>
