@@ -68,6 +68,8 @@
                     <endpoint key="defaultSMSEndpoint"/>
                 </call>
                 
+                <sequence key="cacheClearingSeq"/>
+                
                 <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
                     <with-param name="direction" value="RESPONSEIN"/>
                 </call-template>
