@@ -11,7 +11,10 @@
             var transactions = payload.paymentTransactionList.amountTransaction;
 
             for ( var i in transactions) {
-            transactions[i].resourceURL = resourceUrlPrefix + transactions[i].serverReferenceCode;
+            var originalResourceURL = transactions[i].resourceURL;
+            var splits = originalResourceURL.split('amount/');
+            var resourceId = splits[1];
+            transactions[i].resourceURL = resourceUrlPrefix + resourceId;
             }
 
             payload.paymentTransactionList.resourceURL = resourceUrlPrefix;
