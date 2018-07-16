@@ -107,6 +107,8 @@
         <with-param name="direction" value="sb"/>
     </call-template>
     
+    <sequence key="cacheClearingSeq"/>
+    
     <switch source="$axis2:HTTP_SC">
         <case regex="201">
             <sequence key="sendSmsOutSeq"/>
