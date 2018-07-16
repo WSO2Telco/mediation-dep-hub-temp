@@ -19,6 +19,29 @@
               name="isUserInfoEnabled" scope="default" type="STRING"/>
     <property expression="$trp:x-jwt-assertion" name="jwt-header"
               scope="default" type="STRING"/>
+
+    <!-- compare the msisdn in url and enduserId -->
+    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+      <property name="script" value="
+        var endUserId = mc.getProperty('endUserId');
+        var msisdn = endUserId.substring(5);
+        var endpointUrl = mc.getProperty('ENDPOINT');
+        var equalMsisdns = true;
+	    if (endpointUrl.indexOf(msisdn) == -1) {
+	        equalMsisdns = false;
+	    }
+        mc.setProperty('equalMsisdns', equalMsisdns);
+      "/>
+    </class>
+    
+    <filter regex="false" source="get-property('equalMsisdns')">
+        <then>
+            <property value="SVC0002" name="ERROR_CODE" scope="default" type="STRING"/>
+            <property value="Two different endUserId provided" name="errvar" scope="default" type="STRING"/>
+            <sequence key="commonFault"/>
+        </then>
+    </filter>
+    
     <filter regex="true" source="get-property('isUserInfoEnabled')">
         <then>
             <enrich>
