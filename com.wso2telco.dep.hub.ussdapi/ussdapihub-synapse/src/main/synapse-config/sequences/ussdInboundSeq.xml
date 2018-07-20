@@ -57,7 +57,18 @@
 	<call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
     	<with-param name="msisdn" value="{$ctx:MSISDN}"/>
     	<with-param name="direction" value="nb"/>
-  	</call-template>    
+  	</call-template>
+
+    <switch source="$axis2:HTTP_SC">
+        <case regex="(400|403|404|405|500|503)">
+            <property expression="//messageId" name="ERROR_CODE"
+                      scope="default" type="STRING"/>
+            <property expression="//variables" name="errvar"
+                      scope="default" type="STRING"/>
+            <sequence key="commonFault"/>
+        </case>
+        <default/>
+    </switch>
     
     <respond/>
 </sequence>
