@@ -24,6 +24,13 @@
                         <else/>
                     </filter>
                 </case>
+                <case regex="(400|403|500|503)">
+                    <property expression="//messageId" name="ERROR_CODE"
+                              scope="default" type="STRING"/>
+                    <property expression="//variables" name="errvar"
+                              scope="default" type="STRING"/>
+                    <sequence key="commonFault"/>
+                </case>
                 <default/>
             </switch>
         </case>
@@ -32,6 +39,13 @@
                 <case regex="(200|201)">
                     <class name="com.wso2telco.dep.mediator.AuthorizeResponseHandlerMediator"/>
                     <sequence key="replaceResourceURLSeq"/>
+                </case>
+                <case regex="(400|403|500|503)">
+                    <property expression="//messageId" name="ERROR_CODE"
+                              scope="default" type="STRING"/>
+                    <property expression="//variables" name="errvar"
+                              scope="default" type="STRING"/>
+                    <sequence key="commonFault"/>
                 </case>
                 <default/>
             </switch>
