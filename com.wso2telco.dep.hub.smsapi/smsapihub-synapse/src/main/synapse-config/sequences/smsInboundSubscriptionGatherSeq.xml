@@ -89,6 +89,17 @@
             </payloadFactory>
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
 
+            <switch source="$axis2:HTTP_SC">
+                <case regex="(400|403|404|405|500|503)">
+                    <property expression="//messageId" name="ERROR_CODE"
+                        scope="default" type="STRING"/>
+                    <property expression="//variables" name="errvar"
+                        scope="default" type="STRING"/>
+                    <sequence key="commonFault"/>
+                </case>
+                <default/>
+            </switch>
+
 		   	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 		 		<with-param name="direction" value="RESPONSEOUT"/>
 			</call-template>
