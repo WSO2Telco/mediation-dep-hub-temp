@@ -72,7 +72,6 @@
                         </callbackReference><?xml-multiple senderAddresses?>
 				    $3
                         <resourceURL>$4</resourceURL>
-                        <clientCorrelator>$5</clientCorrelator>
                     </deliveryReceiptSubscription>
                 </format>
                 <args>
@@ -80,9 +79,25 @@
                     <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
                     <arg evaluator="xml" expression="//senderAddresses"/>
                     <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
-                    <arg evaluator="xml" expression="$ctx:original_clientcorrelator"/>
                 </args>
             </payloadFactory>
+
+            <filter xpath="$ctx:original_clientcorrelator">
+                <then>
+                    <enrich>
+                        <source clone="true" type="inline">
+                            <clientCorrelator xmlns="">TEST</clientCorrelator>
+                        </source>
+                        <target action="child" type="body"/>
+                    </enrich>
+                    <enrich>
+                        <source clone="true" property="original_clientcorrelator" type="property"/>
+                        <target xpath="//clientCorrelator/text()"/>
+                    </enrich>
+                </then>
+                <else/>
+            </filter>
+
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
             
             <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
