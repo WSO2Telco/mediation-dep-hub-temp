@@ -110,7 +110,7 @@
     <sequence key="cacheClearingSeq"/>
     
     <switch source="$axis2:HTTP_SC">
-        <case regex="201">
+        <case regex="(200|201)">
             <sequence key="sendSmsOutSeq"/>
             <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
                 <property name="script" value="
