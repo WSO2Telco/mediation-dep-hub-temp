@@ -57,6 +57,7 @@
         <property name="script" value="
             var payload= mc.getPayloadJSON();
             payload.outboundUSSDMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
+            payload.outboundUSSDMessageRequest.responseRequest.notifyURL = mc.getProperty('notifyUrl');
             mc.setPayloadJSON(payload);
         "/>
     </class>
