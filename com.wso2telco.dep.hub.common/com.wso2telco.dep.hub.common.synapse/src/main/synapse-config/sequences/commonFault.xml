@@ -677,7 +677,7 @@
             <property name="HTTP_SC" scope="axis2" type="STRING" value="403"/>
         </then>
         <else>
-                <filter regex="yes" source="$ctx:BACKEND_ERROR">
+                <filter regex="yes" source="$ctx:BACKEND_ERROR_SET">
                     <then>
                         <switch source="$axis2:HTTP_SC">
                             <case regex="(401|404|405|500|503)">
