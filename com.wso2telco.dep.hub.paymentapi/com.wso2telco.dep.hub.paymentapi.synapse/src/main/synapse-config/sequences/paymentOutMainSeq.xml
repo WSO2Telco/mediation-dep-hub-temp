@@ -29,7 +29,7 @@
                         scope="default" type="STRING"/>
                     <property expression="//variables" name="errvar"
                         scope="default" type="STRING"/>
-                    <property name="BACKEND_ERROR" scope="default"
+                    <property name="BACKEND_ERROR_SET" scope="default"
                               type="STRING" value="yes"/>
                     <sequence key="commonFault"/>
                 </case>
