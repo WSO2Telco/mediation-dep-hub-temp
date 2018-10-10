@@ -24,7 +24,7 @@
                         <else/>
                     </filter>
                 </case>
-                <case regex="(400|403|500|503)">
+                <case regex="(400|401|403|404|405|500|503)">
                     <property expression="//messageId" name="ERROR_CODE"
                         scope="default" type="STRING"/>
                     <property expression="//variables" name="errvar"
@@ -42,7 +42,7 @@
                     <class name="com.wso2telco.dep.mediator.AuthorizeResponseHandlerMediator"/>
                     <sequence key="replaceResourceURLSeq"/>
                 </case>
-                <case regex="(400|403|500|503)">
+                <case regex="(400|401|403|404|405|500|503)">
                     <property expression="//messageId" name="ERROR_CODE"
                         scope="default" type="STRING"/>
                     <property expression="//variables" name="errvar"
