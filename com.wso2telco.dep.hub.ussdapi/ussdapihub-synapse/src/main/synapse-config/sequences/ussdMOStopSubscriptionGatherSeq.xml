@@ -10,7 +10,7 @@
     </filter>
     
     <switch source="$axis2:HTTP_SC">
-        <case regex="(200|201|204)">
+        <case regex="(204)">
             <dbreport>
                 <connection>
                     <pool>
