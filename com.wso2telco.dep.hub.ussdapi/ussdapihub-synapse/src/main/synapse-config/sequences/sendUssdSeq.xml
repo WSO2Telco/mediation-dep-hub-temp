@@ -46,6 +46,19 @@
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="RESPONSEIN"/>
   	</call-template>
+
+    <switch source="$axis2:HTTP_SC" >
+        <case regex="(400|403|404|405|500|503)">
+            <property expression="//messageId" name="ERROR_CODE"
+                      scope="default" type="STRING"/>
+            <property expression="//variables" name="errvar"
+                      scope="default" type="STRING"/>
+            <property name="BACKEND_ERROR_SET" scope="default"
+                      type="STRING" value="yes"/>
+            <sequence key="commonFault"/>
+        </case>
+        <default/>
+    </switch>
   	
   <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
     <with-param name="msisdn" value="{$ctx:MSISDN}"/>
@@ -61,19 +74,6 @@
             mc.setPayloadJSON(payload);
         "/>
     </class>
-
-    <switch source="$axis2:HTTP_SC" >
-        <case regex="(400|403|404|405|500|503)">
-            <property expression="//messageId" name="ERROR_CODE"
-                      scope="default" type="STRING"/>
-            <property expression="//variables" name="errvar"
-                      scope="default" type="STRING"/>
-            <property name="BACKEND_ERROR_SET" scope="default"
-                      type="STRING" value="yes"/>
-            <sequence key="commonFault"/>
-        </case>
-        <default/>
-    </switch>
 
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
         <with-param name="direction" value="RESPONSEOUT"/>
