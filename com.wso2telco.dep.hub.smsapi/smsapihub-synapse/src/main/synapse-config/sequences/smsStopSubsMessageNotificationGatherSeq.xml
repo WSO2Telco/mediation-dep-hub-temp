@@ -3,6 +3,15 @@
     <log level="custom">
         <property name="STATUS" value="==== @ SMS Msg GatherSeq ===="/>
     </log>
+    <filter regex="200|201|204" source="$axis2:HTTP_SC">
+        <then>
+            <property name="status" scope="default" type="STRING" value="deleted"/>
+        </then>
+        <else>
+            <property name="status" scope="default" type="STRING" value="failed"/>
+        </else>
+    </filter>
+
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201|204)">
 			<dbreport>
@@ -30,9 +39,26 @@
         </case>
         <default/>
     </switch>
+
+    <payloadFactory media-type="json">
+        <format>
+            {
+            "operators" : {
+            "operatorCode" : "$1",
+            "status": "$2"
+            }
+            }
+        </format>
+        <args>
+            <arg evaluator="xml" expression="get-property('operatorCode')"/>
+            <arg evaluator="xml" expression="get-property('status')"/>
+        </args>
+    </payloadFactory>
+
     <property name="collection" scope="default">
         <deleteSubscription xmlns=""/>
     </property>
+
     <aggregate id="sms_msg_stop_splitter">
         <completeCondition>
             <messageCount max="-1" min="-1"/>
@@ -41,7 +67,20 @@
             <log level="custom">
                 <property name="STATUS" value="==== @ SMS Msg GatherSeq OnComplete ===="/>
             </log>
-            <property name="HTTP_SC" scope="axis2" type="STRING" value="204"/>
+
+            <payloadFactory media-type="xml">
+                <format>
+                    <deleteSubscription>
+                        <?xml-multiple operators?>$1
+                    </deleteSubscription>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="//operators"/>
+                </args>
+            </payloadFactory>
+
+            <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
+            <property name="HTTP_SC" scope="axis2" type="STRING" value="200"/><property name="messageType" scope="axis2" type="STRING" value="application/json"/>
 
 		   	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
 		 		<with-param name="direction" value="RESPONSEOUT"/>
