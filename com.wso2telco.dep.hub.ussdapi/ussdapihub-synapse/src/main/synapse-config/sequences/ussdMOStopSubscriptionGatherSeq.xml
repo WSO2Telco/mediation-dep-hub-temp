@@ -68,10 +68,12 @@
                 <format>
                     <deleteSubscription>
                     	<?xml-multiple operators?>$1		    
+		    			<resourceURL>$2</resourceURL>
 		    		</deleteSubscription>
                 </format>
                 <args>
                     <arg evaluator="xml" expression="//operators"/>
+                    <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
                 </args>
             </payloadFactory>
             
