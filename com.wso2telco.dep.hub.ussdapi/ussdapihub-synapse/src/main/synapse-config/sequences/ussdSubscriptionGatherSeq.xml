@@ -7,24 +7,24 @@
                 <then>
                     <property name="status" scope="default" type="STRING" value="Created"/>
                     <property expression="json-eval($.subscription.resourceURL)" name="resourceURL" scope="default" type="STRING"/>
+                    <dbreport>
+                        <connection>
+                            <pool>
+                                <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                            </pool>
+                        </connection>
+                        <statement>
+                            <sql><![CDATA[insert into mo_ussd_subscription(ussd_request_did, domainurl, operator) values(?, ?, ?);]]></sql>
+                            <parameter expression="get-property('default', 'subscriptionID')" type="VARCHAR"/>
+                            <parameter expression="get-property('default', 'resourceURL')" type="VARCHAR"/>
+                            <parameter expression="get-property('default', 'operatorCode')" type="VARCHAR"/>
+                        </statement>
+                    </dbreport>
                 </then>
                 <else>
                     <property name="status" scope="default" type="STRING" value="Not Created"/>
                 </else>
             </filter>
-            <dbreport>
-                <connection>
-                    <pool>
-                        <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
-                    </pool>
-                </connection>
-                <statement>
-                    <sql><![CDATA[insert into mo_ussd_subscription(ussd_request_did, domainurl, operator) values(?, ?, ?);]]></sql>
-                    <parameter expression="get-property('default', 'subscriptionID')" type="VARCHAR"/>
-                    <parameter expression="get-property('default', 'resourceURL')" type="VARCHAR"/>
-                    <parameter expression="get-property('default', 'operatorCode')" type="VARCHAR"/>
-                </statement>
-            </dbreport>
         </else>
     </filter>
 
