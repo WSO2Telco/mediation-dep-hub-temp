@@ -46,6 +46,11 @@
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
       <with-param name="direction" value="RESPONSEIN"/>
   	</call-template>
+  	
+  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
+    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
+    <with-param name="direction" value="sb"/>
+  </call-template>
 
     <switch source="$axis2:HTTP_SC" >
         <case regex="(400|403|404|405|500|503)">
@@ -59,11 +64,6 @@
         </case>
         <default/>
     </switch>
-  	
-  <call-template target="com.wso2telco.dep.common.main.response.datapublisher.Template">
-    <with-param name="msisdn" value="{$ctx:MSISDN}"/>
-    <with-param name="direction" value="sb"/>
-  </call-template>
 
     <!-- setting the original clientCorrelator for response -->
     <class name="org.wso2telco.dep.nashornmediator.NashornMediator">

@@ -18,22 +18,42 @@
                     </pool>
                 </connection>
                 <statement>
-                    <sql><![CDATA[delete from mo_ussd_subscription where ussd_request_did=?;]]></sql>
+                    <sql><![CDATA[delete from mo_ussd_subscription where ussd_request_did=? and operator=?;]]></sql>
                     <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
+                    <parameter expression="get-property('operatorCode')" type="VARCHAR"/>
                 </statement>
             </dbreport>
-            
-            <dbreport>
+
+            <dblookup>
                 <connection>
                     <pool>
                         <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
                     </pool>
                 </connection>
                 <statement>
-                    <sql><![CDATA[delete from ussd_request_entry where ussd_request_did=?;]]></sql>
+                    <sql>select count(mo_ussd_request_did) as id_count from mo_ussd_subscription where ussd_request_did =?</sql>
                     <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
+                    <result name="idCount" column="id_count"/>
                 </statement>
-            </dbreport>
+            </dblookup>
+
+            <filter source="$ctx:idCount" regex="0">
+                <then>
+                    <dbreport>
+                        <connection>
+                            <pool>
+                                <dsName>jdbc/WSO2TELCO_DEP_DB</dsName>
+                            </pool>
+                        </connection>
+                        <statement>
+                            <sql><![CDATA[delete from ussd_request_entry where ussd_request_did=?;]]></sql>
+                            <parameter expression="get-property('subscriptionId')" type="VARCHAR"/>
+                        </statement>
+                    </dbreport>
+                </then>
+                <else>
+                </else>
+            </filter>
         </case>
         <default/>
     </switch>
