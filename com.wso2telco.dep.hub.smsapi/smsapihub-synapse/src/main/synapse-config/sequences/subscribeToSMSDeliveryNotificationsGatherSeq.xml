@@ -8,6 +8,8 @@
         <else>
             <filter xpath="$body//deliveryReceiptSubscription">
                 <then>
+                    <filter regex="201" source="$axis2:HTTP_SC">
+                        <then>
                     <property name="status" scope="default" type="STRING" value="Created"/>
                     <property expression="json-eval($.deliveryReceiptSubscription.resourceURL)" name="resourceURL" scope="default" type="STRING"/>
                     <dbreport>
@@ -34,6 +36,11 @@
                             <parameter expression="$ctx:subscriptionID" type="VARCHAR"/>
                         </statement>
                     </dbreport>
+                        </then>
+                        <else>
+                            <property name="status" scope="default" type="STRING" value="Not Created"/>
+                        </else>
+                    </filter>
                 </then>
                 <else>
                     <property name="status" scope="default" type="STRING" value="Not Created"/>
@@ -108,7 +115,7 @@
                 <with-param name="msisdn" value="{$ctx:MSISDN}"/>
                 <with-param name="direction" value="nb"/>
             </call-template>
-
+            <property name="HTTP_SC" scope="axis2" value="200"/>
             <respond/>
         </onComplete>
     </aggregate>
