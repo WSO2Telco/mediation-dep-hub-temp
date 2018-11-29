@@ -3,17 +3,6 @@
 
     <header expression="get-property('ENDPOINT')" name="To" scope="default"/>
 
-    <filter regex="true" source="get-property('isUserInfoEnabled')">
-        <then>
-            <enrich>
-                <source clone="true" property="InitialMessage" type="property"/>
-                <target action="replace" type="body"/>
-            </enrich>
-            <header expression="get-property('auth-header')" name="Authorization" scope="transport"/>
-            <header expression="get-property('jwt-header')" name="x-jwt-assertion" scope="transport"/>
-        </then>
-        <else/>
-    </filter>
     <header name="Content-Type" scope="transport" value="application/json"/>
     <header name="Accept" scope="transport" value="application/json"/>
     <header name="Accept-Charset" scope="transport" value="UTF-8"/>

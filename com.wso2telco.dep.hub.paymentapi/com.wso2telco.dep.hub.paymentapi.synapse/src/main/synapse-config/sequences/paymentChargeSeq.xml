@@ -15,21 +15,10 @@
               name="endUserId" scope="default" type="STRING"/>
     <property expression="json-eval($.amountTransaction.paymentAmount.chargingInformation.amount)"
             name="chargeAmount" scope="default" type="STRING"/>
-    <property expression="get-property('IS_USER_INFO_ENABLED')"
-              name="isUserInfoEnabled" scope="default" type="STRING"/>
     <property expression="$trp:x-jwt-assertion" name="jwt-header"
               scope="default" type="STRING"/>
+
+    <sequence key="chargeRequestSeq"/>
     
-    <filter regex="true" source="get-property('isUserInfoEnabled')">
-        <then>
-            <enrich>
-                <source clone="true" type="body"/>
-                <target action="replace" property="InitialMessage" type="property"/>
-            </enrich>
-            <sequence key="cacheLookupSeq"/>
-        </then>
-        <else>
-            <sequence key="checkLimitSeq"/>
-        </else>
-    </filter>
+
 </sequence>
