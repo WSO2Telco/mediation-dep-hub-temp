@@ -44,12 +44,6 @@
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.resource</groupId>
-      <artifactId>userInfoConfig</artifactId>
-      <version>1.0.0</version>
-      <type>zip</type>
-    </dependency>
-    <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>userInfoCallSeq</artifactId>
       <version>1.0.0</version>
@@ -68,38 +62,8 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>UserInfoEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>cacheUpdateSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>cacheLookupSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>chargeRequestSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>checkLimitErrorSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>checkLimitSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -112,12 +76,6 @@
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>dropSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>filterCheckLimitSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -165,12 +123,6 @@
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>pkgTypeSetSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>replaceResourceURLForListSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
@@ -178,12 +130,6 @@
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>replaceResourceURLSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>userInfoCallErrorSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
@@ -202,12 +148,6 @@
     <dependency>
       <groupId>com.wso2telco.dep.hub.endpoint</groupId>
       <artifactId>tokenPoolEndpoint</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.endpoint</groupId>
-      <artifactId>defaultUserInfoEndpoint</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
