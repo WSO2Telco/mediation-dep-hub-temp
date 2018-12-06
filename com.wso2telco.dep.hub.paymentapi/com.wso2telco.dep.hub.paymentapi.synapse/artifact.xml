@@ -10,6 +10,7 @@
     </artifact>
     <artifact name="chargeRequestSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/chargeRequestSeq.xml</file>
+    </artifact>
     <artifact name="dropSeq" groupId="com.wso2telco.dep.hub.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
         <file>src/main/synapse-config/sequences/dropSeq.xml</file>
     </artifact>
