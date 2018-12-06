@@ -44,10 +44,10 @@
       <type>zip</type>
     </dependency>
     <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>userInfoCallSeq</artifactId>
+      <groupId>com.wso2telco.dep.hub.resource</groupId>
+      <artifactId>userInfoConfig</artifactId>
       <version>1.0.0</version>
-      <type>xml</type>
+      <type>zip</type>
     </dependency>
     <dependency>
       <groupId>com.wso2telco.dep.hub.api</groupId>
@@ -64,12 +64,6 @@
     <dependency>
       <groupId>com.wso2telco.dep.hub.sequence</groupId>
       <artifactId>chargeRequestSeq</artifactId>
-      <version>1.0.0</version>
-      <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>com.wso2telco.dep.hub.sequence</groupId>
-      <artifactId>defaultPkgTypeSetSeq</artifactId>
       <version>1.0.0</version>
       <type>xml</type>
     </dependency>
