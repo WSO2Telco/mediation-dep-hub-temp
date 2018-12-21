@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentChargeSeq" xmlns="http://ws.apache.org/ns/synapse">
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+   <!--  <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
         <property name="script" value="
             var payload= mc.getPayloadJSON();
             var clientCorrelator = mc.getProperty('clientCorrelator');
             payload.amountTransaction.clientCorrelator = clientCorrelator;
             mc.setPayloadJSON(payload);
-        "/>
+        "/>  
+    </class> -->
+    
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyPath" value="payload.amountTransaction.clientCorrelator"/>  
+        <property name="propertyValue" value="correlatorChange"/>
+        <property name="msgContextProperty" value="clientCorrelator"/>
     </class>
+    
     <property action="remove" name="REST_URL_POSTFIX" scope="axis2"/>
     <header expression="get-property('ENDPOINT')" name="To"
             scope="default"/>
