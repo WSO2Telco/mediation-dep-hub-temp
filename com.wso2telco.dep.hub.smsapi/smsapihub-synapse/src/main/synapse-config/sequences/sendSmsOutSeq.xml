@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendSmsOutSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-<class name="com.wso2telco.dep.common.mediation.SMSResourceURLMediator"/>
+<class name="com.wso2telco.dep.common.mediation.UtilMediator">
+ <property name="propertyValue" value="resourceURLChange"/>
+</class>
 <class name="com.wso2telco.dep.mediator.impl.smsmessaging.SendSMSRequestIdPersistMediator"/>
 </sequence>
