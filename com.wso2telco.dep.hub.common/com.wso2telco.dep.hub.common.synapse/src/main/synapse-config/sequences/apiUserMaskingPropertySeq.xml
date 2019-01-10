@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="apiUserMaskingPropertySeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="$trp:USER_ANONYMIZATION" name="USER_ANONYMIZATION" scope="default" type="STRING"/>
+
+    <property expression="get-property('registry', 'conf:/repository/wso2telco/configurations/mediationConfig.xml')" name="mediationConfig" scope="default" type="OM"/>
+    <property expression="$ctx:mediationConfig//userMaskingSecretKey" name="USER_MASKING_SECRET_KEY" scope="default" type="STRING"/>
+    <property expression="$ctx:mediationConfig//msisdn_regex" name="USER_MASKING_MSISDN_REGEX" scope="default" type="STRING"/>
+</sequence>

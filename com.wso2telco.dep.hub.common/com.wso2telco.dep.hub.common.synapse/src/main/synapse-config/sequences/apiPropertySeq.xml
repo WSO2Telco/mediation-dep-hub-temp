@@ -14,4 +14,6 @@
     <property expression="$trp:APPLICATION_NAME" name="APPLICATION_NAME" scope="default" type="STRING"/>
     <property expression="$trp:APPLICATION_ID" name="APPLICATION_ID" scope="default" type="STRING"/>
     <property expression="$trp:REQUEST_ID" name="REQUEST_ID" scope="default" type="STRING"/>
+    <!-- user masking property reading -->
+    <sequence key="apiUserMaskingPropertySeq"/>
 </sequence>

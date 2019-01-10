@@ -20,6 +20,20 @@
     <foreach expression="//address" xmlns:ns="http://org.apache.synapse/xsd">
         <sequence>
             <property expression="//address/text()" name="MSISDN" scope="default" type="STRING"/>
+            <!-- if request is USER_ANONYMIZED then get actual msisdn -->
+            <filter regex="true" source="get-property('USER_ANONYMIZATION')">
+                <then>
+                    <property expression="//address/text()" name="MSISDN" scope="default" type="STRING"/>
+                    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
+                        <property name="script" value="
+				            var msisdn =  mc.getProperty('MSISDN');
+				            var maskedMsisdnMap = mc.getProperty('MASKED_MSISDN_MAP');
+				            mc.setProperty('MSISDN', maskedMsisdnMap.get(msisdn));
+				        "/>
+                    </class>
+                </then>
+                <else/>
+            </filter>
             <!-- validate the msisdn for black list and white list -->
             <call-template target="com.wso2telco.dep.common.msisdnValidator.Template">
                 <with-param name="paramName" value="address"/>
@@ -93,11 +107,23 @@
         <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
-        
+
+    <!-- Resolve anonymize user data before operator call  -->
+    <call-template target="com.wso2telco.dep.common.anonymizeUserData.Template">
+        <with-param name="anonymize" value="false"/>
+        <with-param name="handler" value="{$ctx:HANDLER}"/>
+    </call-template>
+
     <call>
         <endpoint key="defaultSMSEndpoint"/>
     </call>
-    
+
+    <!-- Anonymize user data  -->
+    <call-template target="com.wso2telco.dep.common.anonymizeUserData.Template">
+        <with-param name="anonymize" value="true"/>
+        <with-param name="handler" value="{$ctx:HANDLER}"/>
+    </call-template>
+
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEIN"/>
 	</call-template>
@@ -106,9 +132,9 @@
         <with-param name="msisdn" value="{$ctx:MSISDN_LIST}"/>
         <with-param name="direction" value="sb"/>
     </call-template>
-    
+
     <sequence key="cacheClearingSeq"/>
-    
+
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201)">
             <sequence key="sendSmsOutSeq"/>
@@ -131,7 +157,7 @@
         </case>
         <default/>
     </switch>
-    
+
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
  		<with-param name="direction" value="RESPONSEOUT"/>
 	</call-template>

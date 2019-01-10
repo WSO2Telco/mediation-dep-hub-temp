@@ -66,5 +66,5 @@
         <with-param name="msisdn" value="{$ctx:MSISDN}"/>
         <with-param name="direction" value="nb"/>
     </call-template>
-	
+    
 </sequence>
