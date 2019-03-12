@@ -22,9 +22,19 @@
         <with-param name="direction" value="sb"/>
     </call-template>
 
+    <!-- Resolve anonymize user data before operator call  -->
+    <call-template target="com.wso2telco.dep.common.anonymizeUserData.Template">
+        <with-param name="anonymize" value="false"/>
+        <with-param name="handler" value="{$ctx:HANDLER}"/>
+    </call-template>
     <call>
         <endpoint key="defaultPaymentEndpoint"/>
     </call>
 
+    <!-- Anonymize user data  -->
+    <call-template target="com.wso2telco.dep.common.anonymizeUserData.Template">
+        <with-param name="anonymize" value="true"/>
+        <with-param name="handler" value="{$ctx:HANDLER}"/>
+    </call-template>
     <loopback/>
 </sequence>
