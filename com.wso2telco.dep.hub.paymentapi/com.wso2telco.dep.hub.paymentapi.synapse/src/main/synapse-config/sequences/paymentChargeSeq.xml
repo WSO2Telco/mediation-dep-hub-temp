@@ -19,6 +19,5 @@
               scope="default" type="STRING"/>
 
     <sequence key="chargeRequestSeq"/>
-    
 
 </sequence>

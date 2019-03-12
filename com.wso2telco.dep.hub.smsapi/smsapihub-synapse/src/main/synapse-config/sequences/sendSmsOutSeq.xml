@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendSmsOutSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="$trp:OPERATOR_DELIVERY_INFO_RESOURCE_URL" name="OPERATOR_DELIVERY_INFO_RESOURCE_URL" scope="default" type="STRING"/>
     <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
         <property name="script" value="
             var payload= mc.getPayloadJSON();
@@ -17,7 +18,9 @@
             mc.setProperty('SEND_SMS_OPERATOR_REQUEST_ID', operatorRequestId);
 
             var responseDeliveryInfoResourceUrl = mc.getProperty('RESPONSE_DELIVERY_INFO_RESOURCE_URL');
-
+            if (mc.getProperty('OPERATOR_DELIVERY_INFO_RESOURCE_URL') == 'true') {
+                responseDeliveryInfoResourceUrl = payload.outboundSMSMessageRequest.deliveryInfoList.resourceURL
+            }
             payload.outboundSMSMessageRequest.deliveryInfoList.resourceURL = responseDeliveryInfoResourceUrl;
             payload.outboundSMSMessageRequest.resourceURL=smsRetrieveResourceUrl;
             mc.setPayloadJSON(payload);
