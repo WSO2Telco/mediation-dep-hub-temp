@@ -72,14 +72,6 @@
         </then>
         <else/>
     </filter>
-    <!-- <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-        var originalJSONPayloadString = mc.getProperty('original_body');
-        var originalJSONPayload = JSON.parse(originalJSONPayloadString);
-        originalJSONPayload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('uniqueClientCorrelator');
-        mc.setPayloadJSON(JSON.stringify(originalJSONPayload));
-        "/>
-    </class> -->
 
     <class name="com.wso2telco.dep.common.mediation.UtilMediator">
         <property name="propertyPath" value="originalJSONPayload.outboundSMSMessageRequest.clientCorrelator"/>
@@ -118,13 +110,6 @@
     <switch source="$axis2:HTTP_SC">
         <case regex="(200|201)">
             <sequence key="sendSmsOutSeq"/>
-            <!-- <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-                <property name="script" value="
-                    var payload = mc.getPayloadJSON();
-                    payload.outboundSMSMessageRequest.clientCorrelator = mc.getProperty('clientCorrelator');
-                    mc.setPayloadJSON(payload);
-                "/>
-            </class>  -->
             <class name="com.wso2telco.dep.common.mediation.UtilMediator">
 		        <property name="propertyPath" value="payload.outboundSMSMessageRequest.clientCorrelator"/>
 		        <property name="propertyValue" value="correlatorChange"/>
