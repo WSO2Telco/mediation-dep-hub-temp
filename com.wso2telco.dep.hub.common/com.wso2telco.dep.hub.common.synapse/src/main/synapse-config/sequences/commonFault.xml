@@ -641,27 +641,10 @@
                 </args>
             </payloadFactory>
         </case>
-        <case regex="POL7101">
-            <payloadFactory media-type="xml">
-                <format>
-                    <m:requestError xmlns:m="http://services.samples">
-                        <m:serviceException>
-                            <m:messageId>$1</m:messageId>
-                            <m:text>A service error occurred. Error code is %1</m:text>
-                            <m:variables>An internal service error has occurred. Please try again later.</m:variables>
-                        </m:serviceException>
-                    </m:requestError>
-                </format>
-                <args>
-                    <arg evaluator="xml" expression="$ctx:ERROR_CODE"/>
-                    <arg evaluator="xml" expression="$ctx:errvar"/>
-                </args>
-            </payloadFactory>
-        </case>
         <default>
-            <property name="ERROR_CODE" scope="default" type="STRING" value="6000"/>
-            <property name="message" scope="default" type="STRING" value="System Error, Please contact technical support."/>
-            <property name="errvar" scope="default" type="STRING" value="Unexpected error has occurred. Please contact technical support."/>
+            <property name="ERROR_CODE" scope="default" type="STRING" value="SVC0001"/>
+            <property name="message" scope="default" type="STRING" value="A service error occurred. Error code is %1"/>
+            <property name="errvar" scope="default" type="STRING" value="An internal service error has occurred. Please try again later."/>
             <payloadFactory media-type="xml">
                 <format>
                     <m:requestError xmlns:m="http://services.samples">
