@@ -11,7 +11,6 @@
                     <filter regex="201" source="$axis2:HTTP_SC">
                         <then>
                     <property name="status" scope="default" type="STRING" value="Created"/>
-                    <property name="includeResourceURLToResponse" scope="operation" type="BOOLEAN" value="true"/>
                     <property expression="json-eval($.subscription.resourceURL)" name="resourceURL" scope="default" type="STRING"/>
                     <dbreport>
                         <connection>
@@ -72,56 +71,29 @@
         </completeCondition>
         <onComplete enclosingElementProperty="collection" expression="//destinationAddresses">
             <log level="full"/>
-            <filter regex="true" source="get-property('operation', 'includeResourceURLToResponse')">
-            <then>
-                <payloadFactory media-type="xml">
-                    <format>
-                        <subscription>
-                            <callbackReference>
-                                <callbackData>$1</callbackData>
-                                <notifyURL>$2</notifyURL>
-                            </callbackReference><?xml-multiple destinationAddresses?>
-                            $3
-
-                            <notificationFormat>$4</notificationFormat>
-                            <clientCorrelator>$5</clientCorrelator>
-                            <resourceURL>$6</resourceURL>
-                        </subscription>
-                    </format>
-                    <args>
-                        <arg evaluator="xml" expression="$ctx:original_callbackData"/>
-                        <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
-                        <arg evaluator="xml" expression="//destinationAddresses"/>
-                        <arg evaluator="xml" expression="$ctx:original_notificationFormat"/>
-                        <arg evaluator="xml" expression="$ctx:original_clientCorrelator"/>
-                        <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
-                    </args>
-                </payloadFactory>
-            </then>
-            <else>
-                <payloadFactory media-type="xml">
-                    <format>
-                        <subscription>
-                            <callbackReference>
-                                <callbackData>$1</callbackData>
-                                <notifyURL>$2</notifyURL>
-                            </callbackReference><?xml-multiple destinationAddresses?>
-                            $3
-
-                            <notificationFormat>$4</notificationFormat>
-                            <clientCorrelator>$5</clientCorrelator>
-                        </subscription>
-                    </format>
-                    <args>
-                        <arg evaluator="xml" expression="$ctx:original_callbackData"/>
-                        <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
-                        <arg evaluator="xml" expression="//destinationAddresses"/>
-                        <arg evaluator="xml" expression="$ctx:original_notificationFormat"/>
-                        <arg evaluator="xml" expression="$ctx:original_clientCorrelator"/>
-                    </args>
-                </payloadFactory>
-            </else>
-            </filter>
+            <payloadFactory media-type="xml">
+                <format>
+                    <subscription>
+                        <callbackReference>
+                            <callbackData>$1</callbackData>
+                            <notifyURL>$2</notifyURL>
+                        </callbackReference><?xml-multiple destinationAddresses?>
+				    $3		    
+				    
+				    <notificationFormat>$4</notificationFormat>
+                        <clientCorrelator>$5</clientCorrelator>
+                        <resourceURL>$6</resourceURL>
+                    </subscription>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$ctx:original_callbackData"/>
+                    <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
+                    <arg evaluator="xml" expression="//destinationAddresses"/>
+                    <arg evaluator="xml" expression="$ctx:original_notificationFormat"/>
+                    <arg evaluator="xml" expression="$ctx:original_clientCorrelator"/>
+                    <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
+                </args>
+            </payloadFactory>
             <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
 
 		   	<call-template target="com.wso2telco.dep.common.loggingExtension.Template">
