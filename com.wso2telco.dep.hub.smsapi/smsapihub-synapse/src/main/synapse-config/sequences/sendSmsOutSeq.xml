@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendSmsOutSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-<class name="com.wso2telco.dep.common.mediation.UtilMediator">
+ <property expression="$trp:OPERATOR_DELIVERY_INFO_RESOURCE_URL" name="OPERATOR_DELIVERY_INFO_RESOURCE_URL" scope="default" type="STRING"/>
+ <class name="com.wso2telco.dep.common.mediation.UtilMediator">
  <property name="propertyValue" value="resourceURLChange"/>
  <property name="apiName" value="smsmessaging"/>
  <property name="sequenceName" value="sendSmsOutSeq"/>
