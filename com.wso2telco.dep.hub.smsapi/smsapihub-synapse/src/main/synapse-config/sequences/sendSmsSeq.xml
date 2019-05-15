@@ -24,12 +24,9 @@
             <filter regex="true" source="get-property('USER_ANONYMIZATION')">
                 <then>
                     <property expression="//address/text()" name="MSISDN" scope="default" type="STRING"/>
-                    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-                        <property name="script" value="
-				            var msisdn =  mc.getProperty('MSISDN');
-				            var maskedMsisdnMap = mc.getProperty('MASKED_MSISDN_MAP');
-				            mc.setProperty('MSISDN', maskedMsisdnMap.get(msisdn));
-				        "/>
+                    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+                        <property name="propertyValue" value="unmaskMsisdn"/>
+                        <property name="msgContextProperty" value="MSISDN"/>
                     </class>
                 </then>
                 <else/>
