@@ -644,7 +644,7 @@
         <default>
             <property name="ERROR_CODE" scope="default" type="STRING" value="SVC0001"/>
             <property name="message" scope="default" type="STRING" value="A service error occurred. Error code is %1"/>
-            <property name="errvar" scope="default" type="STRING" value="An internal service error has occured. Please try again later."/>
+            <property name="errvar" scope="default" type="STRING" value="An internal service error has occurred. Please try again later."/>
             <payloadFactory media-type="xml">
                 <format>
                     <m:requestError xmlns:m="http://services.samples">
@@ -713,10 +713,10 @@
     <property action="remove" name="Accept" scope="transport"/>
     <property action="remove" name="X-JWT-Assertion" scope="transport"/>
     <property name="messageType" scope="axis2" type="STRING" value="application/json"/>
-    
+
     <call-template target="com.wso2telco.dep.common.loggingExtension.Template">
- 		<with-param name="direction" value="RESPONSEOUT"/>
-	</call-template>
+        <with-param name="direction" value="RESPONSEOUT"/>
+    </call-template>
 
     <!--Publishing sb related error-->
     <filter xpath="boolean($ctx:sbAction)">
@@ -730,6 +730,6 @@
         <with-param name="msisdn" value="{$ctx:MSISDN}"/>
         <with-param name="direction" value="nb"/>
     </call-template>
-	
+
     <send/>
 </sequence>
