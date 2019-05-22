@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendSmsOutSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-<class name="com.wso2telco.dep.common.mediation.UtilMediator">
- <property name="propertyValue" value="resourceURLChange"/>
- <property name="apiName" value="smsmessaging"/>
- <property name="sequenceName" value="sendSmsOutSeq"/>
-</class>
-<class name="com.wso2telco.dep.mediator.impl.smsmessaging.SendSMSRequestIdPersistMediator"/>
+    <property name="smsRetrieveResourceUrlPrefix" expression="get-property('SEND_SMS_RESOURCE_URL_PREFIX')"/>
+    <property name="requestId" expression="get-property('REQUEST_ID')"/>
+    <property name="encodedSenderAddress" expression="get-property('ENCODED_SENDER_ADDRESS')"/>
+    <property name="responseResourceUrl" expression="json-eval($.outboundSMSMessageRequest.resourceURL)"/>
+    <property name="operatorRequestId" expression="fn:replace(syn:get-property('responseResourceUrl'), '^.*/', '')" xmlns:fn="http://www.w3.org/2005/xpath-functions"/>
+    <filter source="boolean(get-property('operatorRequestId'))" regex="false">
+        <then>
+            <!--        throw error-->
+        </then>
+    </filter>
+    <property name="SEND_SMS_OPERATOR_REQUEST_ID" expression="get-property('operatorRequestId')" action="set" scope="default"/>
+
+    <property name="responseDeliveryInfoResourceUrl" expression="get-property('RESPONSE_DELIVERY_INFO_RESOURCE_URL')" scope="default"/>
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="resourceURL"/>
+        <property name="propertyPath" value="payload.outboundSMSMessageRequest.deliveryInfoList.resourceURL"/>
+        <property name="msgContextProperty" value="responseDeliveryInfoResourceUrl"/>
+    </class>
+
+    <property name="smsRetrieveResourceUrl" expression="fn:concat(syn:get-property('smsRetrieveResourceUrlPrefix'), '/request/', syn:get-property('requestId'))" scope="default" xmlns:fn="http://www.w3.org/2005/xpath-functions"/>
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="resourceURL"/>
+        <property name="propertyPath" value="payload.outboundSMSMessageRequest.resourceURL"/>
+        <property name="msgContextProperty" value="smsRetrieveResourceUrl"/>
+    </class>
+
+    <class name="com.wso2telco.dep.mediator.impl.smsmessaging.SendSMSRequestIdPersistMediator"/>
 </sequence>

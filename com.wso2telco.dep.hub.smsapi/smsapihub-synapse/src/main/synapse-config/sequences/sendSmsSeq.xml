@@ -85,8 +85,9 @@
     </filter>
 
     <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="clientCorrelator"/>
         <property name="propertyPath" value="originalJSONPayload.outboundSMSMessageRequest.clientCorrelator"/>
-        <property name="propertyValue" value="correlatorChange"/>
         <property name="msgContextProperty" value="uniqueClientCorrelator"/>
     </class>
 
@@ -134,8 +135,9 @@
         <case regex="(200|201)">
             <sequence key="sendSmsOutSeq"/>
             <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+                <property name="propertyValue" value="singlePropertyReplacement"/>
+                <property name="propertyName" value="clientCorrelator"/>
 		        <property name="propertyPath" value="payload.outboundSMSMessageRequest.clientCorrelator"/>
-		        <property name="propertyValue" value="correlatorChange"/>
 		        <property name="msgContextProperty" value="clientCorrelator"/>
 		    </class>
         </case>

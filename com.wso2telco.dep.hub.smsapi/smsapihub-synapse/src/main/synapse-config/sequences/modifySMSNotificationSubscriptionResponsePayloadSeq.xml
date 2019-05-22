@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="modifySMSNotificationSubscriptionResponsePayloadSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-            var payload= mc.getPayloadJSON();
-            var hubGateway = mc.getProperty('hubGateway');
-    		var requestResourceUrl = mc.getProperty('REST_FULL_REQUEST_PATH');
-    		var subscriptionID = mc.getProperty('subscriptionID');
- 			payload.subscription.resourceURL = hubGateway + requestResourceUrl + '/' + subscriptionID;
-            payload.subscription.callbackReference.notifyURL = mc.getProperty('originalNotifyURL');
-            payload.subscription.clientCorrelator = mc.getProperty('originalClientCorrelator');
-            mc.setPayloadJSON(payload);
-        "/>
+    <property name="propertyReplacement" expression="fn:concat(syn:get-property('hubGateway'), '/', syn:get-property('REST_FULL_REQUEST_PATH'), '/', syn:get-property('subscriptionID'))" scope="default" xmlns:fn="http://www.w3.org/2005/xpath-functions" />
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="resourceURL"/>
+        <property name="propertyPath" value="originalJSONPayload.subscription.resourceURL"/>
+        <property name="msgContextProperty" value="propertyReplacement"/>
+    </class>
+
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="clientCorrelator"/>
+        <property name="propertyPath" value="originalJSONPayload.subscription.clientCorrelator"/>
+        <property name="msgContextProperty" value="originalClientCorrelator"/>
+    </class>
+
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="notifyURL"/>
+        <property name="propertyPath" value="originalJSONPayload.subscription.callbackReference.notifyURL"/>
+        <property name="msgContextProperty" value="originalNotifyURL"/>
     </class>
 </sequence>
