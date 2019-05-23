@@ -2,12 +2,26 @@
 <sequence name="modifySMSDeliverySubscriptionRequestPayloadSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <property expression="json-eval($.deliveryReceiptSubscription.callbackReference.notifyURL)" name="originalNotifyURL" scope="default" type="STRING"/>
     <property expression="json-eval($.deliveryReceiptSubscription.clientCorrelator)" name="originalClientCorrelator" scope="default" type="STRING"/>
-    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">
-        <property name="script" value="
-            var payload= mc.getPayloadJSON();
-            payload.deliveryReceiptSubscription.callbackReference.notifyURL = mc.getProperty('notifyURL');
-            payload.deliveryReceiptSubscription.clientCorrelator = mc.getProperty('clientCorrelator');
-            mc.setPayloadJSON(payload);
-        "/>
+<!--    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">-->
+<!--        <property name="script" value="-->
+<!--            var payload= mc.getPayloadJSON();-->
+<!--            payload.deliveryReceiptSubscription.callbackReference.notifyURL = mc.getProperty('notifyURL');-->
+<!--            payload.deliveryReceiptSubscription.clientCorrelator = mc.getProperty('clientCorrelator');-->
+<!--            mc.setPayloadJSON(payload);-->
+<!--        "/>-->
+<!--    </class>-->
+
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="notifyURL"/>
+        <property name="propertyPath" value="payload.deliveryReceiptSubscription.callbackReference.notifyURL"/>
+        <property name="msgContextProperty" value="notifyURL"/>
+    </class>
+
+    <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="clientCorrelator"/>
+        <property name="propertyPath" value="payload.deliveryReceiptSubscription.clientCorrelator"/>
+        <property name="msgContextProperty" value="clientCorrelator"/>
     </class>
 </sequence>
