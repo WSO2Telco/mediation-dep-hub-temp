@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="sendSmsOutSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+
     <property name="responseResourceUrl" expression="json-eval($.outboundSMSMessageRequest.resourceURL)"/>
     <property name="operatorRequestId" expression="fn:replace(syn:get-property('responseResourceUrl'), '^.*/', '')" xmlns:fn="http://www.w3.org/2005/xpath-functions"/>
     <filter source="boolean(get-property('operatorRequestId'))" regex="false">

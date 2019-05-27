@@ -11,6 +11,7 @@
                     <filter regex="201" source="$axis2:HTTP_SC">
                         <then>
                     <property name="status" scope="default" type="STRING" value="Created"/>
+                    <property name="includeResourceURLToResponse" scope="operation" type="BOOLEAN" value="true"/>
                     <property expression="json-eval($.deliveryReceiptSubscription.resourceURL)" name="resourceURL" scope="default" type="STRING"/>
                     <dbreport>
                         <connection>
@@ -70,24 +71,46 @@
             <messageCount max="-1" min="-1"/>
         </completeCondition>
         <onComplete enclosingElementProperty="collection" expression="//senderAddresses">
-            <payloadFactory media-type="xml">
-                <format>
-                    <deliveryReceiptSubscription>
-                        <callbackReference>
-                            <callbackData>$1</callbackData>
-                            <notifyURL>$2</notifyURL>
-                        </callbackReference><?xml-multiple senderAddresses?>
-				    $3
-                        <resourceURL>$4</resourceURL>
-                    </deliveryReceiptSubscription>
-                </format>
-                <args>
-                    <arg evaluator="xml" expression="$ctx:original_callbackData"/>
-                    <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
-                    <arg evaluator="xml" expression="//senderAddresses"/>
-                    <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
-                </args>
-            </payloadFactory>
+            <filter regex="true" source="get-property('operation', 'includeResourceURLToResponse')">
+                <then>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <deliveryReceiptSubscription>
+                                <callbackReference>
+                                    <callbackData>$1</callbackData>
+                                    <notifyURL>$2</notifyURL>
+                                </callbackReference><?xml-multiple senderAddresses?>
+                                $3
+                                <resourceURL>$4</resourceURL>
+                            </deliveryReceiptSubscription>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:original_callbackData"/>
+                            <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
+                            <arg evaluator="xml" expression="//senderAddresses"/>
+                            <arg evaluator="xml" expression="$ctx:responseResourceURL"/>
+                        </args>
+                    </payloadFactory>
+                </then>
+                <else>
+                    <payloadFactory media-type="xml">
+                        <format>
+                            <deliveryReceiptSubscription>
+                                <callbackReference>
+                                    <callbackData>$1</callbackData>
+                                    <notifyURL>$2</notifyURL>
+                                </callbackReference><?xml-multiple senderAddresses?>
+                                $3
+                            </deliveryReceiptSubscription>
+                        </format>
+                        <args>
+                            <arg evaluator="xml" expression="$ctx:original_callbackData"/>
+                            <arg evaluator="xml" expression="$ctx:original_notifyUrl"/>
+                            <arg evaluator="xml" expression="//senderAddresses"/>
+                        </args>
+                    </payloadFactory>
+                </else>
+            </filter>
 
             <filter xpath="$ctx:original_clientcorrelator">
                 <then>
