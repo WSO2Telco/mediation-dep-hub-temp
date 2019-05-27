@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentRefundSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
-<!--    <class name="org.wso2telco.dep.nashornmediator.NashornMediator">-->
-<!--        <property name="script" value="-->
-<!--            var payload= mc.getPayloadJSON();-->
-<!--            var clientCorrelator = mc.getProperty('clientCorrelator');-->
-<!--            payload.amountTransaction.clientCorrelator = clientCorrelator;-->
-<!--            mc.setPayloadJSON(payload);-->
-<!--        "/>-->
-<!--    </class>-->
 
     <class name="com.wso2telco.dep.common.mediation.UtilMediator">
         <property name="propertyValue" value="singlePropertyReplacement"/>
