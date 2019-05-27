@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="paymentRefundSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
     <class name="com.wso2telco.dep.common.mediation.UtilMediator">
+        <property name="propertyValue" value="singlePropertyReplacement"/>
+        <property name="propertyName" value="clientCorrelator"/>
         <property name="propertyPath" value="payload.amountTransaction.clientCorrelator"/>
-        <property name="propertyValue" value="correlatorChange"/>
         <property name="msgContextProperty" value="clientCorrelator"/>
     </class>
 
